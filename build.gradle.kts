@@ -5,32 +5,40 @@
 plugins {
     `java-library`
     `maven-publish`
+    id("com.gradleup.shadow") version "9.0.0-beta10"
 }
 
 repositories {
     mavenLocal()
-    maven {
-        url = uri("https://repo.maven.apache.org/maven2/")
-    }
+    mavenCentral()
+    gradlePluginPortal()
 }
 
 dependencies {
-    api(libs.org.slf4j.slf4j.api)
-    api(libs.com.google.guava.guava)
-    runtimeOnly(libs.ch.qos.logback.logback.classic)
-    testImplementation(libs.org.junit.jupiter.junit.jupiter.engine)
+    // api("com.google.guava:guava:33.4.0-jre") // under APACHE 2.0 licence
+    api("org.slf4j:slf4j-api:2.0.17") // under MIT licence
+    testImplementation("org.junit.jupiter:junit-jupiter:5.12.1") // Eclipse Public License - v 2.0
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.12.1")
 }
 
 group = "com.kibo.pgar.lib"
-version = "0.0.1"
+version = "1.0.0"
 description = "kibo-pgar-lib"
-java.sourceCompatibility = JavaVersion.VERSION_1_8
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
 
 publishing {
     publications.create<MavenPublication>("maven") {
         from(components["java"])
     }
+
+    publications.create<MavenPublication>("shadow") {
+        from(components["shadow"])
+    }
 }
+
 
 tasks.withType<JavaCompile>() {
     options.encoding = "UTF-8"
@@ -42,4 +50,40 @@ tasks.withType<Javadoc>() {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+tasks.withType<AbstractArchiveTask>().configureEach {
+    isPreserveFileTimestamps = false
+    isReproducibleFileOrder = true
+}
+
+val testJar by tasks.registering(Jar::class) {
+    manifest {
+        attributes["Description"] = "Arnaldo KiboPgArLib from the KiboPgArLib Contributors" // help me out to use manifest jar
+        attributes["Manifest-Version"] = "1.0.0"
+        attributes["Multi-Release"] = "false"
+        attributes["reproducibleFileOrder"] = "true"
+        attributes["preserveFileTimestamps"] = "false"
+        attributes["source"] = "true"
+
+    }
+}
+
+tasks.shadowJar {
+    archiveClassifier = "shadowjar"
+
+    from(sourceSets.main.get().allSource)
+
+    manifest.inheritFrom(testJar.get().manifest)
+
+    dependencies {
+        exclude(dependency("org.junit.jupiter:junit-jupiter:5.12.1"))
+        exclude(dependency("org.junit.platform:junit-platform-launcher:1.12.1"))
+
+        exclude(dependency("org.slf4j:slf4j-api:2.0.17"))
+
+        configurations = provider { listOf(project.configurations.runtimeClasspath.get()) }
+    }
+
+    minimize()
 }
