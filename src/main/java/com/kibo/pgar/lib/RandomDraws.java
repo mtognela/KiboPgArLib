@@ -8,13 +8,10 @@ import java.util.Random;
  * 
  * @author Alessandro Muscio (Kibo)
  */
-public class RandomDraws {
-	private static final String UNSUPPORTED_OP_ERR_MSG = String
-			.format("%sThis class isn't instantiable!%s", AnsiColors.RED, AnsiColors.RESET);
+public final class RandomDraws {
 	private static final Random RAND = new Random();
 
-	public RandomDraws() throws UnsupportedOperationException {
-		throw new UnsupportedOperationException(RandomDraws.UNSUPPORTED_OP_ERR_MSG);
+	private RandomDraws() {
 	}
 
 	/**

@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.StringJoiner;
 
-public class CommandLineTable {
+public final class CommandLineTable {
     private static final String SHORT_ROWS_ERROR = "One or multiple of the given rows are too short for this table!";
 
     private static final char HORIZONTAL_SEPARATOR = '-';

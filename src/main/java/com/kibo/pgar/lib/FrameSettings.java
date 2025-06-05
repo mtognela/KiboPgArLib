@@ -6,7 +6,7 @@ package com.kibo.pgar.lib;
  * 
  * @author Alessandro Muscio (Kibo)
  */
-public class FrameSettings {
+public final class FrameSettings {
     private static final char HORIZONTAL_FRAME = '-';
     private static final char VERTICAL_FRAME = '|';
 

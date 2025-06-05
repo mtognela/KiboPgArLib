@@ -8,12 +8,9 @@ package com.kibo.pgar.lib;
  * 
  * @author Alessandro Muscio (Kibo)
  */
-public class KnownProblems {
-    private static final String UNSUPPORTED_OP_ERR_MSG = String
-            .format("%sThis class isn't instantiable!%s", AnsiColors.RED, AnsiColors.RESET);
+public final class KnownProblems {
 
-    public KnownProblems() throws UnsupportedOperationException {
-        throw new UnsupportedOperationException(KnownProblems.UNSUPPORTED_OP_ERR_MSG);
+    private KnownProblems() {
     }
 
     /**

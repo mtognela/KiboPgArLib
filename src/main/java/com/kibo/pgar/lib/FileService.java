@@ -16,7 +16,7 @@ import java.io.Serializable;
  * 
  * @author Alessandro Muscio (Kibo)
  */
-public class FileService {
+public final class FileService {
     private static final String RED_ATTENTION = PrettyStrings.pretty(
             AnsiColors.RED, AnsiWeights.BOLD, null, "Attention!");
     private static final String NOT_FOUND_ERROR = FileService.RED_ATTENTION.concat(

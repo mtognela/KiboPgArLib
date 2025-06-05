@@ -9,7 +9,7 @@ package com.kibo.pgar.lib;
  * @author Minini Luca
  */
 
-public class Menu {
+public final class Menu {
     final private static String FRAME = "--------------------------------";
     final private static String EXIT_OPTION = "0.\tExit";
     final private static String INPUT_REQUEST = "Enter the number of the desired option";

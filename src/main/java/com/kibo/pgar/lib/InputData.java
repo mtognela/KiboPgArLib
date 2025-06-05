@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class InputData {
+public final class InputData {
     private static final Scanner reader = createScanner();
 
     private static final String ALPHANUMERIC_CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ";
@@ -31,9 +31,26 @@ public class InputData {
             AnsiColors.RED, null, null, "\nThe answer is not valid!");
 
 
-    private InputData() {}
+    private InputData() {
+        
+    }
 
-    private static void flushReader() { reader.nextLine(); }
+    /**
+     * Flushes the input buffer by advancing the scanner to the next line.<br>
+     * <br>
+     *
+     * This method consumes and discards the remainder of the current line of input,
+     * typically used to clear the input buffer after reading numeric input with
+     * <code>Scanner</code> methods like <code>nextInt()</code> or
+     * <code>nextDouble()</code>.<br>
+     * <br>
+     *
+     * This prevents unexpected behavior caused by leftover newline characters
+     * when switching between different input types.
+     */
+    private static void flushReader() {
+        reader.nextLine();
+    }
 
     private static Scanner createScanner() {
         // Check if the code is being executed from Eclipse

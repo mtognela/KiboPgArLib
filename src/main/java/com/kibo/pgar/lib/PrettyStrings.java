@@ -6,14 +6,11 @@ package com.kibo.pgar.lib;
  * 
  * @author Alessandro Muscio (Kibo) and Mattia Tognela 
  */
-public class PrettyStrings {
-    private static final String UNSUPPORTED_OP_ERR_MSG = String
-            .format("%sThis class isn't instantiable!%s", AnsiColors.RED, AnsiColors.RESET);
+public final class PrettyStrings {
     private static final char SPACE = ' ';
     private static final char NEW_LINE = '\n';
 
-    public PrettyStrings() throws UnsupportedOperationException {
-        throw new UnsupportedOperationException(PrettyStrings.UNSUPPORTED_OP_ERR_MSG);
+    private PrettyStrings() {
     }
 
     public static String frame(String toFrame, FrameSettings settings) {
