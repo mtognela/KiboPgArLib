@@ -32,7 +32,7 @@ public class Tests {
     List<AnsiWeights> weights = new ArrayList<>(Arrays.asList(AnsiWeights.values()));
     List<AnsiDecorations> decorations = new ArrayList<>(Arrays.asList(AnsiDecorations.values()));
     AnsiColors reset = colors.remove(0);
-    StringBuilder builder = new StringBuilder();
+    StringBuffer builder = new StringBuffer();
 
     weights.remove(0);
     decorations.remove(0);
@@ -141,7 +141,7 @@ public class Tests {
     final FrameSettings SETTINGS_FR = new FrameSettings(27, Alignment.RIGHT, false);
     final FrameSettings SETTINGS_FRV = new FrameSettings(24, Alignment.RIGHT, true);
 
-    StringBuilder builder = new StringBuilder();
+    StringBuffer builder = new StringBuffer();
 
     builder.append(PrettyStrings.isolatedLine(TEST_IL));
 

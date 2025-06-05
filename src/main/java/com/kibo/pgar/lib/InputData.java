@@ -7,37 +7,31 @@ import java.util.Scanner;
 
 public class InputData {
     private static final Scanner reader = createScanner();
-    private static final String UNSUPPORTED_OP_ERR_MSG = String
-            .format("%sThis class isn't instantiable!%s", AnsiColors.RED, AnsiColors.RESET);
-
-    private static final String RED_ATTENTION = PrettyStrings.prettify("Attention!", AnsiColors.RED, null, null);
 
     private static final String ALPHANUMERIC_CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ";
-    private static final String ALPHANUMERIC_CHARACTERS_ERROR = PrettyStrings.prettify(
-            "\nOnly alphanumeric characters are allowed.", AnsiColors.RED, null, null);
-    private static final String EMPTY_STRING_ERROR = PrettyStrings.prettify(
-            "\nNo characters were inserted.", AnsiColors.RED, null, null);
-    private static final String ALLOWED_CHARACTERS_ERROR = PrettyStrings.prettify(
-            "\nThe only allowed characters are: %s", AnsiColors.RED, null, null);
-    private static final String INTEGER_FORMAT_ERROR = PrettyStrings.prettify(
-            "\nThe inserted data is in an incorrect format. An integer is required.", AnsiColors.RED, null, null);
-    private static final String DOUBLE_FORMAT_ERROR = PrettyStrings.prettify(
-            "\nThe inserted data is in an incorrect format. A double is required.", AnsiColors.RED, null, null);
-    private static final String MINIMUM_ERROR_INTEGER = PrettyStrings.prettify(
-            "\nA value greater or equal than %d is required.", AnsiColors.RED, null, null);
-    private static final String MAXIMUM_ERROR_INTEGER = PrettyStrings.prettify(
-            "\nA value less or equal than %d is required.", AnsiColors.RED, null, null);
-    private static final String MINIMUM_ERROR_DOUBLE = PrettyStrings.prettify(
-            "\nA value greater or equal than %.2f is required.", AnsiColors.RED, null, null);
-    private static final String MAXIMUM_ERROR_DOUBLE = PrettyStrings.prettify(
-            "\nA value less or equal than %.2f is required.", AnsiColors.RED, null, null);
-    private static final String INVALID_ANSWER = PrettyStrings.prettify(
-            "\nThe answer is not valid!", AnsiColors.RED, null, null);
+    private static final String ALPHANUMERIC_CHARACTERS_ERROR = PrettyStrings.pretty(
+            AnsiColors.RED, null, null, "\nOnly alphanumeric characters are allowed.");
+    private static final String EMPTY_STRING_ERROR = PrettyStrings.pretty(
+            AnsiColors.RED, null, null, "\nNo characters were inserted.");
+    private static final String ALLOWED_CHARACTERS_ERROR = PrettyStrings.pretty(
+            AnsiColors.RED, null, null, "\nThe only allowed characters are: %s");
+    private static final String INTEGER_FORMAT_ERROR = PrettyStrings.pretty(
+            AnsiColors.RED, null, null, "\nThe inserted data is in an incorrect format. An integer is required.");
+    private static final String DOUBLE_FORMAT_ERROR = PrettyStrings.pretty(
+            AnsiColors.RED, null, null, "\nThe inserted data is in an incorrect format. A double is required.");
+    private static final String MINIMUM_ERROR_INTEGER = PrettyStrings.pretty(
+            AnsiColors.RED, null, null, "\nA value greater or equal than %d is required.");
+    private static final String MAXIMUM_ERROR_INTEGER = PrettyStrings.pretty(
+            AnsiColors.RED, null, null, "\nA value less or equal than %d is required.");
+    private static final String MINIMUM_ERROR_DOUBLE = PrettyStrings.pretty(
+            AnsiColors.RED, null, null, "\nA value greater or equal than %.2f is required.");
+    private static final String MAXIMUM_ERROR_DOUBLE = PrettyStrings.pretty(
+            AnsiColors.RED, null, null, "\nA value less or equal than %.2f is required.");
+    private static final String INVALID_ANSWER = PrettyStrings.pretty(
+            AnsiColors.RED, null, null, "\nThe answer is not valid!");
 
 
-    public InputData() throws UnsupportedOperationException {
-        throw new UnsupportedOperationException(InputData.UNSUPPORTED_OP_ERR_MSG);
-    }
+    private InputData() {}
 
     private static void flushReader() { reader.nextLine(); }
 

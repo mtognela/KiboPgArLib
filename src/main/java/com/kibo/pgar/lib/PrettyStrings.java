@@ -4,7 +4,7 @@ package com.kibo.pgar.lib;
  * <code>Class</code> that let's you prettify the strings to output in the
  * terminal.
  * 
- * @author Alessandro Muscio (Kibo)
+ * @author Alessandro Muscio (Kibo) and Mattia Tognela 
  */
 public class PrettyStrings {
     private static final String UNSUPPORTED_OP_ERR_MSG = String
@@ -138,7 +138,7 @@ public class PrettyStrings {
      * 
      * @return A <code>String</code> representing the given one formatted and prettified.
      */
-    public static String prettify(AnsiColors color, AnsiWeights weight, AnsiDecorations decoration, String format,
+    public static String pretty(AnsiColors color, AnsiWeights weight, AnsiDecorations decoration, String format,
             Object... args) {
         StringBuffer builder = new StringBuffer();
         boolean reset = false;
