@@ -1,7 +1,6 @@
-# KiboPgArLib [(**forked from here**)](https://github.com/AlessandroMuscio/KiboPgArLib)
+# KiboPgArLib 
 ## Changes
 
-- Just added a SimpleInput.java class to do simple input stuff
 - I'm right now trying out Gradle for building the lib :)
+- Right Now i'm getting to work the Menu.java
 
-> for more information on the original [Repo](https://github.com/AlessandroMuscio/KiboPgArLib) and [Author](https://github.com/AlessandroMuscio)
