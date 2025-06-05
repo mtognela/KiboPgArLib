@@ -5,7 +5,7 @@
 plugins {
     `java-library`
     `maven-publish`
-    id("com.gradleup.shadow") version "9.0.0-beta10"
+    id("com.gradleup.shadow") version "9.0.0-beta13"
 }
 
 repositories {
@@ -15,9 +15,9 @@ repositories {
 }
 
 dependencies {
-    // api("com.google.guava:guava:33.4.0-jre") // under APACHE 2.0 licence
-    api("org.slf4j:slf4j-api:2.0.17") // under MIT licence
-    testImplementation("org.junit.jupiter:junit-jupiter:5.12.1") // Eclipse Public License - v 2.0
+    api("org.slf4j:slf4j-api:2.1.0-alpha1") 
+    testImplementation("ch.qos.logback:logback-classic:1.5.18")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.12.1") 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.12.1")
 }
 
@@ -28,17 +28,6 @@ java {
     sourceCompatibility = JavaVersion.VERSION_21
     targetCompatibility = JavaVersion.VERSION_21
 }
-
-publishing {
-    publications.create<MavenPublication>("maven") {
-        from(components["java"])
-    }
-
-    publications.create<MavenPublication>("shadow") {
-        from(components["shadow"])
-    }
-}
-
 
 tasks.withType<JavaCompile>() {
     options.encoding = "UTF-8"
@@ -59,7 +48,7 @@ tasks.withType<AbstractArchiveTask>().configureEach {
 
 val testJar by tasks.registering(Jar::class) {
     manifest {
-        attributes["Description"] = "Arnaldo KiboPgArLib from the KiboPgArLib Contributors" // help me out to use manifest jar
+        attributes["Description"] = "Arnaldo KiboPgArLib from the KiboPgArLib Contributors" 
         attributes["Manifest-Version"] = "1.0.0"
         attributes["Multi-Release"] = "false"
         attributes["reproducibleFileOrder"] = "true"
@@ -79,7 +68,7 @@ tasks.shadowJar {
     dependencies {
         exclude(dependency("org.junit.jupiter:junit-jupiter:5.12.1"))
         exclude(dependency("org.junit.platform:junit-platform-launcher:1.12.1"))
-
+        exclude(dependency("ch.qos.logback:logback-classic:1.5.18"))
         exclude(dependency("org.slf4j:slf4j-api:2.0.17"))
 
         configurations = provider { listOf(project.configurations.runtimeClasspath.get()) }
