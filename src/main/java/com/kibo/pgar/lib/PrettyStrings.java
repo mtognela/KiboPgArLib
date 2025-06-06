@@ -135,7 +135,7 @@ public final class PrettyStrings {
      * 
      * @return A <code>String</code> representing the given one formatted and prettified.
      */
-    public static String pretty(AnsiColors color, AnsiWeights weight, AnsiDecorations decoration, String format,
+    public static String prettify(AnsiColors color, AnsiWeights weight, AnsiDecorations decoration, String format,
             Object... args) {
         StringBuffer builder = new StringBuffer();
         boolean reset = false;
@@ -162,4 +162,48 @@ public final class PrettyStrings {
 
         return builder.toString();
     }
+
+    /**
+     * For backwords compatabily only 
+     * 
+     * Prettifies the given <code>String</code> by adding a <i>color</i>,
+     * <i>weight</i> and <i>decoration</i>, if given.
+     * 
+     * @param color      The color given to the <code>String</code>,
+     *                   <code>null</code> for default color.
+     * @param weight     The weight given to the <code>String</code>,
+     *                   <code>null</code> for default weight.
+     * @param decoration The decoration given to the <code>String</code>,
+     *                   <code>null</code> for no decoration.
+     * @param toPrettify The <code>String</code> to be formatted and prettified.
+     * 
+     * @return A <code>String</code> representing the given one prettified.
+     */
+    public static String prettify(String toPrettify, AnsiColors color, AnsiWeights weight, AnsiDecorations decoration) {
+        StringBuffer builder = new StringBuffer();
+        boolean reset = false;
+
+        if (color != null) {
+            reset = true;
+            builder.append(color);
+        }
+
+        if (weight != null) {
+            reset = true;
+            builder.append(weight);
+        }
+
+        if (decoration != null) {
+            reset = true;
+            builder.append(decoration);
+        }
+
+        builder.append(toPrettify);
+
+        if (reset)
+            builder.append(AnsiColors.RESET);
+
+        return builder.toString();
+    }
+
 }

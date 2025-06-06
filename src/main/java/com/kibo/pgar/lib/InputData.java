@@ -9,25 +9,25 @@ public final class InputData {
     private static final Scanner reader = createScanner();
 
     private static final String ALPHANUMERIC_CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ";
-    private static final String ALPHANUMERIC_CHARACTERS_ERROR = PrettyStrings.pretty(
+    private static final String ALPHANUMERIC_CHARACTERS_ERROR = PrettyStrings.prettify(
             AnsiColors.RED, null, null, "\nOnly alphanumeric characters are allowed.");
-    private static final String EMPTY_STRING_ERROR = PrettyStrings.pretty(
+    private static final String EMPTY_STRING_ERROR = PrettyStrings.prettify(
             AnsiColors.RED, null, null, "\nNo characters were inserted.");
-    private static final String ALLOWED_CHARACTERS_ERROR = PrettyStrings.pretty(
+    private static final String ALLOWED_CHARACTERS_ERROR = PrettyStrings.prettify(
             AnsiColors.RED, null, null, "\nThe only allowed characters are: %s");
-    private static final String INTEGER_FORMAT_ERROR = PrettyStrings.pretty(
+    private static final String INTEGER_FORMAT_ERROR = PrettyStrings.prettify(
             AnsiColors.RED, null, null, "\nThe inserted data is in an incorrect format. An integer is required.");
-    private static final String DOUBLE_FORMAT_ERROR = PrettyStrings.pretty(
+    private static final String DOUBLE_FORMAT_ERROR = PrettyStrings.prettify(
             AnsiColors.RED, null, null, "\nThe inserted data is in an incorrect format. A double is required.");
-    private static final String MINIMUM_ERROR_INTEGER = PrettyStrings.pretty(
+    private static final String MINIMUM_ERROR_INTEGER = PrettyStrings.prettify(
             AnsiColors.RED, null, null, "\nA value greater or equal than %d is required.");
-    private static final String MAXIMUM_ERROR_INTEGER = PrettyStrings.pretty(
+    private static final String MAXIMUM_ERROR_INTEGER = PrettyStrings.prettify(
             AnsiColors.RED, null, null, "\nA value less or equal than %d is required.");
-    private static final String MINIMUM_ERROR_DOUBLE = PrettyStrings.pretty(
+    private static final String MINIMUM_ERROR_DOUBLE = PrettyStrings.prettify(
             AnsiColors.RED, null, null, "\nA value greater or equal than %.2f is required.");
-    private static final String MAXIMUM_ERROR_DOUBLE = PrettyStrings.pretty(
+    private static final String MAXIMUM_ERROR_DOUBLE = PrettyStrings.prettify(
             AnsiColors.RED, null, null, "\nA value less or equal than %.2f is required.");
-    private static final String INVALID_ANSWER = PrettyStrings.pretty(
+    private static final String INVALID_ANSWER = PrettyStrings.prettify(
             AnsiColors.RED, null, null, "\nThe answer is not valid!");
 
 

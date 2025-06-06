@@ -17,16 +17,22 @@ import java.io.Serializable;
  * @author Alessandro Muscio (Kibo)
  */
 public final class FileService {
-    private static final String RED_ATTENTION = PrettyStrings.pretty(
-            AnsiColors.RED, AnsiWeights.BOLD, null, "Attention!");
-    private static final String NOT_FOUND_ERROR = FileService.RED_ATTENTION.concat(
-            "\nCan't find the file %s\n");
-    private static final String WRITING_ERROR = FileService.RED_ATTENTION.concat(
-            "\nProblem writing the file %s\n");
-    private static final String READING_ERROR = FileService.RED_ATTENTION.concat(
-            "\nProblem reading the file %s\n");
-    private static final String CLOSING_ERROR = FileService.RED_ATTENTION.concat(
-            "\nProblem closing the file %s\n");
+    
+    private static final String NOT_FOUND_ERROR = PrettyStrings.prettify(
+            AnsiColors.RED, AnsiWeights.BOLD, null,
+            "Attention! Can't find the file %s\n");
+
+    private static final String WRITING_ERROR = PrettyStrings.prettify(
+            AnsiColors.RED, AnsiWeights.BOLD, null,
+            "Attention! Problem writing the file %s\n");
+
+    private static final String READING_ERROR = PrettyStrings.prettify(
+            AnsiColors.RED, AnsiWeights.BOLD, null,
+            "Attention! Problem reading the file %s\n");
+
+    private static final String CLOSING_ERROR = PrettyStrings.prettify(
+            AnsiColors.RED, AnsiWeights.BOLD, null,
+            "Attention! Problem closing the file %s\n");
 
     private FileService()  {
     }

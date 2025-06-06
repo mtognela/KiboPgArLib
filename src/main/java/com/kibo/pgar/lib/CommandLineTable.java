@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.StringJoiner;
 
 public final class CommandLineTable {
-    private static final String SHORT_ROWS_ERROR = "One or multiple of the given rows are too short for this table!";
+    private static final String SHORT_ROWS_ERROR = PrettyStrings.prettify(AnsiColors.RED, AnsiWeights.BOLD,
+            null, "One or multiple of the given rows are too short for this table!");
 
     private static final char HORIZONTAL_SEPARATOR = '-';
     private static final char VERTICAL_SEPARATOR = '|';

@@ -11,9 +11,15 @@ import java.io.Serializable;
  * @version 1.0
  */
 public class Menu implements Serializable {
-    private static final String EXIT_ENTRY = "0. Exit";
-    private static final String INSERT_REQUEST = "> ";
-    private static final String NEGATIVE_MILLIS_ERROR = PrettyStrings.pretty(AnsiColors.RED, null, null,
+    private static final String EXIT_ENTRY = PrettyStrings.prettify(
+        AnsiColors.CYAN, AnsiWeights.BOLD, null,
+        "0. Exit");
+
+    private static final String INSERT_REQUEST = PrettyStrings.prettify(
+        AnsiColors.GREEN, AnsiWeights.BOLD, null,
+        ": ");
+
+    private static final String NEGATIVE_MILLIS_ERROR = PrettyStrings.prettify(AnsiColors.RED, null, null,
             "Attention! You can't have negative time");
 
     /**
@@ -110,13 +116,6 @@ public class Menu implements Serializable {
     }
 
     /**
-     * Clear any character from the console.
-     */
-    public static void clearConsole() {
-        System.out.flush();
-    }
-
-    /**
      * Stops the program for a certain amount of milliseconds.
      * 
      * @param milliseconds The number of milliseconds to stop the program.
@@ -132,22 +131,5 @@ public class Menu implements Serializable {
         } catch (IllegalArgumentException e) {
             System.out.println(NEGATIVE_MILLIS_ERROR);
         }
-    }
-
-    /**
-     * Prints a certain message simulating a loading by adding dots slowly.
-     *
-     * @param message The message to print.
-     * 
-     * @throws InterruptedException Read the {@link #wait() wait} method.
-     */
-    public static void loadingMessage(String message) throws InterruptedException {
-        System.out.print(message + ".");
-        wait(1000);
-        System.out.print(".");
-        wait(1000);
-        System.out.print(".");
-        wait(1000);
-        clearConsole();
     }
 }
