@@ -5,7 +5,7 @@ import java.io.File;
 /**
  * Extension of {@link File} that adds cross-platform utilities.
  */
-public class OmniFile extends File {
+public final class OmniFile extends File {
 
     /**
      * Constructs a {@code UmniFile} from a sequence of path components.
