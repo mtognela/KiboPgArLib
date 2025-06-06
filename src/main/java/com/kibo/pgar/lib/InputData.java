@@ -46,7 +46,6 @@ public final class InputData {
      * This prevents unexpected behavior caused by leftover newline characters
      * when switching between different input types.
      */
-    
     private static void flushReader() {
         reader.nextLine();
     }
@@ -66,7 +65,6 @@ public final class InputData {
      * @see Scanner#useDelimiter(String)
      * @see System#in
      */
-
     private static Scanner createScanner() {
         return new Scanner(System.in).useDelimiter("\n");
     }
@@ -78,7 +76,6 @@ public final class InputData {
      * @return A <code>boolean</code> representing if the message is alphanumeric or
      * not.
      */
-
     private static boolean hasAlphanumericCharacters(String message) {
         char currentChar;
 
@@ -97,7 +94,6 @@ public final class InputData {
      * @param message Let you deliver a message for the user
      * @return A <code>String</code> form the method <code>reader.nextLine()</code>;
      */
-
     public static String readSting(String message) {
         System.out.printf("%s: ", message);
         return reader.nextLine();
@@ -112,7 +108,6 @@ public final class InputData {
      * @param alphanumeric If the input needs to be alphanumeric or not.
      * @return A <code>String</code> representing the user input.
      */
-
     public static String readString(String message, boolean alphanumeric) {
         boolean isAlphanumeric;
         String read;
@@ -147,7 +142,6 @@ public final class InputData {
      * @param alphanumeric If the input needs to be alphanumeric or not.
      * @return A <code>String</code> representing the user input.
      */
-
     public static String readStringNotEmpty(String message, boolean alphanumeric) {
         boolean isStringEmpty = true;
         String read;
@@ -173,7 +167,6 @@ public final class InputData {
      * @param allowed All the allowed characters.
      * @return A <code>char</code> representing the character tha was read.
      */
-
     public static char readChar(String message, String allowed) {
         boolean isAllowed = false;
         String read;
@@ -200,7 +193,6 @@ public final class InputData {
      *
      * @return An <code>int</code> representing the integer that was read.
      */
-
     public static int readInteger(String message) {
         boolean isInteger;
         int read = 0;
@@ -233,7 +225,6 @@ public final class InputData {
      * @param min     The minimum value to read.
      * @return An <code>int</code> representing the integer that was read.
      */
-
     public static int readIntegerWithMinimum(String message, int min) {
         boolean isAboveMin = false;
         int read;
@@ -259,7 +250,6 @@ public final class InputData {
      * @param max     The maximum value to read.
      * @return An <code>int</code> representing the integer that was read.
      */
-
     public static int readIntegerWithMaximum(String message, int max) {
         boolean isBelowMax = false;
         int read;
@@ -287,7 +277,6 @@ public final class InputData {
      * @param max     The maximum value to read.
      * @return An <code>int</code> representing the integer that was read.
      */
-
     public static int readIntegerBetween(String message, int min, int max) {
         boolean isBetweenMinMax = false;
         int read;
@@ -313,7 +302,6 @@ public final class InputData {
      * @param message The message to print.
      * @return A <code>double</code> representing the double that was read.
      */
-
     public static double readDouble(String message) {
         boolean isDouble;
         double read = Double.NaN;
@@ -346,7 +334,6 @@ public final class InputData {
      * @param min     The minimum value to read.
      * @return A <code>double</code> representing the double that was read.
      */
-
     public static double readDoubleWithMinimum(String message, double min) {
         boolean isAboveMin = false;
         double read;
@@ -372,7 +359,6 @@ public final class InputData {
      * @param max     The maximum value to read.
      * @return An <code>double</code> representing the double that was read.
      */
-
     public static double readDoubleWithMaximum(String message, double max) {
         boolean isBelowMax = false;
         double read;
@@ -400,7 +386,6 @@ public final class InputData {
      * @param max     The maximum value to read.
      * @return An <code>double</code> representing the double that was read.
      */
-
     public static double readDoubleBetween(String message, double min, double max) {
         boolean isBetweenMinMax = false;
         double read;
@@ -429,7 +414,6 @@ public final class InputData {
      * @return A <code>boolean</code> representing the affirmative or negative
      * answer of the user.
      */
-
     public static boolean readYesOrNo(String question) {
         String answer = readStringNotEmpty(question + " [Y/n]", true);
 
