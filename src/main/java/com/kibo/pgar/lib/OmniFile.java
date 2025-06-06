@@ -3,7 +3,9 @@ package com.kibo.pgar.lib;
 import java.io.File;
 
 /**
- * Extension of {@link File} that adds cross-platform utilities.
+ * <code>Class</code> for simple universal file  
+ * 
+ * @author Mattia Tognela (mtognela)
  */
 public final class OmniFile extends File {
 
