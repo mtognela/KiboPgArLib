@@ -8,12 +8,12 @@ import java.io.File;
 public class OmniFile extends File {
 
     /**
-     * Constructs a {@code UniversalFile} from a sequence of path components.
+     * Constructs a {@code UmniFile} from a sequence of path components.
      * 
      * @param args Path segments to join with the system's file separator.
      */
     public OmniFile(String... args) {
         super(String.join(File.separator, args));
     }
-    
+
 }
