@@ -36,16 +36,6 @@ public class Menu implements Serializable {
    */
   private final int frameLength;
 
-  /**
-   * Represents if you want the title centred or not.
-   */
-  private final boolean centredTitle;
-
-  /**
-   * Represents if you want to use the vertical frame or not.
-   */
-  private final boolean useVerticalFrame;
-
   private final FrameSettings frameSettings;
 
   /**
@@ -57,16 +47,15 @@ public class Menu implements Serializable {
    * @param title            Represents the title of the menu.
    * @param entries          Represents the entries of the menu.
    * @param useExitEntry     If you want the exit entry or not.
-   * @param centredTitle     If you want the title to be centred or not.
+   * @param alignament     If you want the title to be centred or not.
    * @param useVerticalFrame If you want to use the vertical frame or not.
    */
-  public Menu(String title, String[] entries, boolean useExitEntry, boolean centredTitle, boolean useVerticalFrame) {
+  public Menu(String title, String[] entries, boolean useExitEntry, Alignment alignment, boolean useVerticalFrame) {
     this.title = title;
     this.entries = entries;
     this.useExitEntry = useExitEntry;
     this.frameLength = calculateFrameLength(title, entries);
-    this.centredTitle = centredTitle;
-    this.useVerticalFrame = useVerticalFrame;
+    this.frameSettings = new FrameSettings(frameLength, alignment, useVerticalFrame);
   }
 
   /**
@@ -94,9 +83,9 @@ public class Menu implements Serializable {
   private void printMenu() {
     StringBuffer menu = new StringBuffer();
 
-    menu.append(PrettyStrings.frame(title, new FrameSettings(frameLength, , useVerticalFrame)));
+    menu.append(PrettyStrings.frame(title, frameSettings));
 
-    for (int i = 0; i < entrijes.length; i++)
+    for (int i = 0; i < entries.length; i++)
       menu.append(i != entries.length - 1 ? String.format("%d. %s\n", (i + 1), entries[i])
           : String.format("%d. %s", (i + 1), entries[i]));
 
