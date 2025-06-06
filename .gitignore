@@ -21,6 +21,7 @@ build/test-results/
 *.bak
 *.swp
 *~.nib
+*.bin
 
 # Maven Wrapper files
 .mvn/wrapper/
