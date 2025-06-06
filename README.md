@@ -1,6 +1,4 @@
 # KiboPgArLib 
 ## Changes
 
-- I'm right now trying out Gradle for building the lib :)
-- Right Now i'm getting to work the Menu.java
-
+- now I just added OmniFile.java for just don't think about file crap in os :) 
