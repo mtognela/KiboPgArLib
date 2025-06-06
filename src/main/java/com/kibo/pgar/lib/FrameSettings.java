@@ -5,6 +5,7 @@ package com.kibo.pgar.lib;
  * <code>String</code>.
  * 
  * @author Alessandro Muscio (Kibo)
+ * @version 1.0
  */
 public final class FrameSettings {
     private static final char HORIZONTAL_FRAME = '-';

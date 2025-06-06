@@ -1,6 +1,5 @@
 package com.kibo.pgar.lib;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -31,8 +30,7 @@ public final class InputData {
             AnsiColors.RED, null, null, "\nThe answer is not valid!");
 
 
-    private InputData() {
-        
+    private InputData() {   
     }
 
     /**
@@ -48,34 +46,29 @@ public final class InputData {
      * This prevents unexpected behavior caused by leftover newline characters
      * when switching between different input types.
      */
+    
     private static void flushReader() {
         reader.nextLine();
     }
 
-    private static Scanner createScanner() {
-        // Check if the code is being executed from Eclipse
-        if (isEclipseEnvironment()) {
-            // If running in Eclipse, use System.lineSeparator() as the delimiter
-            return new Scanner(System.in).useDelimiter(System.lineSeparator());
-        } else {
-            // If not running in Eclipse, use "\n" as the delimiter
-            return new Scanner(System.in).useDelimiter("\n");
-        }
-    }
-
     /**
-     * Determines if the code is being executed within an Eclipse environment.<br><br>
-     *
-     * This method checks for the presence of the <code>.project</code> file and <code>.settings</code> directory
-     * in the current working directory, which are standard indicators of an Eclipse project.<br><br>
-     *
-     * @return <code>true</code> if the code is running in Eclipse, <code>false</code> otherwise.
+     * Creates a new {@link Scanner} instance configured to read user input from
+     * {@link System#in},
+     * using newline ({@code "\n"}) as the delimiter pattern.
+     * <p>
+     * The scanner will tokenize input by lines, making {@link Scanner#next()}
+     * return
+     * entire lines of input at a time. This matches common console input behavior
+     * across different execution environments.
+     * </p>
+     * 
+     * @return A configured Scanner instance reading from standard input
+     * @see Scanner#useDelimiter(String)
+     * @see System#in
      */
 
-    private static boolean isEclipseEnvironment() {
-        File projectFile = new File(".project");
-        File settingsDir = new File(".settings");
-        return projectFile.exists() && settingsDir.exists();
+    private static Scanner createScanner() {
+        return new Scanner(System.in).useDelimiter("\n");
     }
 
     /**
@@ -86,7 +79,6 @@ public final class InputData {
      * not.
      */
 
-    
     private static boolean hasAlphanumericCharacters(String message) {
         char currentChar;
 
@@ -107,7 +99,7 @@ public final class InputData {
      */
 
     public static String readSting(String message) {
-        System.out.printf("%s ", message);
+        System.out.printf("%s: ", message);
         return reader.nextLine();
     }
 
@@ -127,7 +119,7 @@ public final class InputData {
 
         if (alphanumeric) {
             do {
-                System.out.printf("%s ", message);
+                System.out.printf("%s: ", message);
 
                 read = reader.next().trim();
 
@@ -137,7 +129,7 @@ public final class InputData {
                     System.out.println(ALPHANUMERIC_CHARACTERS_ERROR);
             } while (!isAlphanumeric);
         } else {
-            System.out.printf("%s ", message);
+            System.out.printf("%s: ", message);
 
             read = reader.next().trim();
         }
@@ -215,7 +207,7 @@ public final class InputData {
 
         do {
             try {
-                System.out.printf("%s ", message);
+                System.out.printf("%s: ", message);
 
                 read = reader.nextInt();
 
@@ -327,7 +319,7 @@ public final class InputData {
         double read = Double.NaN;
 
         do {
-            System.out.printf("%s ", message);
+            System.out.printf("%s: ", message);
 
             try {
                 read = reader.nextDouble();

@@ -6,7 +6,8 @@ import java.util.Random;
  * <code>Class</code> that let you draw a specific data type in a
  * pseudo-random way.
  * 
- * @author Alessandro Muscio (Kibo)
+ * @author Alessandro Muscio (Kibo) and Mattia Tognela (mtognela)
+ * @version 1.1
  */
 public final class RandomDraws {
 	private static final Random RAND = new Random();

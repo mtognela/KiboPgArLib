@@ -5,6 +5,7 @@ package com.kibo.pgar.lib;
  * terminal.
  * 
  * @author Alessandro Muscio (Kibo) and Mattia Tognela 
+ * @version 1.1
  */
 public final class PrettyStrings {
     private static final char SPACE = ' ';

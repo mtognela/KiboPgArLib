@@ -7,8 +7,8 @@ import java.io.Serializable;
  * that zero is always the exit option. The class also contains some method that
  * may result useful in visualizing the menu.
  *
- * @author Alessandro Muscio
- * @version 1.0
+ * @author Alessandro Muscio and Mattia Tognela (mtognela)
+ * @version 1.1
  */
 public class Menu implements Serializable {
     private static final String EXIT_ENTRY = PrettyStrings.prettify(

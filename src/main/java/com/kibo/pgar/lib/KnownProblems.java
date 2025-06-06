@@ -6,7 +6,8 @@ package com.kibo.pgar.lib;
  * GeeksForGeeks searching the algorithm even though you know you have already
  * solved them.
  * 
- * @author Alessandro Muscio (Kibo)
+ * @author Alessandro Muscio (Kibo) and Mattia Tognela (mtognela)
+ * @version 1.1
  */
 public final class KnownProblems {
 

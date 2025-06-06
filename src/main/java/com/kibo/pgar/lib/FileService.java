@@ -14,7 +14,7 @@ import java.io.Serializable;
 /**
  * <code>Class</code> that let's you serialize and deserialize objects to file.
  * 
- * @author Alessandro Muscio (Kibo)
+ * @author Alessandro Muscio (Kibo) and Mattia Tognela (mtognela)
  */
 public final class FileService {
     
