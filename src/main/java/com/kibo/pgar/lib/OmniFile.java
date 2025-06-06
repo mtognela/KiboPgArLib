@@ -15,14 +15,5 @@ public class OmniFile extends File {
     public OmniFile(String... args) {
         super(String.join(File.separator, args));
     }
-
-      /**
-     * Casts this {@code UniversalFile} to a regular {@link File}.
-     * 
-     * @return a reference to this object as a {@link File}.
-     */
-    public File castToFile() {
-        return this;
-    }
-
+    
 }
