@@ -13,7 +13,9 @@ target/
 
 # Build and test reports
 build/reports/
-build/test-results/
+build/test-results/ù
+build/test-results/test/binary/output.bin.idx
+build/test-results/test/binary/output.bin
 
 # Ignore temporary files
 *.log
