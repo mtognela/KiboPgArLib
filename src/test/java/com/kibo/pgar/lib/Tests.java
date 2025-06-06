@@ -28,9 +28,9 @@ public final class Tests {
         final String NEW_LINE = "\n";
         final String SEPARATOR = "~~~~~~~~~~~~~~~~~~~~" + NEW_LINE;
 
-        List<AnsiColors> colors = new ArrayList<>(Arrays.asList(AnsiColors.values()));
-        List<AnsiWeights> weights = new ArrayList<>(Arrays.asList(AnsiWeights.values()));
-        List<AnsiDecorations> decorations = new ArrayList<>(Arrays.asList(AnsiDecorations.values()));
+        List<AnsiColors> colors = Arrays.asList(AnsiColors.values());
+        List<AnsiWeights> weights = Arrays.asList(AnsiWeights.values());
+        List<AnsiDecorations> decorations = Arrays.asList(AnsiDecorations.values());
         AnsiColors reset = colors.remove(0);
         StringBuffer builder = new StringBuffer();
 
