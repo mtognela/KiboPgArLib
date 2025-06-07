@@ -12,8 +12,7 @@ import com.kibo.pgar.lib.Formats.AnsiColors;
 import com.kibo.pgar.lib.Formats.AnsiWeights;
 import com.kibo.pgar.lib.Strings.PrettyStrings;
 import com.kibo.pgar.lib.Types.TypeSafeEmpty;
-
-import com.kibo.pgar.lib.Types.TypeToken;
+import com.kibo.pgar.lib.Types.TypeT;
 
 public final class JsonService {
 
@@ -27,10 +26,10 @@ public final class JsonService {
 
         try (FileReader reader = new FileReader(file)) {
             return gson.fromJson(reader, type);
-        } catch (JsonIOException | JsonSyntaxException | IOException e) {           
+        } catch (JsonIOException | JsonSyntaxException | IOException e) {
             System.out.println(ERROR_IN_INITIALIZING_THE_READER);
             System.out.println(e.getMessage());
-            return TypeSafeEmpty.getEmpty(new TypeToken<T>() {});
+            return TypeSafeEmpty.getEmpty(new TypeT<T>());
         }
 
     }

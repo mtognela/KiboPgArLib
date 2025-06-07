@@ -10,14 +10,14 @@ import com.kibo.pgar.lib.Strings.PrettyStrings;
 /**
  * TypeToken class to capture and preserve generic type information
  */
-public class TypeToken<T> {
+public class TypeT<T> {
     private static final String TYPE_TOKEN_MUST_BE_PARAMETERIZED = PrettyStrings.prettify(AnsiColors.RED,
             AnsiWeights.BOLD,
             null, "TypeToken must be parameterized");
     private final Type type;
     private final int hashCode;
 
-    public TypeToken() {
+    public TypeT() {
         Type superclass = getClass().getGenericSuperclass();
 
         if (superclass instanceof ParameterizedType) {
@@ -37,9 +37,9 @@ public class TypeToken<T> {
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
-        else if (!(obj instanceof TypeToken))
+        else if (!(obj instanceof TypeT))
             return false;
-        TypeToken<?> other = (TypeToken<?>) obj;
+        TypeT<?> other = (TypeT<?>) obj;
         return type.equals(other.type);
     }
 
