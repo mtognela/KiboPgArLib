@@ -6,8 +6,6 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.nio.Buffer;
@@ -255,7 +253,6 @@ public class TypeSafe {
      */
     @SuppressWarnings("unchecked")
     public static <T> T getEmpty(TypeToken<T> typeToken) {
-        Class<?> rawType = extractRawType(typeToken.getType());
         Supplier<?> handler = typeHandlers.get(typeToken);
 
         if (handler != null)
@@ -263,7 +260,7 @@ public class TypeSafe {
         else
             throw new IllegalArgumentException(
                     PrettyStrings.prettify(AnsiColors.RED, AnsiWeights.BOLD, null,
-                            "Unsupported type: %s", extractRawType(rawType).getSimpleName()));
+                            "Unsupported type: %s", typeToken.toString()));
 
     }
 
@@ -291,26 +288,6 @@ public class TypeSafe {
      */
     public static <T> void defineEmpty(TypeToken<T> typeElement, T defaultValue) {
         typeHandlers.putIfAbsent(typeElement, () -> defaultValue);
-    }
-
-    /**
-     * Extracts the raw type from a Type object, handling both Class and
-     * ParameterizedType cases.
-     * 
-     * @param type The Type to extract from
-     * @return The raw Class object
-     * @throws IllegalArgumentException if the type cannot be processed
-     */
-
-    private static Class<?> extractRawType(Type type) {
-        if (type instanceof ParameterizedType) {
-            return (Class<?>) ((ParameterizedType) type).getRawType();
-        } else if (type instanceof Class) {
-            return (Class<?>) type;
-        } else {
-            throw new IllegalArgumentException(PrettyStrings.prettify(AnsiColors.RED, AnsiWeights.BOLD, null,
-                    "Cannot extract raw type from: %s", type.toString()));
-        }
     }
 
 }
