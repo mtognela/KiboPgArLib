@@ -8,34 +8,31 @@ import java.io.IOException;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
+import com.kibo.pgar.lib.Collections.AnyCollections;
+import com.kibo.pgar.lib.Formats.AnsiColors;
+import com.kibo.pgar.lib.Formats.AnsiWeights;
+import com.kibo.pgar.lib.Strings.PrettyStrings;
 
 public final class JsonService {
 
-    private static final String ERROR_IN_INITIALIZING_THE_READER = "Error in initializing the reader";
-    private static final String ERROR_IN_INITIALIZING_THE_WRITER = "Error in initializing the writer";
+    private static final String ERROR_IN_INITIALIZING_THE_READER = PrettyStrings.prettify(AnsiColors.RED,
+            AnsiWeights.BOLD, null, "Error in initializing the reader");
+    private static final String ERROR_IN_INITIALIZING_THE_WRITER = PrettyStrings.prettify(AnsiColors.RED,
+            AnsiWeights.BOLD, null, "Error in initializing the writer");
     private static final Gson gson = new Gson();
 
-    public static <T> T read(File file, Class<T> type) {
+    public static <T> Class<T> read(File file, Class<T> type) {
+        
         try (FileReader reader = new FileReader(file)) {
-            return gson.fromJson(reader, type);
+            return AnyCollections.safeCastToClass(gson.fromJson(reader, type), type);
         } catch (JsonIOException | JsonSyntaxException | IOException e) {
             System.out.println(ERROR_IN_INITIALIZING_THE_READER);
             System.out.println(e.getMessage());
-            return emptyInstanceForAnyType(type);
+            return (Class<T>) AnyCollections.emptyInstanceForAnyType(type);
         }
 
     }
     
-
-    public static <T> T emptyInstanceForAnyType(Class<T> type) {
-        try {
-            return type.getDeclaredConstructor().newInstance();
-        } catch (Exception e) {
-            return null;
-        }
-
-    }
-
     public static <T> boolean write(File file, T input) {
         Gson gson = new Gson();
 
