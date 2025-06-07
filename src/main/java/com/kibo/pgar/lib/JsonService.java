@@ -4,14 +4,23 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.Collections;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.NavigableMap;
+import java.util.NavigableSet;
+import java.util.Queue;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.SortedSet;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
-import com.google.gson.reflect.TypeToken;
 
 public final class JsonService {
 
@@ -20,25 +29,18 @@ public final class JsonService {
 
     private static final Gson gson = new Gson();
 
-    private <T> T readGeneric(File file) {
+    @SuppressWarnings("unchecked")
+    public static <T> T read(File file, Class<T> type) {
         try (FileReader reader = new FileReader(file)) {
-            TypeToken<T> typeToken = new  TypeToken<>() {};
-            return gson.fromJson(reader, typeToken.getType());
+            return gson.fromJson(reader, type);
         } catch (JsonIOException | JsonSyntaxException | IOException e) {
             System.out.println(ERROR_IN_INITIALIZING_THE_READER);
             System.out.println(e.getMessage());
-            return null;
+            return emptyInstanceForType(type);
         }
     }
 
-    @SuppressWarnings("unused")
-    private <T extends Serializable> List<T> read(File file) {
-        List<T> toReturn = readGeneric(file);
-        return toReturn != null ?  toReturn : Collections.emptyList(); 
-    }
-
-
-    public <T extends Serializable> boolean write(File file, T input) {
+    public static <T> boolean write(File file, T input) {
         Gson gson = new Gson();
 
         try (FileWriter writer = new FileWriter(file)) {
@@ -49,5 +51,30 @@ public final class JsonService {
             System.out.println(e.getMessage());
             return false;
         }
+    }
+
+
+    @SuppressWarnings("unchecked")
+    public static <T> T emptyInstanceForType(Class<T> type) {
+        if (List.class.isAssignableFrom(type))
+            return (T) Collections.emptyList();
+        else if (Set.class.isAssignableFrom(type))
+            return (T) Collections.emptySet();
+        else if (SortedSet.class.isAssignableFrom(type))
+            return (T) Collections.unmodifiableSortedSet(new TreeSet<>());
+        else if (NavigableSet.class.isAssignableFrom(type))
+            return (T) Collections.unmodifiableNavigableSet(new TreeSet<>());
+        else if (Queue.class.isAssignableFrom(type))
+            return (T) new LinkedList<>();
+        else if (Deque.class.isAssignableFrom(type))
+            return (T) new LinkedList<>();
+        else if (Map.class.isAssignableFrom(type))
+            return (T) Collections.emptyMap();
+        else if (SortedMap.class.isAssignableFrom(type))
+            return (T) Collections.unmodifiableSortedMap(new TreeMap<>());
+        else if (NavigableMap.class.isAssignableFrom(type))
+            return (T) Collections.unmodifiableNavigableMap(new TreeMap<>());
+
+        return null;
     }
 }
