@@ -8,11 +8,11 @@ import java.io.IOException;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 import com.kibo.pgar.lib.Formats.AnsiColors;
 import com.kibo.pgar.lib.Formats.AnsiWeights;
 import com.kibo.pgar.lib.Strings.PrettyStrings;
 import com.kibo.pgar.lib.Types.TypeSafeEmpty;
-import com.kibo.pgar.lib.Types.TypeT;
 
 public final class JsonService {
 
@@ -29,7 +29,7 @@ public final class JsonService {
         } catch (JsonIOException | JsonSyntaxException | IOException e) {
             System.out.println(ERROR_IN_INITIALIZING_THE_READER);
             System.out.println(e.getMessage());
-            return TypeSafeEmpty.getEmpty(new TypeT<T>());
+            return TypeSafeEmpty.getEmpty(new TypeToken<T>() {});
         }
 
     }
