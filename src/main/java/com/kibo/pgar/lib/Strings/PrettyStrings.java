@@ -10,7 +10,7 @@ import com.kibo.pgar.lib.Menus.FrameSettings;
  * <code>Class</code> that let's you prettify the strings to output in the
  * terminal.
  * 
- * @author Alessandro Muscio (Kibo) and Mattia Tognela 
+ * @author Alessandro Muscio (Kibo) and Mattia Tognela (mtognela)
  * @version 1.2
  */
 public final class PrettyStrings {
