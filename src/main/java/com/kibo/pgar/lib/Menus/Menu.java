@@ -2,7 +2,7 @@ package com.kibo.pgar.lib.Menus;
 
 import java.io.Serializable;
 
-import com.kibo.pgar.lib.PrettyStrings;
+import com.kibo.pgar.lib.Strings.PrettyStrings;
 import com.kibo.pgar.lib.Calcs.KnownProblems;
 import com.kibo.pgar.lib.Formats.Alignment;
 import com.kibo.pgar.lib.Formats.AnsiColors;

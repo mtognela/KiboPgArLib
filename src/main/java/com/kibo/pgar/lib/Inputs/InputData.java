@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import com.kibo.pgar.lib.Strings.PrettyStrings;
 import com.kibo.pgar.lib.Formats.AnsiColors;
 
 public final class InputData {
