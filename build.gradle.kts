@@ -41,7 +41,7 @@ tasks.withType<Javadoc>() {
 
 tasks.register<JavaExec>("run") {
     classpath = configurations.runtimeClasspath.get()
-    mainClass.set("Main")
+    mainClass.set("TypeSafeEmpty")
     // args = listOf("arg1", "arg2") // if you need arguments
 }
 
