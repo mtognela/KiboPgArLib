@@ -1,5 +1,3 @@
-
-
 plugins {
     `java-library`
     id("com.gradleup.shadow") version "9.0.0-beta13"
@@ -9,9 +7,14 @@ repositories {
     mavenLocal()
     mavenCentral()
     gradlePluginPortal()
+
+    flatDir {
+        dirs("lib")
+    }
 }
 
 dependencies {
+    implementation("com.google.code.gson:gson:2.13.1")
     api("org.slf4j:slf4j-api:2.1.0-alpha1") 
     testImplementation("ch.qos.logback:logback-classic:1.5.18")
     testImplementation("org.junit.jupiter:junit-jupiter:5.12.1") 
@@ -34,6 +37,12 @@ tasks.withType<Javadoc>() {
     options.encoding = "UTF-8"
 }
 
+tasks.register<JavaExec>("run") {
+    classpath = configurations.runtimeClasspath.get()
+    mainClass.set("Main")
+    // args = listOf("arg1", "arg2") // if you need arguments
+}
+
 tasks.test {
     useJUnitPlatform()
 }
@@ -45,8 +54,8 @@ tasks.withType<AbstractArchiveTask>().configureEach {
 
 val testJar by tasks.registering(Jar::class) {
     manifest {
-        attributes["Description"] = "Arnaldo KiboPgArLib from the KiboPgArLib Contributors" 
-        attributes["Manifest-Version"] = "1.0.0"
+        attributes["Description"] = "Chi mola mia dura la vince" 
+        attributes["Manifest-Version"] = "1.1.0"
         attributes["Multi-Release"] = "false"
         attributes["reproducibleFileOrder"] = "true"
         attributes["preserveFileTimestamps"] = "false"

@@ -1,10 +1,32 @@
-package com.kibo.pgar.lib;
+package com.kibo.pgar.lib.Menus;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.StringJoiner;
 
+import com.kibo.pgar.lib.Formats.Alignment;
+import com.kibo.pgar.lib.Formats.AnsiColors;
+import com.kibo.pgar.lib.Formats.AnsiWeights;
+import com.kibo.pgar.lib.Strings.PrettyStrings;
+
+/**
+ * A utility class for creating formatted ASCII tables in command-line interfaces.
+ * <p>
+ * This class provides configurable table formatting with features including:
+ * <ul>
+ *   <li>Customizable borders and separators</li>
+ *   <li>Alignment control (left, right, center)</li>
+ *   <li>Automatic column width calculation</li>
+ *   <li>Header support</li>
+ *   <li>Vertical line visibility toggle</li>
+ * </ul>
+ * </p>
+ * <p>
+ * 
+ * @author Alessandro Muscio (Kibo) and Mattia Tognela (mtognela)
+ * @version 1.2
+ */
 public final class CommandLineTable {
     private static final String SHORT_ROWS_ERROR = PrettyStrings.prettify(AnsiColors.RED, AnsiWeights.BOLD,
             null, "One or multiple of the given rows are too short for this table!");

@@ -1,9 +1,11 @@
-package com.kibo.pgar.lib;
+package com.kibo.pgar.lib.Inputs;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import com.kibo.pgar.lib.Strings.PrettyStrings;
+import com.kibo.pgar.lib.Formats.AnsiColors;
 
 public final class InputData {
     private static final Scanner reader = createScanner();
@@ -31,8 +33,7 @@ public final class InputData {
             AnsiColors.RED, null, null, "\nThe answer is not valid!");
 
 
-    private InputData() {
-        
+    private InputData() {   
     }
 
     /**
@@ -52,30 +53,23 @@ public final class InputData {
         reader.nextLine();
     }
 
-    private static Scanner createScanner() {
-        // Check if the code is being executed from Eclipse
-        if (isEclipseEnvironment()) {
-            // If running in Eclipse, use System.lineSeparator() as the delimiter
-            return new Scanner(System.in).useDelimiter(System.lineSeparator());
-        } else {
-            // If not running in Eclipse, use "\n" as the delimiter
-            return new Scanner(System.in).useDelimiter("\n");
-        }
-    }
-
     /**
-     * Determines if the code is being executed within an Eclipse environment.<br><br>
-     *
-     * This method checks for the presence of the <code>.project</code> file and <code>.settings</code> directory
-     * in the current working directory, which are standard indicators of an Eclipse project.<br><br>
-     *
-     * @return <code>true</code> if the code is running in Eclipse, <code>false</code> otherwise.
+     * Creates a new {@link Scanner} instance configured to read user input from
+     * {@link System#in},
+     * using newline ({@code "\n"}) as the delimiter pattern.
+     * <p>
+     * The scanner will tokenize input by lines, making {@link Scanner#next()}
+     * return
+     * entire lines of input at a time. This matches common console input behavior
+     * across different execution environments.
+     * </p>
+     * 
+     * @return A configured Scanner instance reading from standard input
+     * @see Scanner#useDelimiter(String)
+     * @see System#in
      */
-
-    private static boolean isEclipseEnvironment() {
-        File projectFile = new File(".project");
-        File settingsDir = new File(".settings");
-        return projectFile.exists() && settingsDir.exists();
+    private static Scanner createScanner() {
+        return new Scanner(System.in).useDelimiter("\n");
     }
 
     /**
@@ -85,8 +79,6 @@ public final class InputData {
      * @return A <code>boolean</code> representing if the message is alphanumeric or
      * not.
      */
-
-    
     private static boolean hasAlphanumericCharacters(String message) {
         char currentChar;
 
@@ -105,9 +97,8 @@ public final class InputData {
      * @param message Let you deliver a message for the user
      * @return A <code>String</code> form the method <code>reader.nextLine()</code>;
      */
-
     public static String readSting(String message) {
-        System.out.printf("%s ", message);
+        System.out.printf("%s: ", message);
         return reader.nextLine();
     }
 
@@ -120,14 +111,13 @@ public final class InputData {
      * @param alphanumeric If the input needs to be alphanumeric or not.
      * @return A <code>String</code> representing the user input.
      */
-
     public static String readString(String message, boolean alphanumeric) {
         boolean isAlphanumeric;
         String read;
 
         if (alphanumeric) {
             do {
-                System.out.printf("%s ", message);
+                System.out.printf("%s: ", message);
 
                 read = reader.next().trim();
 
@@ -137,7 +127,7 @@ public final class InputData {
                     System.out.println(ALPHANUMERIC_CHARACTERS_ERROR);
             } while (!isAlphanumeric);
         } else {
-            System.out.printf("%s ", message);
+            System.out.printf("%s: ", message);
 
             read = reader.next().trim();
         }
@@ -155,7 +145,6 @@ public final class InputData {
      * @param alphanumeric If the input needs to be alphanumeric or not.
      * @return A <code>String</code> representing the user input.
      */
-
     public static String readStringNotEmpty(String message, boolean alphanumeric) {
         boolean isStringEmpty = true;
         String read;
@@ -181,7 +170,6 @@ public final class InputData {
      * @param allowed All the allowed characters.
      * @return A <code>char</code> representing the character tha was read.
      */
-
     public static char readChar(String message, String allowed) {
         boolean isAllowed = false;
         String read;
@@ -208,14 +196,13 @@ public final class InputData {
      *
      * @return An <code>int</code> representing the integer that was read.
      */
-
     public static int readInteger(String message) {
         boolean isInteger;
         int read = 0;
 
         do {
             try {
-                System.out.printf("%s ", message);
+                System.out.printf("%s: ", message);
 
                 read = reader.nextInt();
 
@@ -241,7 +228,6 @@ public final class InputData {
      * @param min     The minimum value to read.
      * @return An <code>int</code> representing the integer that was read.
      */
-
     public static int readIntegerWithMinimum(String message, int min) {
         boolean isAboveMin = false;
         int read;
@@ -267,7 +253,6 @@ public final class InputData {
      * @param max     The maximum value to read.
      * @return An <code>int</code> representing the integer that was read.
      */
-
     public static int readIntegerWithMaximum(String message, int max) {
         boolean isBelowMax = false;
         int read;
@@ -295,7 +280,6 @@ public final class InputData {
      * @param max     The maximum value to read.
      * @return An <code>int</code> representing the integer that was read.
      */
-
     public static int readIntegerBetween(String message, int min, int max) {
         boolean isBetweenMinMax = false;
         int read;
@@ -321,13 +305,12 @@ public final class InputData {
      * @param message The message to print.
      * @return A <code>double</code> representing the double that was read.
      */
-
     public static double readDouble(String message) {
         boolean isDouble;
         double read = Double.NaN;
 
         do {
-            System.out.printf("%s ", message);
+            System.out.printf("%s: ", message);
 
             try {
                 read = reader.nextDouble();
@@ -354,7 +337,6 @@ public final class InputData {
      * @param min     The minimum value to read.
      * @return A <code>double</code> representing the double that was read.
      */
-
     public static double readDoubleWithMinimum(String message, double min) {
         boolean isAboveMin = false;
         double read;
@@ -380,7 +362,6 @@ public final class InputData {
      * @param max     The maximum value to read.
      * @return An <code>double</code> representing the double that was read.
      */
-
     public static double readDoubleWithMaximum(String message, double max) {
         boolean isBelowMax = false;
         double read;
@@ -408,7 +389,6 @@ public final class InputData {
      * @param max     The maximum value to read.
      * @return An <code>double</code> representing the double that was read.
      */
-
     public static double readDoubleBetween(String message, double min, double max) {
         boolean isBetweenMinMax = false;
         double read;
@@ -437,7 +417,6 @@ public final class InputData {
      * @return A <code>boolean</code> representing the affirmative or negative
      * answer of the user.
      */
-
     public static boolean readYesOrNo(String question) {
         String answer = readStringNotEmpty(question + " [Y/n]", true);
 

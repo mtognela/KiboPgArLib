@@ -1,14 +1,21 @@
-package com.kibo.pgar.lib;
+package com.kibo.pgar.lib.Menus;
 
 import java.io.Serializable;
+
+import com.kibo.pgar.lib.Strings.PrettyStrings;
+import com.kibo.pgar.lib.Calcs.KnownProblems;
+import com.kibo.pgar.lib.Formats.Alignment;
+import com.kibo.pgar.lib.Formats.AnsiColors;
+import com.kibo.pgar.lib.Formats.AnsiWeights;
+import com.kibo.pgar.lib.Inputs.InputData;
 
 /**
  * The <strong>Menu</strong> class creates a menu with multiple entry supposing
  * that zero is always the exit option. The class also contains some method that
  * may result useful in visualizing the menu.
  *
- * @author Alessandro Muscio
- * @version 1.0
+ * @author Alessandro Muscio and Mattia Tognela (mtognela)
+ * @version 1.2
  */
 public class Menu implements Serializable {
     private static final String EXIT_ENTRY = PrettyStrings.prettify(

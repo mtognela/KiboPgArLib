@@ -14,6 +14,14 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.kibo.pgar.lib.Calcs.KnownProblems;
+import com.kibo.pgar.lib.Formats.Alignment;
+import com.kibo.pgar.lib.Formats.AnsiColors;
+import com.kibo.pgar.lib.Formats.AnsiDecorations;
+import com.kibo.pgar.lib.Formats.AnsiWeights;
+import com.kibo.pgar.lib.Menus.FrameSettings;
+import com.kibo.pgar.lib.Strings.PrettyStrings;
+
 public final class Tests {
     private static final Logger LOGGER = LoggerFactory.getLogger(Tests.class);
     private static final String TEST_START = "Test Started - %s";
@@ -28,9 +36,9 @@ public final class Tests {
         final String NEW_LINE = "\n";
         final String SEPARATOR = "~~~~~~~~~~~~~~~~~~~~" + NEW_LINE;
 
-        List<AnsiColors> colors = Arrays.asList(AnsiColors.values());
-        List<AnsiWeights> weights = Arrays.asList(AnsiWeights.values());
-        List<AnsiDecorations> decorations = Arrays.asList(AnsiDecorations.values());
+        List<AnsiColors> colors = new ArrayList<>(Arrays.asList(AnsiColors.values()));
+        List<AnsiWeights> weights = new ArrayList<>(Arrays.asList(AnsiWeights.values()));
+        List<AnsiDecorations> decorations = new ArrayList<>(Arrays.asList(AnsiDecorations.values()));
         AnsiColors reset = colors.remove(0);
         StringBuffer builder = new StringBuffer();
 

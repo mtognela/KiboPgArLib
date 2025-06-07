@@ -1,4 +1,4 @@
-package com.kibo.pgar.lib;
+package com.kibo.pgar.lib.Files;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -11,10 +11,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+import com.kibo.pgar.lib.Formats.AnsiColors;
+import com.kibo.pgar.lib.Formats.AnsiWeights;
+import com.kibo.pgar.lib.Strings.PrettyStrings;
+
 /**
  * <code>Class</code> that let's you serialize and deserialize objects to file.
  * 
- * @author Alessandro Muscio (Kibo)
+ * @author Alessandro Muscio (Kibo) and Mattia Tognela (mtognela)
  */
 public final class FileService {
     
