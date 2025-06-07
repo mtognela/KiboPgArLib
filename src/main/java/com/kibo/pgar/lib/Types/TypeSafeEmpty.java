@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 
+import com.google.gson.reflect.TypeToken;
 import com.kibo.pgar.lib.Formats.AnsiColors;
 import com.kibo.pgar.lib.Formats.AnsiWeights;
 import com.kibo.pgar.lib.Strings.PrettyStrings;
@@ -22,21 +23,21 @@ public class TypeSafeEmpty {
     private static final String MAP = "Map";
     private static final String SET = "Set";
     private static final String LIST = "List";
-    private static final Map<TypeT<?>, Object> emptyCache = new HashMap<>();
+    private static final Map<TypeToken<?>, Object> emptyCache = new HashMap<>();
     
     /**
      * Gets empty collection for the specified TypeToken
      */
     @SuppressWarnings("unchecked")
-    public static <T> T getEmpty(TypeT<T> typeToken) {
+    public static <T> T getEmpty(TypeToken<T> typeToken) {
         return (T) emptyCache.computeIfAbsent(typeToken,
-                (Function<? super TypeT<?>, ? extends Object>) TypeSafeEmpty.createEmpty(typeToken));
+                (Function<? super TypeToken<?>, ? extends Object>) TypeSafeEmpty.createEmpty(typeToken));
     }
 
     /**
      * Creates appropriate empty collection based on the type
      */
-    private static Object createEmpty(TypeT<?> typeToken) {
+    private static Object createEmpty(TypeToken<?> typeToken) {
         Class<?> rawType = extractRawType(typeToken.getType());
 
         return switch (rawType.getSimpleName()) {
@@ -59,8 +60,8 @@ public class TypeSafeEmpty {
     /**
      * Convenience method for creating TypeTokens
      */
-    public static <T> TypeT<T> typeToken() {
-        return new TypeT<T>() {};
+    public static <T> TypeToken<T> typeToken() {
+        return new TypeToken<T>() {};
     }
     
     public static void clearCache() {
@@ -73,7 +74,7 @@ public class TypeSafeEmpty {
     
     public static Set<String> getCachedTypes() {
         return emptyCache.keySet().stream()
-                .map(TypeT::toString)
+                .map(TypeToken::toString)
                 .collect(HashSet::new, HashSet::add, HashSet::addAll);
     } 
     
