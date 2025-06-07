@@ -1,9 +1,14 @@
-package com.kibo.pgar.lib;
+package com.kibo.pgar.lib.Menus;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.StringJoiner;
+
+import com.kibo.pgar.lib.PrettyStrings;
+import com.kibo.pgar.lib.Formats.Alignment;
+import com.kibo.pgar.lib.Formats.AnsiColors;
+import com.kibo.pgar.lib.Formats.AnsiWeights;
 
 /**
  * A utility class for creating formatted ASCII tables in command-line interfaces.

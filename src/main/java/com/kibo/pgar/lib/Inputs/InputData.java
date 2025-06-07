@@ -1,8 +1,10 @@
-package com.kibo.pgar.lib;
+package com.kibo.pgar.lib.Inputs;
 
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import com.kibo.pgar.lib.Formats.AnsiColors;
 
 public final class InputData {
     private static final Scanner reader = createScanner();

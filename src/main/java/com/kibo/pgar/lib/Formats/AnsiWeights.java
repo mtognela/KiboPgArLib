@@ -1,4 +1,4 @@
-package com.kibo.pgar.lib;
+package com.kibo.pgar.lib.Formats;
 
 /**
  * <code>Enum</code> that collects some ansi weights in order to prettify

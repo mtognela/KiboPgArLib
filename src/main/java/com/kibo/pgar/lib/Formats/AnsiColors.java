@@ -1,4 +1,4 @@
-package com.kibo.pgar.lib;
+package com.kibo.pgar.lib.Formats;
 
 /**
  * <code>Enum</code> that collects some ANSI colors in order to prettify strings in the terminal. It

@@ -1,4 +1,4 @@
-package com.kibo.pgar.lib;
+package com.kibo.pgar.lib.Calcs;
 
 /**
  * <code>Class</code> for a simple implementation of some of the usual problems

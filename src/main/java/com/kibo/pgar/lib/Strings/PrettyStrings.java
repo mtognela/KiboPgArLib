@@ -1,5 +1,11 @@
 package com.kibo.pgar.lib;
 
+import com.kibo.pgar.lib.Formats.Alignment;
+import com.kibo.pgar.lib.Formats.AnsiColors;
+import com.kibo.pgar.lib.Formats.AnsiDecorations;
+import com.kibo.pgar.lib.Formats.AnsiWeights;
+import com.kibo.pgar.lib.Menus.FrameSettings;
+
 /**
  * <code>Class</code> that let's you prettify the strings to output in the
  * terminal.

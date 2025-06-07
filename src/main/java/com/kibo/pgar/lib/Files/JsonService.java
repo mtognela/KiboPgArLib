@@ -1,12 +1,10 @@
-package com.kibo.pgar.lib;
+package com.kibo.pgar.lib.Files;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Map;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
@@ -26,8 +24,9 @@ public final class JsonService {
             System.out.println(e.getMessage());
             return emptyInstanceForAnyType(type);
         }
-    }
 
+    }
+    
 
     public static <T> T emptyInstanceForAnyType(Class<T> type) {
         try {
