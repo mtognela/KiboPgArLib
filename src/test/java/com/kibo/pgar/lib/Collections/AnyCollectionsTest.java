@@ -39,6 +39,7 @@ class AnyCollectionsTest {
         @Test
         @DisplayName("Should return ArrayList instance, not Class")
         void testArrayListType() {
+            @SuppressWarnings("unchecked")
             ArrayList<Object> result = AnyCollections.emptyInstanceForAnyType(ArrayList.class);
             
             assertNotNull(result, "Result should not be null");
@@ -50,6 +51,7 @@ class AnyCollectionsTest {
         @Test
         @DisplayName("Should return HashMap instance, not Class")
         void testHashMapType() {
+            @SuppressWarnings("unchecked")
             HashMap<Object, Object> result = AnyCollections.emptyInstanceForAnyType(HashMap.class);
             
             assertNotNull(result, "Result should not be null");
@@ -66,7 +68,9 @@ class AnyCollectionsTest {
         @Test
         @DisplayName("Should return same instance for multiple calls with same type")
         void testCachingBehavior() {
+            @SuppressWarnings("unchecked")
             HashSet<Object> result1 = AnyCollections.emptyInstanceForAnyType(HashSet.class);
+            @SuppressWarnings("unchecked")
             HashSet<Object> result2 = AnyCollections.emptyInstanceForAnyType(HashSet.class);
             
             assertNotNull(result1, "First result should not be null");
@@ -190,8 +194,11 @@ class AnyCollectionsTest {
         @Test
         @DisplayName("Should work with multiple different collection types")
         void testMultipleCollectionTypes() {
+            @SuppressWarnings("unchecked")
             ArrayList<Object> listResult = AnyCollections.emptyInstanceForAnyType(ArrayList.class);
+            @SuppressWarnings("unchecked")
             HashMap<Object, Object> mapResult = AnyCollections.emptyInstanceForAnyType(HashMap.class);
+            @SuppressWarnings("unchecked")
             HashSet<Object> setResult = AnyCollections.emptyInstanceForAnyType(HashSet.class);
             
             assertNotNull(listResult, "ArrayList result should not be null");
