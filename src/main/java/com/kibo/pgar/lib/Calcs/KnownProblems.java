@@ -7,7 +7,7 @@ package com.kibo.pgar.lib.Calcs;
  * solved them.
  * 
  * @author Alessandro Muscio (Kibo) and Mattia Tognela (mtognela)
- * @version 1.3
+ * @version 1.4
  */
 public final class KnownProblems {
 

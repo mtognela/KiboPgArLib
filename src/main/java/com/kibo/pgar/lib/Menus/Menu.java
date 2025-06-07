@@ -15,7 +15,7 @@ import com.kibo.pgar.lib.Inputs.InputData;
  * may result useful in visualizing the menu.
  *
  * @author Alessandro Muscio and Mattia Tognela (mtognela)
- * @version 1.3
+ * @version 1.4
  */
 public class Menu implements Serializable {
     private static final String EXIT_ENTRY = PrettyStrings.prettify(

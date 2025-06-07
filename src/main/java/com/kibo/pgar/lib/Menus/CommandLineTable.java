@@ -25,7 +25,7 @@ import com.kibo.pgar.lib.Strings.PrettyStrings;
  * <p>
  * 
  * @author Alessandro Muscio (Kibo) and Mattia Tognela (mtognela)
- * @version 1.3
+ * @version 1.4
  */
 public final class CommandLineTable {
     private static final String SHORT_ROWS_ERROR = PrettyStrings.prettify(AnsiColors.RED, AnsiWeights.BOLD,

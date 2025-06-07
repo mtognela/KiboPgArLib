@@ -5,7 +5,7 @@ package com.kibo.pgar.lib.Formats;
  * can color both the words and the background of strings.
  * 
  * @author Alessandro Muscio (Kibo) and Mattia Tognela (mtognela)
- * @version 1.3
+ * @version 1.4
  */
 public enum AnsiColors {
     /** Resets all attributes. */

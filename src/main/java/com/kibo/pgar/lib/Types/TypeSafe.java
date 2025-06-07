@@ -94,7 +94,7 @@ import com.kibo.pgar.lib.Strings.PrettyStrings;
  * pointers
  * 
  * @author Mattia Tognela (mtognela)
- * @version 1.3
+ * @version 1.4
  */
 public class TypeSafe {
 
