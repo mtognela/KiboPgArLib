@@ -1,5 +1,3 @@
-
-
 plugins {
     `java-library`
     id("com.gradleup.shadow") version "9.0.0-beta13"
@@ -9,6 +7,10 @@ repositories {
     mavenLocal()
     mavenCentral()
     gradlePluginPortal()
+
+    flatDir {
+        dirs("lib")
+    }
 }
 
 dependencies {
@@ -33,6 +35,12 @@ tasks.withType<JavaCompile>() {
 
 tasks.withType<Javadoc>() {
     options.encoding = "UTF-8"
+}
+
+tasks.register<JavaExec>("run") {
+    classpath = configurations.runtimeClasspath.get()
+    mainClass.set("Main")
+    // args = listOf("arg1", "arg2") // if you need arguments
 }
 
 tasks.test {
