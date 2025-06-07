@@ -29,7 +29,6 @@ public final class JsonService {
 
     private static final Gson gson = new Gson();
 
-    @SuppressWarnings("unchecked")
     public static <T> T read(File file, Class<T> type) {
         try (FileReader reader = new FileReader(file)) {
             return gson.fromJson(reader, type);
@@ -54,7 +53,6 @@ public final class JsonService {
     }
 
 
-    @SuppressWarnings("unchecked")
     public static <T> T emptyInstanceForType(Class<T> type) {
         if (List.class.isAssignableFrom(type))
             return (T) Collections.emptyList();
