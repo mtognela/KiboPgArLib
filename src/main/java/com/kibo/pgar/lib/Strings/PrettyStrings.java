@@ -1,4 +1,4 @@
-package com.kibo.pgar.lib;
+package com.kibo.pgar.lib.Strings;
 
 import com.kibo.pgar.lib.Formats.Alignment;
 import com.kibo.pgar.lib.Formats.AnsiColors;

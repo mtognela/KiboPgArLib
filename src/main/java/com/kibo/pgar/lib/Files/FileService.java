@@ -11,9 +11,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import com.kibo.pgar.lib.PrettyStrings;
 import com.kibo.pgar.lib.Formats.AnsiColors;
 import com.kibo.pgar.lib.Formats.AnsiWeights;
+import com.kibo.pgar.lib.Strings.PrettyStrings;
 
 /**
  * <code>Class</code> that let's you serialize and deserialize objects to file.

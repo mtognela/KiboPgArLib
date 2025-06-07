@@ -8,15 +8,19 @@ import java.io.File;
  * @author Mattia Tognela (mtognela)
  * @version 1.1
  */
-public final class OmniFile extends File {
+public final class OmniFile {
+
+    private OmniFile() {
+    }
 
     /**
-     * Constructs a {@code UmniFile} from a sequence of path components.
+     * Constructs a {@code File} from a sequence of path components.
      * 
      * @param args Path segments to join with the system's file separator.
+     * @return the File creathed for 
      */
-    public OmniFile(String... args) {
-        super(String.join(File.separator, args));
+    public static File of(String... args) {
+        return new File(String.join(File.separator, args));
     }
 
 }

@@ -20,6 +20,7 @@ import com.kibo.pgar.lib.Formats.AnsiColors;
 import com.kibo.pgar.lib.Formats.AnsiDecorations;
 import com.kibo.pgar.lib.Formats.AnsiWeights;
 import com.kibo.pgar.lib.Menus.FrameSettings;
+import com.kibo.pgar.lib.Strings.PrettyStrings;
 
 public final class Tests {
     private static final Logger LOGGER = LoggerFactory.getLogger(Tests.class);
