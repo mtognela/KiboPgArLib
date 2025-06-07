@@ -22,7 +22,6 @@ public final class JsonService {
             AnsiWeights.BOLD, null, "Error in initializing the writer");
     private static final Gson gson = new Gson();
 
-    @SuppressWarnings("unchecked")
     public static <T> T read(File file, TypeToken<T> type) {
         try (FileReader reader = new FileReader(file)) {
             return gson.fromJson(reader, type);
