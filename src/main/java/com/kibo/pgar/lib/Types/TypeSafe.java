@@ -269,14 +269,28 @@ public class TypeSafe {
 
     /**
      * Registers a custom handler for providing empty/default instances of a type.
+     * 
      * If a handler already exists for the type, it will not be replaced.
      * 
-     * @param <T>         The type to register a handler for
-     * @param typeElement The TypeToken representing the type
-     * @param defult      The Supplier that provides empty/default instances
+     * @param <T>             The type to register a handler for
+     * @param typeElement     The TypeToken representing the type
+     * @param defaultSupplier The Supplier that provides empty/default instances
      */
-    public static <T> void defineEmpthy(TypeToken<T> typeElement, Supplier<?> defult) {
-        typeHandlers.putIfAbsent(typeElement, defult);
+    public static <T> void defineEmpty(TypeToken<T> typeElement, Supplier<? extends T> defaultSupplier) {
+        typeHandlers.putIfAbsent(typeElement, defaultSupplier);
+    }
+
+    /**
+     * Registers a custom handler for providing empty/default instances of a type.
+     * 
+     * If a handler already exists for the type, it will not be replaced.
+     * 
+     * @param <T>          The type to register a handler for
+     * @param typeElement  The TypeToken representing the type
+     * @param defaultValue The default value to return
+     */
+    public static <T> void defineEmpty(TypeToken<T> typeElement, T defaultValue) {
+        typeHandlers.putIfAbsent(typeElement, () -> defaultValue);
     }
 
     /**
