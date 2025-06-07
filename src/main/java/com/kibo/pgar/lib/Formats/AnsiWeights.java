@@ -5,7 +5,7 @@ package com.kibo.pgar.lib.Formats;
  * strings in the terminal. It can change the font weight of strings.
  * 
  * @author Alessandro Muscio (Kibo)
- * @version 1.2
+ * @version 1.3
  */
 public enum AnsiWeights {
     /** Resets the formatting of the terminal. */
