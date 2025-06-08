@@ -1,6 +1,6 @@
 package com.kibo.pgar.lib.Menus;
 
-import com.kibo.pgar.lib.Formats.Alignment;
+import com.kibo.pgar.lib.AnsiClasses.Alignment;
 
 /**
  * <code>Class</code> that let's you specify the settings for framing a

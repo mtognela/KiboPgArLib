@@ -1,4 +1,4 @@
-package com.kibo.pgar.lib.Formats;
+package com.kibo.pgar.lib.AnsiClasses;
 
 /**
  * <code>Enum</code> that collects some ansi decorations in order to prettify

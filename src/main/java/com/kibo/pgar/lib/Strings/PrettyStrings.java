@@ -1,9 +1,9 @@
 package com.kibo.pgar.lib.Strings;
 
-import com.kibo.pgar.lib.Formats.Alignment;
-import com.kibo.pgar.lib.Formats.AnsiColors;
-import com.kibo.pgar.lib.Formats.AnsiDecorations;
-import com.kibo.pgar.lib.Formats.AnsiWeights;
+import com.kibo.pgar.lib.AnsiClasses.Alignment;
+import com.kibo.pgar.lib.AnsiClasses.AnsiColors;
+import com.kibo.pgar.lib.AnsiClasses.AnsiDecorations;
+import com.kibo.pgar.lib.AnsiClasses.AnsiWeights;
 import com.kibo.pgar.lib.Menus.FrameSettings;
 
 /**
