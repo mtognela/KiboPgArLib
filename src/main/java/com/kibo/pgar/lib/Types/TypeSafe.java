@@ -96,6 +96,7 @@ public class TypeSafe {
 
     private static final String UNSUPPORTED_TYPE_S_LOAD_A_DEFAULT_WITH_THE_METHOD_DEFINE_EMPTY = "Unsupported type: %s \nLoad a default with the method defineEmpty";
     private static final String HANDLER_FOR_TYPE_S_RETURNED_INCOMPATIBLE_TYPE_S = "Handler for type %s returned incompatible type %s";
+    
     /**
      * Map of type handlers that provide default empty values for supported types.
      * Contains predefined handlers for common Java types including primitives,
