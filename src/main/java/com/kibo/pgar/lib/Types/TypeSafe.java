@@ -82,8 +82,6 @@ import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 import com.google.gson.reflect.TypeToken;
-import com.kibo.pgar.lib.Formats.AnsiColors;
-import com.kibo.pgar.lib.Formats.AnsiWeights;
 import com.kibo.pgar.lib.Strings.PrettyStrings;
 
 /**
@@ -193,8 +191,7 @@ public class TypeSafe {
         typeHandlers.put(new TypeToken<Currency>() {}, () -> Currency.getInstance("USD"));
 
         // Thread and Executor types
-        typeHandlers.put(new TypeToken<Thread>() {}, () -> new Thread(() -> {
-        }));
+        typeHandlers.put(new TypeToken<Thread>() {}, () -> new Thread(() -> {}));
         typeHandlers.put(new TypeToken<ThreadLocal>() {}, ThreadLocal::new);
         typeHandlers.put(new TypeToken<ExecutorService>() {}, () -> Executors.newSingleThreadExecutor());
         typeHandlers.put(new TypeToken<CompletableFuture>() {}, CompletableFuture::new);

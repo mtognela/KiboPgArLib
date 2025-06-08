@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.StringJoiner;
 
 import com.kibo.pgar.lib.Formats.Alignment;
-import com.kibo.pgar.lib.Formats.AnsiColors;
-import com.kibo.pgar.lib.Formats.AnsiWeights;
 import com.kibo.pgar.lib.Strings.PrettyStrings;
 
 /**
