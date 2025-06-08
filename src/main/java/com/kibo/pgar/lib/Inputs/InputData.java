@@ -603,7 +603,7 @@ public final class InputData {
      */
     public static boolean readYesOrNo(String question, Consumer<? super String> print) {
         while (true) {
-            String answer = readStringNotEmpty(question + " [Y/n]", true, print);
+            String answer = readStringNotEmpty(question, true, print);
 
             YesNoResponse response = parseYesNoResponse(answer);
 
@@ -662,7 +662,7 @@ public final class InputData {
         final Set<String> noResponses = Set.of("n", "no", "false", "0");
 
         while (true) {
-            String answer = readStringNotEmpty(question + " [Y/n]", true, print);
+            String answer = readStringNotEmpty(question, true, print);
             String normalized = answer.trim().toLowerCase();
 
             if (yesResponses.contains(normalized)) {
@@ -684,6 +684,6 @@ public final class InputData {
     }
 
     private static void yesOrNoPrint(String message) {
-        System.out.printf(message);
+        System.out.printf("%s? %s ", message,  "[Y/n]");
     }
 }
