@@ -102,7 +102,7 @@ public class TypeSafe {
     private static Map<TypeToken<?>, Supplier<?>> typeHandlers = new HashMap<>();
 
     static {
-        // Primitive wrapper types
+        /** Primitive wrapper types */
         typeHandlers.put(new TypeToken<Boolean>() {}, () -> Boolean.FALSE);
         typeHandlers.put(new TypeToken<Byte>() {}, () -> (byte) 0);
         typeHandlers.put(new TypeToken<Short>() {}, () -> (short) 0);
@@ -112,18 +112,18 @@ public class TypeSafe {
         typeHandlers.put(new TypeToken<Double>() {}, () -> 0.0);
         typeHandlers.put(new TypeToken<Character>() {}, () -> '\0');
 
-        // String and StringBuilder types
+        /** String and StringBuilder types */
         typeHandlers.put(new TypeToken<String>() {}, () -> "");
         typeHandlers.put(new TypeToken<StringBuilder>() {}, StringBuilder::new);
         typeHandlers.put(new TypeToken<StringBuffer>() {}, StringBuffer::new);
 
-        // Optional types
+        /** Optional types */
         typeHandlers.put(new TypeToken<Optional>() {}, Optional::empty);
         typeHandlers.put(new TypeToken<OptionalInt>() {}, OptionalInt::empty);
         typeHandlers.put(new TypeToken<OptionalLong>() {}, OptionalLong::empty);
         typeHandlers.put(new TypeToken<OptionalDouble>() {}, OptionalDouble::empty);
 
-        // Date and Time types
+        /** Date and Time types */
         typeHandlers.put(new TypeToken<LocalDate>() {}, () -> LocalDate.MIN);
         typeHandlers.put(new TypeToken<LocalDateTime>() {}, () -> LocalDateTime.MIN);
         typeHandlers.put(new TypeToken<LocalTime>() {}, () -> LocalTime.MIN);
@@ -131,8 +131,7 @@ public class TypeSafe {
         typeHandlers.put(new TypeToken<Duration>() {}, () -> Duration.ZERO);
         typeHandlers.put(new TypeToken<Period>() {}, () -> Period.ZERO);
         typeHandlers.put(new TypeToken<ZonedDateTime>() {}, () -> ZonedDateTime.of(LocalDateTime.MIN, ZoneOffset.UTC));
-        typeHandlers.put(new TypeToken<OffsetDateTime>() {},
-                () -> OffsetDateTime.of(LocalDateTime.MIN, ZoneOffset.UTC));
+        typeHandlers.put(new TypeToken<OffsetDateTime>() {}, () -> OffsetDateTime.of(LocalDateTime.MIN, ZoneOffset.UTC));
         typeHandlers.put(new TypeToken<OffsetTime>() {}, () -> OffsetTime.of(LocalTime.MIN, ZoneOffset.UTC));
         typeHandlers.put(new TypeToken<Year>() {}, () -> Year.of(1));
         typeHandlers.put(new TypeToken<YearMonth>() {}, () -> YearMonth.of(1, 1));
@@ -140,23 +139,23 @@ public class TypeSafe {
         typeHandlers.put(new TypeToken<ZoneId>() {}, () -> ZoneOffset.UTC);
         typeHandlers.put(new TypeToken<ZoneOffset>() {}, () -> ZoneOffset.UTC);
 
-        // Numeric types
+        /** Numeric types */
         typeHandlers.put(new TypeToken<BigDecimal>() {}, () -> BigDecimal.ZERO);
         typeHandlers.put(new TypeToken<BigInteger>() {}, () -> BigInteger.ZERO);
         typeHandlers.put(new TypeToken<Number>() {}, () -> 0);
 
-        // Atomic types
+        /** Atomic types */
         typeHandlers.put(new TypeToken<AtomicInteger>() {}, () -> new AtomicInteger(0));
         typeHandlers.put(new TypeToken<AtomicLong>() {}, () -> new AtomicLong(0L));
         typeHandlers.put(new TypeToken<AtomicBoolean>() {}, () -> new AtomicBoolean(false));
         typeHandlers.put(new TypeToken<AtomicReference>() {}, () -> new AtomicReference<>());
 
-        // UUID and Path
+        /** UUID and Path */
         typeHandlers.put(new TypeToken<UUID>() {}, () -> new UUID(0L, 0L));
         typeHandlers.put(new TypeToken<Path>() {}, () -> Path.of(""));
         typeHandlers.put(new TypeToken<File>() {}, () -> new File(""));
 
-        // Collection types
+        /** Collection types */
         typeHandlers.put(new TypeToken<List>() {}, Collections::emptyList);
         typeHandlers.put(new TypeToken<Set>() {}, Collections::emptySet);
         typeHandlers.put(new TypeToken<Map>() {}, Collections::emptyMap);
@@ -176,32 +175,32 @@ public class TypeSafe {
         typeHandlers.put(new TypeToken<ConcurrentHashMap>() {}, ConcurrentHashMap::new);
         typeHandlers.put(new TypeToken<Properties>() {}, Properties::new);
 
-        // Stream types
+        /** Stream types */
         typeHandlers.put(new TypeToken<Stream>() {}, Stream::empty);
         typeHandlers.put(new TypeToken<IntStream>() {}, IntStream::empty);
         typeHandlers.put(new TypeToken<LongStream>() {}, LongStream::empty);
         typeHandlers.put(new TypeToken<DoubleStream>() {}, DoubleStream::empty);
 
-        // Regex and Pattern
+        /** Regex and Pattern */
         typeHandlers.put(new TypeToken<Pattern>() {}, () -> Pattern.compile(""));
         typeHandlers.put(new TypeToken<Matcher>() {}, () -> Pattern.compile("").matcher(""));
 
-        // Locale and Currency
+        /** Locale and Currency */
         typeHandlers.put(new TypeToken<Locale>() {}, Locale::getDefault);
         typeHandlers.put(new TypeToken<Currency>() {}, () -> Currency.getInstance("USD"));
 
-        // Thread and Executor types
+        /** Thread and Executor types */
         typeHandlers.put(new TypeToken<Thread>() {}, () -> new Thread(() -> {}));
         typeHandlers.put(new TypeToken<ThreadLocal>() {}, ThreadLocal::new);
         typeHandlers.put(new TypeToken<ExecutorService>() {}, () -> Executors.newSingleThreadExecutor());
         typeHandlers.put(new TypeToken<CompletableFuture>() {}, CompletableFuture::new);
         typeHandlers.put(new TypeToken<Future>() {}, () -> CompletableFuture.completedFuture(null));
 
-        // Random and Security
+        /** Random and Security */
         typeHandlers.put(new TypeToken<Random>() {}, Random::new);
         typeHandlers.put(new TypeToken<SecureRandom>() {}, SecureRandom::new);
 
-        // IO types
+        /** IO types */
         typeHandlers.put(new TypeToken<ByteArrayInputStream>() {}, () -> new ByteArrayInputStream(new byte[0]));
         typeHandlers.put(new TypeToken<ByteArrayOutputStream>() {}, ByteArrayOutputStream::new);
         typeHandlers.put(new TypeToken<StringReader>() {}, () -> new StringReader(""));
@@ -209,19 +208,16 @@ public class TypeSafe {
         typeHandlers.put(new TypeToken<PrintWriter>() {}, () -> new PrintWriter(new StringWriter()));
         typeHandlers.put(new TypeToken<Scanner>() {}, () -> new Scanner(""));
 
-        // Reflection types
+        /** Reflection types */
         typeHandlers.put(new TypeToken<Class>() {}, () -> Object.class);
 
-        // Exception types
+        /** Exception types */
         typeHandlers.put(new TypeToken<Exception>() {}, Exception::new);
         typeHandlers.put(new TypeToken<RuntimeException>() {}, RuntimeException::new);
         typeHandlers.put(new TypeToken<IllegalArgumentException>() {}, IllegalArgumentException::new);
         typeHandlers.put(new TypeToken<NullPointerException>() {}, NullPointerException::new);
 
-        // Enum support (generic)
-        typeHandlers.put(new TypeToken<Enum>() {}, () -> null); // Enums need special handling
-
-        // Buffer types
+        /** Buffer types */
         typeHandlers.put(new TypeToken<Buffer>() {}, () -> ByteBuffer.allocate(0));
         typeHandlers.put(new TypeToken<ByteBuffer>() {}, () -> ByteBuffer.allocate(0));
         typeHandlers.put(new TypeToken<CharBuffer>() {}, () -> CharBuffer.allocate(0));
@@ -230,10 +226,10 @@ public class TypeSafe {
         typeHandlers.put(new TypeToken<FloatBuffer>() {}, () -> FloatBuffer.allocate(0));
         typeHandlers.put(new TypeToken<DoubleBuffer>() {}, () -> DoubleBuffer.allocate(0));
 
-        // Charset and Encoding
+        /** Charset and Encoding */
         typeHandlers.put(new TypeToken<Charset>() {}, () -> StandardCharsets.UTF_8);
 
-        // Formatting
+        /** Formatting */
         typeHandlers.put(new TypeToken<Formatter>() {}, Formatter::new);
         typeHandlers.put(new TypeToken<DecimalFormat>() {}, DecimalFormat::new);
         typeHandlers.put(new TypeToken<SimpleDateFormat>() {}, SimpleDateFormat::new);
