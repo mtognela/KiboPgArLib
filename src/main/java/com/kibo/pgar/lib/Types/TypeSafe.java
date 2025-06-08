@@ -259,8 +259,7 @@ public class TypeSafe {
             return (T) handler.get();
         else
             throw new IllegalArgumentException(
-                    PrettyStrings.prettify(AnsiColors.RED, AnsiWeights.BOLD, null,
-                            "Unsupported type: %s", typeToken.toString()));
+                    PrettyStrings.errorDefine("Unsupported type: %s \nLoad a default with the method defineEmpthy", typeToken.toString()));
 
     }
 

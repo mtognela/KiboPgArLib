@@ -11,8 +11,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import com.kibo.pgar.lib.Formats.AnsiColors;
-import com.kibo.pgar.lib.Formats.AnsiWeights;
 import com.kibo.pgar.lib.Strings.PrettyStrings;
 
 /**
@@ -22,20 +20,16 @@ import com.kibo.pgar.lib.Strings.PrettyStrings;
  */
 public final class FileService {
     
-    private static final String NOT_FOUND_ERROR = PrettyStrings.prettify(
-            AnsiColors.RED, AnsiWeights.BOLD, null,
+    private static final String NOT_FOUND_ERROR = PrettyStrings.errorDefine(
             "Attention! Can't find the file %s\n");
 
-    private static final String WRITING_ERROR = PrettyStrings.prettify(
-            AnsiColors.RED, AnsiWeights.BOLD, null,
+    private static final String WRITING_ERROR = PrettyStrings.errorDefine(
             "Attention! Problem writing the file %s\n");
 
-    private static final String READING_ERROR = PrettyStrings.prettify(
-            AnsiColors.RED, AnsiWeights.BOLD, null,
+    private static final String READING_ERROR = PrettyStrings.errorDefine(
             "Attention! Problem reading the file %s\n");
 
-    private static final String CLOSING_ERROR = PrettyStrings.prettify(
-            AnsiColors.RED, AnsiWeights.BOLD, null,
+    private static final String CLOSING_ERROR = PrettyStrings.errorDefine(
             "Attention! Problem closing the file %s\n");
 
     private FileService()  {

@@ -9,17 +9,13 @@ import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
-import com.kibo.pgar.lib.Formats.AnsiColors;
-import com.kibo.pgar.lib.Formats.AnsiWeights;
 import com.kibo.pgar.lib.Strings.PrettyStrings;
 import com.kibo.pgar.lib.Types.TypeSafe;
 
 public final class JsonService {
 
-    private static final String ERROR_IN_INITIALIZING_THE_READER = PrettyStrings.prettify(AnsiColors.RED,
-            AnsiWeights.BOLD, null, "Error in initializing the reader");
-    private static final String ERROR_IN_INITIALIZING_THE_WRITER = PrettyStrings.prettify(AnsiColors.RED,
-            AnsiWeights.BOLD, null, "Error in initializing the writer");
+    private static final String ERROR_IN_INITIALIZING_THE_READER = PrettyStrings.errorDefine("Error in initializing the reader");
+    private static final String ERROR_IN_INITIALIZING_THE_WRITER = PrettyStrings.errorDefine("Error in initializing the writer");
     private static final Gson gson = new Gson();
 
     public static <T> T read(File file, TypeToken<T> type) {

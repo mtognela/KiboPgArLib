@@ -28,8 +28,7 @@ import com.kibo.pgar.lib.Strings.PrettyStrings;
  * @version 1.4
  */
 public final class CommandLineTable {
-    private static final String SHORT_ROWS_ERROR = PrettyStrings.prettify(AnsiColors.RED, AnsiWeights.BOLD,
-            null, "One or multiple of the given rows are too short for this table!");
+    private static final String SHORT_ROWS_ERROR = PrettyStrings.errorDefine("One or multiple of the given rows are too short for this table!");
 
     private static final char HORIZONTAL_SEPARATOR = '-';
     private static final char VERTICAL_SEPARATOR = '|';

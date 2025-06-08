@@ -26,7 +26,7 @@ public class Menu implements Serializable {
         AnsiColors.GREEN, AnsiWeights.BOLD, null,
         ": ");
 
-    private static final String NEGATIVE_MILLIS_ERROR = PrettyStrings.prettify(AnsiColors.RED, null, null,
+    private static final String NEGATIVE_MILLIS_ERROR = PrettyStrings.errorDefine(
             "Attention! You can't have negative time");
 
     /**
