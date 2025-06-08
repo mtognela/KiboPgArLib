@@ -10,16 +10,16 @@ public final class InputData {
     private static final Scanner reader = createScanner();
 
     private static final String ALPHANUMERIC_CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ";
-    private static final String ALPHANUMERIC_CHARACTERS_ERROR = PrettyStrings.errorDefine( "\nOnly alphanumeric characters are allowed.");
-    private static final String EMPTY_STRING_ERROR = PrettyStrings.errorDefine( "\nNo characters were inserted.");
-    private static final String ALLOWED_CHARACTERS_ERROR = PrettyStrings.errorDefine( "\nThe only allowed characters are: %s");
-    private static final String INTEGER_FORMAT_ERROR = PrettyStrings.errorDefine( "\nThe inserted data is in an incorrect format. An integer is required.");
-    private static final String DOUBLE_FORMAT_ERROR = PrettyStrings.errorDefine( "\nThe inserted data is in an incorrect format. A double is required.");
-    private static final String MINIMUM_ERROR_INTEGER = PrettyStrings.errorDefine( "\nA value greater or equal than %d is required.");
-    private static final String MAXIMUM_ERROR_INTEGER = PrettyStrings.errorDefine( "\nA value less or equal than %d is required.");
-    private static final String MINIMUM_ERROR_DOUBLE = PrettyStrings.errorDefine( "\nA value greater or equal than %.2f is required.");
-    private static final String MAXIMUM_ERROR_DOUBLE = PrettyStrings.errorDefine( "\nA value less or equal than %.2f is required.");
-    private static final String INVALID_ANSWER = PrettyStrings.errorDefine( "\nThe answer is not valid!");
+    private static final String ALPHANUMERIC_CHARACTERS_ERROR = "\nOnly alphanumeric characters are allowed.";
+    private static final String EMPTY_STRING_ERROR = "\nNo characters were inserted.";
+    private static final String ALLOWED_CHARACTERS_ERROR = "\nThe only allowed characters are: %s";
+    private static final String INTEGER_FORMAT_ERROR = "\nThe inserted data is in an incorrect format. An integer is required.";
+    private static final String DOUBLE_FORMAT_ERROR = "\nThe inserted data is in an incorrect format. A double is required.";
+    private static final String MINIMUM_ERROR_INTEGER = "\nA value greater or equal than %d is required.";
+    private static final String MAXIMUM_ERROR_INTEGER = "\nA value less or equal than %d is required.";
+    private static final String MINIMUM_ERROR_DOUBLE = "\nA value greater or equal than %.2f is required.";
+    private static final String MAXIMUM_ERROR_DOUBLE = "\nA value less or equal than %.2f is required.";
+    private static final String INVALID_ANSWER = "\nThe answer is not valid!";
 
 
     private InputData() {   
@@ -113,7 +113,7 @@ public final class InputData {
                 isAlphanumeric  = hasAlphanumericCharacters(read); //AlphanumericChecker.hasAlphanumericCharacters(message);
 
                 if (!isAlphanumeric)
-                    System.out.println(ALPHANUMERIC_CHARACTERS_ERROR);
+                    PrettyStrings.printlnError(ALPHANUMERIC_CHARACTERS_ERROR);
             } while (!isAlphanumeric);
         } else {
             System.out.printf("%s: ", message);
@@ -172,7 +172,8 @@ public final class InputData {
             if (allowed.indexOf(readChar) != -1)
                 isAllowed = true;
             else
-                System.out.printf(ALLOWED_CHARACTERS_ERROR + "\n", Arrays.toString(allowed.toCharArray()));
+                PrettyStrings.printlnError("%s\n%s", ALLOWED_CHARACTERS_ERROR,
+                        Arrays.toString(allowed.toCharArray()));
         } while (!isAllowed);
 
         return readChar;
@@ -227,7 +228,7 @@ public final class InputData {
             if (read >= min)
                 isAboveMin = true;
             else
-                System.out.printf(MINIMUM_ERROR_INTEGER + "\n", min);
+                PrettyStrings.printlnError("%s\n%s", MINIMUM_ERROR_INTEGER , min);
         } while (!isAboveMin);
 
         return read;
@@ -252,7 +253,7 @@ public final class InputData {
             if (read <= max)
                 isBelowMax = true;
             else
-                System.out.printf(MAXIMUM_ERROR_INTEGER + "\n", max);
+                PrettyStrings.printlnError("%s\n%s", MAXIMUM_ERROR_INTEGER, max);
         } while (!isBelowMax);
 
         return read;

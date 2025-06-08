@@ -14,8 +14,8 @@ import com.kibo.pgar.lib.Types.TypeSafe;
 
 public final class JsonService {
 
-    private static final String ERROR_IN_INITIALIZING_THE_READER = PrettyStrings.errorDefine("Error in initializing the reader");
-    private static final String ERROR_IN_INITIALIZING_THE_WRITER = PrettyStrings.errorDefine("Error in initializing the writer");
+    private static final String ERROR_IN_INITIALIZING_THE_READER = PrettyStrings.error("Error in initializing the reader");
+    private static final String ERROR_IN_INITIALIZING_THE_WRITER = PrettyStrings.error("Error in initializing the writer");
     private static final Gson gson = new Gson();
 
     public static <T> T read(File file, TypeToken<T> type) {

@@ -26,7 +26,7 @@ public class Menu implements Serializable {
         AnsiColors.GREEN, AnsiWeights.BOLD, null,
         ": ");
 
-    private static final String NEGATIVE_MILLIS_ERROR = PrettyStrings.errorDefine(
+    private static final String NEGATIVE_MILLIS_ERROR = PrettyStrings.error(
             "Attention! You can't have negative time");
 
     /**
@@ -112,14 +112,18 @@ public class Menu implements Serializable {
      * Prints the menu and lets the user choose an option from it.
      * 
      * @return An <code>int</code> representing the choice of the user.
+     *         When useExitEntry is true: 0 = Exit, 1-N = menu entries
+     *         When useExitEntry is false: 1-N = menu entries
      */
     public int choose() {
         printMenu();
 
-        if (useExitEntry)
+        if (useExitEntry) {
+            
             return InputData.readIntegerBetween(INSERT_REQUEST, 0, entries.length);
-        else
+        } else {
             return InputData.readIntegerBetween(INSERT_REQUEST, 1, entries.length);
+        }
     }
 
     /**

@@ -170,6 +170,11 @@ public final class PrettyStrings {
         return builder.toString();
     }
 
+    public static void printlnPrettify(AnsiColors color, AnsiWeights weight, AnsiDecorations decoration, String format,
+            Object... args) {
+        System.out.println(prettify(color, weight, decoration, format, args));
+    }
+
     /**
      * Formats and prettifies a string as an error message with red color and bold
      * weight.
@@ -187,8 +192,13 @@ public final class PrettyStrings {
      *           {@link AnsiWeights#BOLD} for weight,
      *           and no decoration.
      */
-    public static String errorDefine(String format, Object... args) {
+    public static String error(String format, Object... args) {
         return prettify(AnsiColors.RED, AnsiWeights.BOLD, null, format, args);
     }
+
+    public static void printlnError(String format, Object... args) {
+        printlnPrettify(AnsiColors.RED, AnsiWeights.BOLD, null, format, args);
+    }
+
 
 }

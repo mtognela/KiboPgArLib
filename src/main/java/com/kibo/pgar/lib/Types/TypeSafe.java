@@ -258,14 +258,14 @@ public class TypeSafe {
             Class<T> rawType = (Class<T>) typeToken.getRawType();
             if (result != null && !rawType.isInstance(result)) {
                 throw new ClassCastException(
-                        PrettyStrings.errorDefine(HANDLER_FOR_TYPE_S_RETURNED_INCOMPATIBLE_TYPE_S,
+                        PrettyStrings.error(HANDLER_FOR_TYPE_S_RETURNED_INCOMPATIBLE_TYPE_S,
                                 typeToken, result.getClass()));
             }
 
             return rawType.cast(result);
         } else {
             throw new IllegalArgumentException(
-                    PrettyStrings.errorDefine(UNSUPPORTED_TYPE_S_LOAD_A_DEFAULT_WITH_THE_METHOD_DEFINE_EMPTY,
+                    PrettyStrings.error(UNSUPPORTED_TYPE_S_LOAD_A_DEFAULT_WITH_THE_METHOD_DEFINE_EMPTY,
                             typeToken.toString()));
         }
     }
