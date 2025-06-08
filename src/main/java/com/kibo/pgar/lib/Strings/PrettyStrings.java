@@ -11,7 +11,7 @@ import com.kibo.pgar.lib.Menus.FrameSettings;
  * terminal.
  * 
  * @author Alessandro Muscio (Kibo) and Mattia Tognela (mtognela)
- * @version 1.5
+ * @version 1.6
  */
 public final class PrettyStrings {
     private static final char SPACE = ' ';

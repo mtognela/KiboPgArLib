@@ -4,7 +4,7 @@ package com.kibo.pgar.lib.AnsiClasses;
  * <code>Enum</code> that collects the alignment a string can have.
  * 
  * @author Alessandro Muscio (Kibo)
- * @version 1.5
+ * @version 1.6
  */
 public enum Alignment {
     /** Represents the <i>left</i> alignment. */

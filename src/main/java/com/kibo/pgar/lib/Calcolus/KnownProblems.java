@@ -7,7 +7,7 @@ package com.kibo.pgar.lib.Calcolus;
  * solved them.
  * 
  * @author Alessandro Muscio (Kibo) and Mattia Tognela (mtognela)
- * @version 1.5
+ * @version 1.6
  */
 public final class KnownProblems {
 

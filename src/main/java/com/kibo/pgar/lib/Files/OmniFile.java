@@ -6,7 +6,7 @@ import java.io.File;
  * <code>Class</code> for simple universal file  
  * 
  * @author Mattia Tognela (mtognela)
- * @version 1.5
+ * @version 1.6
  */
 public final class OmniFile {
 

@@ -23,7 +23,7 @@ import com.kibo.pgar.lib.Strings.PrettyStrings;
  * <p>
  * 
  * @author Alessandro Muscio (Kibo) and Mattia Tognela (mtognela)
- * @version 1.5
+ * @version 1.6
  */
 public final class CommandLineTable {
     private static final String SHORT_ROWS_ERROR = PrettyStrings.error("One or multiple of the given rows are too short for this table!");
