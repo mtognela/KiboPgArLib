@@ -1,4 +1,4 @@
-package com.kibo.pgar.lib.Calcs;
+package com.kibo.pgar.lib.Calcolus;
 
 public final class GCD_LCMTestCase {
 	private final int a;

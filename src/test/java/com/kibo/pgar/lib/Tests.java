@@ -18,8 +18,8 @@ import com.kibo.pgar.lib.AnsiClasses.Alignment;
 import com.kibo.pgar.lib.AnsiClasses.AnsiColors;
 import com.kibo.pgar.lib.AnsiClasses.AnsiDecorations;
 import com.kibo.pgar.lib.AnsiClasses.AnsiWeights;
-import com.kibo.pgar.lib.Calcs.GCD_LCMTestCase;
-import com.kibo.pgar.lib.Calcs.KnownProblems;
+import com.kibo.pgar.lib.Calcolus.GCD_LCMTestCase;
+import com.kibo.pgar.lib.Calcolus.KnownProblems;
 import com.kibo.pgar.lib.Menus.FrameSettings;
 import com.kibo.pgar.lib.Strings.PrettyStrings;
 

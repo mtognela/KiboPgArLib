@@ -6,7 +6,7 @@ import com.kibo.pgar.lib.Strings.PrettyStrings;
 import com.kibo.pgar.lib.AnsiClasses.Alignment;
 import com.kibo.pgar.lib.AnsiClasses.AnsiColors;
 import com.kibo.pgar.lib.AnsiClasses.AnsiWeights;
-import com.kibo.pgar.lib.Calcs.KnownProblems;
+import com.kibo.pgar.lib.Calcolus.KnownProblems;
 import com.kibo.pgar.lib.Inputs.InputData;
 
 /**

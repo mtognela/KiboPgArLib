@@ -1,4 +1,4 @@
-package com.kibo.pgar.lib.Calcs;
+package com.kibo.pgar.lib.Calcolus;
 
 import org.junit.jupiter.api.Test;
 
