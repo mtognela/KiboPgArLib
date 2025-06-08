@@ -87,7 +87,7 @@ public final class InputData {
      * @return A <code>String</code> form the method <code>reader.nextLine()</code>;
      */
     public static String readSting(String message) {
-        System.out.printf("%s: ", message);
+        System.out.printf("%s ", message);
         return reader.nextLine();
     }
 
@@ -106,7 +106,7 @@ public final class InputData {
 
         if (alphanumeric) {
             do {
-                System.out.printf("%s: ", message);
+                System.out.printf("%s ", message);
 
                 read = reader.next().trim();
 
@@ -116,7 +116,7 @@ public final class InputData {
                     PrettyStrings.printlnError(ALPHANUMERIC_CHARACTERS_ERROR);
             } while (!isAlphanumeric);
         } else {
-            System.out.printf("%s: ", message);
+            System.out.printf("%s ", message);
 
             read = reader.next().trim();
         }
@@ -192,7 +192,7 @@ public final class InputData {
 
         do {
             try {
-                System.out.printf("%s: ", message);
+                System.out.printf("%s ", message);
 
                 read = reader.nextInt();
 
@@ -300,7 +300,7 @@ public final class InputData {
         double read = Double.NaN;
 
         do {
-            System.out.printf("%s: ", message);
+            System.out.printf("%s ", message);
 
             try {
                 read = reader.nextDouble();
@@ -316,7 +316,6 @@ public final class InputData {
 
         return read;
     }
-
 
     /**
      * Prints <code>message</code> in the terminal and reads the text inserted by

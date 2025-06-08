@@ -45,7 +45,7 @@ public class Menu implements Serializable {
     private final boolean useExitEntry;
 
     /**
-     * Represents the length of the frame.
+     * Represents the length of the frame - calculated once and immutable.
      */
     private final int frameLength;
 
@@ -119,7 +119,6 @@ public class Menu implements Serializable {
         printMenu();
 
         if (useExitEntry) {
-            
             return InputData.readIntegerBetween(INSERT_REQUEST, 0, entries.length);
         } else {
             return InputData.readIntegerBetween(INSERT_REQUEST, 1, entries.length);

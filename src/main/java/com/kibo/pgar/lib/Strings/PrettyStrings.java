@@ -27,18 +27,19 @@ public final class PrettyStrings {
         framed.append(horizontalFrame);
         framed.append(PrettyStrings.NEW_LINE);
 
+        // Calculate the content width without modifying the settings object
+        int contentWidth = settings.getWidth();
         if (settings.isVerticalFrameEnabled()) {
-            settings.setWidth(settings.getWidth() - 2);
-
+            contentWidth = contentWidth - 2; // Account for left and right vertical frames
             framed.append(settings.getVerticalFrame());
         }
 
         if (settings.getAlignment().equals(Alignment.CENTER))
-            framed.append(PrettyStrings.center(toFrame, settings.getWidth()));
+            framed.append(PrettyStrings.center(toFrame, contentWidth));
         else
             framed.append(PrettyStrings.column(
                     toFrame,
-                    settings.getWidth(),
+                    contentWidth,
                     settings.getAlignment().equals(Alignment.LEFT)));
 
         framed.append(settings.isVerticalFrameEnabled() ? settings.getVerticalFrame() : "");
@@ -199,6 +200,4 @@ public final class PrettyStrings {
     public static void printlnError(String format, Object... args) {
         printlnPrettify(AnsiColors.RED, AnsiWeights.BOLD, null, format, args);
     }
-
-
 }
