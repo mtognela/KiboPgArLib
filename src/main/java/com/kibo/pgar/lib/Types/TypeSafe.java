@@ -94,6 +94,8 @@ import com.kibo.pgar.lib.Strings.PrettyStrings;
  */
 public class TypeSafe {
 
+    private static final String UNSUPPORTED_TYPE_S_LOAD_A_DEFAULT_WITH_THE_METHOD_DEFINE_EMPTY = "Unsupported type: %s \nLoad a default with the method defineEmpty";
+    private static final String HANDLER_FOR_TYPE_S_RETURNED_INCOMPATIBLE_TYPE_S = "Handler for type %s returned incompatible type %s";
     /**
      * Map of type handlers that provide default empty values for supported types.
      * Contains predefined handlers for common Java types including primitives,
@@ -103,136 +105,136 @@ public class TypeSafe {
 
     static {
         /** Primitive wrapper types */
-        typeHandlers.put(new TypeToken<Boolean>() {}, () -> Boolean.FALSE);
-        typeHandlers.put(new TypeToken<Byte>() {}, () -> (byte) 0);
-        typeHandlers.put(new TypeToken<Short>() {}, () -> (short) 0);
-        typeHandlers.put(new TypeToken<Integer>() {}, () -> 0);
-        typeHandlers.put(new TypeToken<Long>() {}, () -> 0L);
-        typeHandlers.put(new TypeToken<Float>() {}, () -> 0.0f);
-        typeHandlers.put(new TypeToken<Double>() {}, () -> 0.0);
-        typeHandlers.put(new TypeToken<Character>() {}, () -> '\0');
+        defineEmpty(new TypeToken<Boolean>() {}, () -> Boolean.FALSE);
+        defineEmpty(new TypeToken<Byte>() {}, () -> (byte) 0);
+        defineEmpty(new TypeToken<Short>() {}, () -> (short) 0);
+        defineEmpty(new TypeToken<Integer>() {}, () -> 0);
+        defineEmpty(new TypeToken<Long>() {}, () -> 0L);
+        defineEmpty(new TypeToken<Float>() {}, () -> 0.0f);
+        defineEmpty(new TypeToken<Double>() {}, () -> 0.0);
+        defineEmpty(new TypeToken<Character>() {}, () -> '\0');
 
         /** String and StringBuilder types */
-        typeHandlers.put(new TypeToken<String>() {}, () -> "");
-        typeHandlers.put(new TypeToken<StringBuilder>() {}, StringBuilder::new);
-        typeHandlers.put(new TypeToken<StringBuffer>() {}, StringBuffer::new);
+        defineEmpty(new TypeToken<String>() {}, () -> "");
+        defineEmpty(new TypeToken<StringBuilder>() {}, StringBuilder::new);
+        defineEmpty(new TypeToken<StringBuffer>() {}, StringBuffer::new);
 
         /** Optional types */
-        typeHandlers.put(new TypeToken<Optional>() {}, Optional::empty);
-        typeHandlers.put(new TypeToken<OptionalInt>() {}, OptionalInt::empty);
-        typeHandlers.put(new TypeToken<OptionalLong>() {}, OptionalLong::empty);
-        typeHandlers.put(new TypeToken<OptionalDouble>() {}, OptionalDouble::empty);
+        defineEmpty(new TypeToken<Optional<?>>() {}, Optional::empty);
+        defineEmpty(new TypeToken<OptionalInt>() {}, OptionalInt::empty);
+        defineEmpty(new TypeToken<OptionalLong>() {}, OptionalLong::empty);
+        defineEmpty(new TypeToken<OptionalDouble>() {}, OptionalDouble::empty);
 
         /** Date and Time types */
-        typeHandlers.put(new TypeToken<LocalDate>() {}, () -> LocalDate.MIN);
-        typeHandlers.put(new TypeToken<LocalDateTime>() {}, () -> LocalDateTime.MIN);
-        typeHandlers.put(new TypeToken<LocalTime>() {}, () -> LocalTime.MIN);
-        typeHandlers.put(new TypeToken<Instant>() {}, () -> Instant.EPOCH);
-        typeHandlers.put(new TypeToken<Duration>() {}, () -> Duration.ZERO);
-        typeHandlers.put(new TypeToken<Period>() {}, () -> Period.ZERO);
-        typeHandlers.put(new TypeToken<ZonedDateTime>() {}, () -> ZonedDateTime.of(LocalDateTime.MIN, ZoneOffset.UTC));
-        typeHandlers.put(new TypeToken<OffsetDateTime>() {}, () -> OffsetDateTime.of(LocalDateTime.MIN, ZoneOffset.UTC));
-        typeHandlers.put(new TypeToken<OffsetTime>() {}, () -> OffsetTime.of(LocalTime.MIN, ZoneOffset.UTC));
-        typeHandlers.put(new TypeToken<Year>() {}, () -> Year.of(1));
-        typeHandlers.put(new TypeToken<YearMonth>() {}, () -> YearMonth.of(1, 1));
-        typeHandlers.put(new TypeToken<MonthDay>() {}, () -> MonthDay.of(1, 1));
-        typeHandlers.put(new TypeToken<ZoneId>() {}, () -> ZoneOffset.UTC);
-        typeHandlers.put(new TypeToken<ZoneOffset>() {}, () -> ZoneOffset.UTC);
+        defineEmpty(new TypeToken<LocalDate>() {}, () -> LocalDate.MIN);
+        defineEmpty(new TypeToken<LocalDateTime>() {}, () -> LocalDateTime.MIN);
+        defineEmpty(new TypeToken<LocalTime>() {}, () -> LocalTime.MIN);
+        defineEmpty(new TypeToken<Instant>() {}, () -> Instant.EPOCH);
+        defineEmpty(new TypeToken<Duration>() {}, () -> Duration.ZERO);
+        defineEmpty(new TypeToken<Period>() {}, () -> Period.ZERO);
+        defineEmpty(new TypeToken<ZonedDateTime>() {}, () -> ZonedDateTime.of(LocalDateTime.MIN, ZoneOffset.UTC));
+        defineEmpty(new TypeToken<OffsetDateTime>() {}, () -> OffsetDateTime.of(LocalDateTime.MIN, ZoneOffset.UTC));
+        defineEmpty(new TypeToken<OffsetTime>() {}, () -> OffsetTime.of(LocalTime.MIN, ZoneOffset.UTC));
+        defineEmpty(new TypeToken<Year>() {}, () -> Year.of(1));
+        defineEmpty(new TypeToken<YearMonth>() {}, () -> YearMonth.of(1, 1));
+        defineEmpty(new TypeToken<MonthDay>() {}, () -> MonthDay.of(1, 1));
+        defineEmpty(new TypeToken<ZoneId>() {}, () -> ZoneOffset.UTC);
+        defineEmpty(new TypeToken<ZoneOffset>() {}, () -> ZoneOffset.UTC);
 
         /** Numeric types */
-        typeHandlers.put(new TypeToken<BigDecimal>() {}, () -> BigDecimal.ZERO);
-        typeHandlers.put(new TypeToken<BigInteger>() {}, () -> BigInteger.ZERO);
-        typeHandlers.put(new TypeToken<Number>() {}, () -> 0);
+        defineEmpty(new TypeToken<BigDecimal>() {}, () -> BigDecimal.ZERO);
+        defineEmpty(new TypeToken<BigInteger>() {}, () -> BigInteger.ZERO);
+        defineEmpty(new TypeToken<Number>() {}, () -> 0);
 
         /** Atomic types */
-        typeHandlers.put(new TypeToken<AtomicInteger>() {}, () -> new AtomicInteger(0));
-        typeHandlers.put(new TypeToken<AtomicLong>() {}, () -> new AtomicLong(0L));
-        typeHandlers.put(new TypeToken<AtomicBoolean>() {}, () -> new AtomicBoolean(false));
-        typeHandlers.put(new TypeToken<AtomicReference>() {}, () -> new AtomicReference<>());
+        defineEmpty(new TypeToken<AtomicInteger>() {}, () -> new AtomicInteger(0));
+        defineEmpty(new TypeToken<AtomicLong>() {}, () -> new AtomicLong(0L));
+        defineEmpty(new TypeToken<AtomicBoolean>() {}, () -> new AtomicBoolean(false));
+        defineEmpty(new TypeToken<AtomicReference<?>>() {}, () -> new AtomicReference<>());
 
         /** UUID and Path */
-        typeHandlers.put(new TypeToken<UUID>() {}, () -> new UUID(0L, 0L));
-        typeHandlers.put(new TypeToken<Path>() {}, () -> Path.of(""));
-        typeHandlers.put(new TypeToken<File>() {}, () -> new File(""));
+        defineEmpty(new TypeToken<UUID>() {}, () -> new UUID(0L, 0L));
+        defineEmpty(new TypeToken<Path>() {}, () -> Path.of(""));
+        defineEmpty(new TypeToken<File>() {}, () -> new File(""));
 
         /** Collection types */
-        typeHandlers.put(new TypeToken<List>() {}, Collections::emptyList);
-        typeHandlers.put(new TypeToken<Set>() {}, Collections::emptySet);
-        typeHandlers.put(new TypeToken<Map>() {}, Collections::emptyMap);
-        typeHandlers.put(new TypeToken<Collection>() {}, Collections::emptyList);
-        typeHandlers.put(new TypeToken<Queue>() {}, () -> new ArrayDeque<>());
-        typeHandlers.put(new TypeToken<Deque>() {}, () -> new ArrayDeque<>());
-        typeHandlers.put(new TypeToken<Stack>() {}, Stack::new);
-        typeHandlers.put(new TypeToken<Vector>() {}, Vector::new);
-        typeHandlers.put(new TypeToken<ArrayList>() {}, ArrayList::new);
-        typeHandlers.put(new TypeToken<LinkedList>() {}, LinkedList::new);
-        typeHandlers.put(new TypeToken<HashSet>() {}, HashSet::new);
-        typeHandlers.put(new TypeToken<LinkedHashSet>() {}, LinkedHashSet::new);
-        typeHandlers.put(new TypeToken<TreeSet>() {}, TreeSet::new);
-        typeHandlers.put(new TypeToken<HashMap>() {}, HashMap::new);
-        typeHandlers.put(new TypeToken<LinkedHashMap>() {}, LinkedHashMap::new);
-        typeHandlers.put(new TypeToken<TreeMap>() {}, TreeMap::new);
-        typeHandlers.put(new TypeToken<ConcurrentHashMap>() {}, ConcurrentHashMap::new);
-        typeHandlers.put(new TypeToken<Properties>() {}, Properties::new);
+        defineEmpty(new TypeToken<List<?>>() {}, Collections::emptyList);
+        defineEmpty(new TypeToken<Set<?>>() {}, Collections::emptySet);
+        defineEmpty(new TypeToken<Map<?, ?>>() {}, Collections::emptyMap);
+        defineEmpty(new TypeToken<Collection<?>>() {}, Collections::emptyList);
+        defineEmpty(new TypeToken<Queue<?>>() {}, () -> new ArrayDeque<>());
+        defineEmpty(new TypeToken<Deque<?>>() {}, () -> new ArrayDeque<>());
+        defineEmpty(new TypeToken<Stack<?>>() {}, Stack::new);
+        defineEmpty(new TypeToken<Vector<?>>() {}, Vector::new);
+        defineEmpty(new TypeToken<ArrayList<?>>() {}, ArrayList::new);
+        defineEmpty(new TypeToken<LinkedList<?>>() {}, LinkedList::new);
+        defineEmpty(new TypeToken<HashSet<?>>() {}, HashSet::new);
+        defineEmpty(new TypeToken<LinkedHashSet<?>>() {}, LinkedHashSet::new);
+        defineEmpty(new TypeToken<TreeSet<?>>() {}, TreeSet::new);
+        defineEmpty(new TypeToken<HashMap<?, ?>>() {}, HashMap::new);
+        defineEmpty(new TypeToken<LinkedHashMap<?, ?>>() {}, LinkedHashMap::new);
+        defineEmpty(new TypeToken<TreeMap<?, ?>>() {}, TreeMap::new);
+        defineEmpty(new TypeToken<ConcurrentHashMap<?, ?>>() {}, ConcurrentHashMap::new);
+        defineEmpty(new TypeToken<Properties>() {}, Properties::new);
 
         /** Stream types */
-        typeHandlers.put(new TypeToken<Stream>() {}, Stream::empty);
-        typeHandlers.put(new TypeToken<IntStream>() {}, IntStream::empty);
-        typeHandlers.put(new TypeToken<LongStream>() {}, LongStream::empty);
-        typeHandlers.put(new TypeToken<DoubleStream>() {}, DoubleStream::empty);
+        defineEmpty(new TypeToken<Stream<?>>() {}, Stream::empty);
+        defineEmpty(new TypeToken<IntStream>() {}, IntStream::empty);
+        defineEmpty(new TypeToken<LongStream>() {}, LongStream::empty);
+        defineEmpty(new TypeToken<DoubleStream>() {}, DoubleStream::empty);
 
         /** Regex and Pattern */
-        typeHandlers.put(new TypeToken<Pattern>() {}, () -> Pattern.compile(""));
-        typeHandlers.put(new TypeToken<Matcher>() {}, () -> Pattern.compile("").matcher(""));
+        defineEmpty(new TypeToken<Pattern>() {}, () -> Pattern.compile(""));
+        defineEmpty(new TypeToken<Matcher>() {}, () -> Pattern.compile("").matcher(""));
 
         /** Locale and Currency */
-        typeHandlers.put(new TypeToken<Locale>() {}, Locale::getDefault);
-        typeHandlers.put(new TypeToken<Currency>() {}, () -> Currency.getInstance("USD"));
+        defineEmpty(new TypeToken<Locale>() {}, Locale::getDefault);
+        defineEmpty(new TypeToken<Currency>() {}, () -> Currency.getInstance("USD"));
 
         /** Thread and Executor types */
-        typeHandlers.put(new TypeToken<Thread>() {}, () -> new Thread(() -> {}));
-        typeHandlers.put(new TypeToken<ThreadLocal>() {}, ThreadLocal::new);
-        typeHandlers.put(new TypeToken<ExecutorService>() {}, () -> Executors.newSingleThreadExecutor());
-        typeHandlers.put(new TypeToken<CompletableFuture>() {}, CompletableFuture::new);
-        typeHandlers.put(new TypeToken<Future>() {}, () -> CompletableFuture.completedFuture(null));
+        defineEmpty(new TypeToken<Thread>() {}, () -> new Thread(() -> {}));
+        defineEmpty(new TypeToken<ThreadLocal<?>>() {}, ThreadLocal::new);
+        defineEmpty(new TypeToken<ExecutorService>() {}, () -> Executors.newSingleThreadExecutor());
+        defineEmpty(new TypeToken<CompletableFuture<?>>() {}, CompletableFuture::new);
+        defineEmpty(new TypeToken<Future<?>>() {}, () -> CompletableFuture.completedFuture(null));
 
         /** Random and Security */
-        typeHandlers.put(new TypeToken<Random>() {}, Random::new);
-        typeHandlers.put(new TypeToken<SecureRandom>() {}, SecureRandom::new);
+        defineEmpty(new TypeToken<Random>() {}, Random::new);
+        defineEmpty(new TypeToken<SecureRandom>() {}, SecureRandom::new);
 
         /** IO types */
-        typeHandlers.put(new TypeToken<ByteArrayInputStream>() {}, () -> new ByteArrayInputStream(new byte[0]));
-        typeHandlers.put(new TypeToken<ByteArrayOutputStream>() {}, ByteArrayOutputStream::new);
-        typeHandlers.put(new TypeToken<StringReader>() {}, () -> new StringReader(""));
-        typeHandlers.put(new TypeToken<StringWriter>() {}, StringWriter::new);
-        typeHandlers.put(new TypeToken<PrintWriter>() {}, () -> new PrintWriter(new StringWriter()));
-        typeHandlers.put(new TypeToken<Scanner>() {}, () -> new Scanner(""));
+        defineEmpty(new TypeToken<ByteArrayInputStream>() {}, () -> new ByteArrayInputStream(new byte[0]));
+        defineEmpty(new TypeToken<ByteArrayOutputStream>() {}, ByteArrayOutputStream::new);
+        defineEmpty(new TypeToken<StringReader>() {}, () -> new StringReader(""));
+        defineEmpty(new TypeToken<StringWriter>() {}, StringWriter::new);
+        defineEmpty(new TypeToken<PrintWriter>() {}, () -> new PrintWriter(new StringWriter()));
+        defineEmpty(new TypeToken<Scanner>() {}, () -> new Scanner(""));
 
         /** Reflection types */
-        typeHandlers.put(new TypeToken<Class>() {}, () -> Object.class);
+        defineEmpty(new TypeToken<Class<?>>() {}, () -> Object.class);
 
         /** Exception types */
-        typeHandlers.put(new TypeToken<Exception>() {}, Exception::new);
-        typeHandlers.put(new TypeToken<RuntimeException>() {}, RuntimeException::new);
-        typeHandlers.put(new TypeToken<IllegalArgumentException>() {}, IllegalArgumentException::new);
-        typeHandlers.put(new TypeToken<NullPointerException>() {}, NullPointerException::new);
+        defineEmpty(new TypeToken<Exception>() {}, Exception::new);
+        defineEmpty(new TypeToken<RuntimeException>() {}, RuntimeException::new);
+        defineEmpty(new TypeToken<IllegalArgumentException>() {}, IllegalArgumentException::new);
+        defineEmpty(new TypeToken<NullPointerException>() {}, NullPointerException::new);
 
         /** Buffer types */
-        typeHandlers.put(new TypeToken<Buffer>() {}, () -> ByteBuffer.allocate(0));
-        typeHandlers.put(new TypeToken<ByteBuffer>() {}, () -> ByteBuffer.allocate(0));
-        typeHandlers.put(new TypeToken<CharBuffer>() {}, () -> CharBuffer.allocate(0));
-        typeHandlers.put(new TypeToken<IntBuffer>() {}, () -> IntBuffer.allocate(0));
-        typeHandlers.put(new TypeToken<LongBuffer>() {}, () -> LongBuffer.allocate(0));
-        typeHandlers.put(new TypeToken<FloatBuffer>() {}, () -> FloatBuffer.allocate(0));
-        typeHandlers.put(new TypeToken<DoubleBuffer>() {}, () -> DoubleBuffer.allocate(0));
+        defineEmpty(new TypeToken<Buffer>() {}, () -> ByteBuffer.allocate(0));
+        defineEmpty(new TypeToken<ByteBuffer>() {}, () -> ByteBuffer.allocate(0));
+        defineEmpty(new TypeToken<CharBuffer>() {}, () -> CharBuffer.allocate(0));
+        defineEmpty(new TypeToken<IntBuffer>() {}, () -> IntBuffer.allocate(0));
+        defineEmpty(new TypeToken<LongBuffer>() {}, () -> LongBuffer.allocate(0));
+        defineEmpty(new TypeToken<FloatBuffer>() {}, () -> FloatBuffer.allocate(0));
+        defineEmpty(new TypeToken<DoubleBuffer>() {}, () -> DoubleBuffer.allocate(0));
 
         /** Charset and Encoding */
-        typeHandlers.put(new TypeToken<Charset>() {}, () -> StandardCharsets.UTF_8);
+        defineEmpty(new TypeToken<Charset>() {}, () -> StandardCharsets.UTF_8);
 
         /** Formatting */
-        typeHandlers.put(new TypeToken<Formatter>() {}, Formatter::new);
-        typeHandlers.put(new TypeToken<DecimalFormat>() {}, DecimalFormat::new);
-        typeHandlers.put(new TypeToken<SimpleDateFormat>() {}, SimpleDateFormat::new);
+        defineEmpty(new TypeToken<Formatter>() {}, Formatter::new);
+        defineEmpty(new TypeToken<DecimalFormat>() {}, DecimalFormat::new);
+        defineEmpty(new TypeToken<SimpleDateFormat>() {}, SimpleDateFormat::new);
     }
 
     /**
@@ -242,18 +244,29 @@ public class TypeSafe {
      * @param <T>       The type of the empty instance to return
      * @param typeToken The TypeToken representing the desired type
      * @return An empty/default instance of the specified type
-     * @throws IllegalArgumentException if the type is not supported
+     * @throws IllegalArgumentException if the type is not supported 
+     * @throws ClassCastException if the cast is not supported 
      */
-    @SuppressWarnings("unchecked")
     public static <T> T getEmpty(TypeToken<T> typeToken) {
         Supplier<?> handler = typeHandlers.get(typeToken);
 
-        if (handler != null)
-            return (T) handler.get();
-        else
-            throw new IllegalArgumentException(
-                    PrettyStrings.errorDefine("Unsupported type: %s \nLoad a default with the method defineEmpthy", typeToken.toString()));
+        if (handler != null) {
+            Object result = handler.get();
 
+            @SuppressWarnings("unchecked")
+            Class<T> rawType = (Class<T>) typeToken.getRawType();
+            if (result != null && !rawType.isInstance(result)) {
+                throw new ClassCastException(
+                        PrettyStrings.errorDefine(HANDLER_FOR_TYPE_S_RETURNED_INCOMPATIBLE_TYPE_S,
+                                typeToken, result.getClass()));
+            }
+
+            return rawType.cast(result);
+        } else {
+            throw new IllegalArgumentException(
+                    PrettyStrings.errorDefine(UNSUPPORTED_TYPE_S_LOAD_A_DEFAULT_WITH_THE_METHOD_DEFINE_EMPTY,
+                            typeToken.toString()));
+        }
     }
 
     /**
@@ -265,12 +278,13 @@ public class TypeSafe {
      * @param typeElement     The TypeToken representing the type
      * @param defaultSupplier The Supplier that provides empty/default instances
      */
-    public static <T> void defineEmpty(TypeToken<T> typeElement, Supplier<? extends T> defaultSupplier) {
+    public static <T> void defineEmpty(TypeToken<T> typeElement, Supplier<T> defaultSupplier) {
         typeHandlers.putIfAbsent(typeElement, defaultSupplier);
     }
 
     /**
-     * Registers a custom handler for providing empty/default instances of a type.
+     * Registers a custom handler for providing empty/default instances of a type
+     * using a constant value.
      * 
      * If a handler already exists for the type, it will not be replaced.
      * 
@@ -278,7 +292,7 @@ public class TypeSafe {
      * @param typeElement  The TypeToken representing the type
      * @param defaultValue The default value to return
      */
-    public static <T> void defineEmpty(TypeToken<T> typeElement, T defaultValue) {
+    public static <T> void defineEmptyValue(TypeToken<T> typeElement, T defaultValue) {
         typeHandlers.putIfAbsent(typeElement, () -> defaultValue);
     }
 
