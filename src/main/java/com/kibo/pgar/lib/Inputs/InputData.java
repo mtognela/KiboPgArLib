@@ -3,6 +3,7 @@ package com.kibo.pgar.lib.Inputs;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.function.Consumer;
 
 import com.kibo.pgar.lib.Strings.PrettyStrings;
@@ -23,8 +24,8 @@ public final class InputData {
     private static final String INVALID_ANSWER = "\nThe answer is not valid!";
 
     private static final String INSERT_REQUEST = ": ";
-    
-    private InputData() {   
+
+    private InputData() {
     }
 
     /**
@@ -68,7 +69,7 @@ public final class InputData {
      *
      * @param message The message to verify.
      * @return A <code>boolean</code> representing if the message is alphanumeric or
-     * not.
+     *         not.
      */
     private static boolean hasAlphanumericCharacters(String message) {
         for (int i = 0; i < message.length(); i++) {
@@ -86,14 +87,13 @@ public final class InputData {
      * @return A <code>String</code> from the method <code>reader.nextLine()</code>
      */
     public static String readString(String message) {
-        System.out.printf("%s%s", message, INSERT_REQUEST);
-        return reader.nextLine();
+        return readString(message, InputData::defaultPrint);
     }
 
     /**
      * @author Mattia Tognela
      * @param message Let you deliver a message for the user
-     * @param print Let you execute the print statement that you like the best
+     * @param print   Let you execute the print statement that you like the best
      * @return A <code>String</code> from the method <code>reader.nextLine()</code>
      */
     public static String readString(String message, Consumer<? super String> print) {
@@ -111,25 +111,7 @@ public final class InputData {
      * @return A <code>String</code> representing the user input.
      */
     public static String readString(String message, boolean alphanumeric) {
-        boolean isAlphanumeric;
-        String read;
-
-        if (alphanumeric) {
-            do {
-                System.out.printf("%s%s", message, INSERT_REQUEST);
-                read = reader.next().trim();
-                isAlphanumeric = hasAlphanumericCharacters(read);
-
-                if (!isAlphanumeric) {
-                    PrettyStrings.printlnError(ALPHANUMERIC_CHARACTERS_ERROR);
-                }
-            } while (!isAlphanumeric);
-        } else {
-            System.out.printf("%s%s", message, INSERT_REQUEST);
-            read = reader.next().trim();
-        }
-
-        return read;
+        return readString(message, alphanumeric, InputData::defaultPrint);
     }
 
     /**
@@ -139,7 +121,8 @@ public final class InputData {
      *
      * @param message      The message to print.
      * @param alphanumeric If the input needs to be alphanumeric or not.
-     * @param print Let you execute the print statement that you like the best
+     * @param print        Let you execute the print statement that you like the
+     *                     best
      * @return A <code>String</code> representing the user input.
      */
     public static String readString(String message, boolean alphanumeric, Consumer<? super String> print) {
@@ -175,19 +158,7 @@ public final class InputData {
      * @return A <code>String</code> representing the user input.
      */
     public static String readStringNotEmpty(String message, boolean alphanumeric) {
-        boolean isStringEmpty = true;
-        String read;
-
-        do {
-            read = readString(message, alphanumeric);
-            isStringEmpty = read.isBlank();
-
-            if (isStringEmpty) {
-                System.out.println(EMPTY_STRING_ERROR);
-            }
-        } while (isStringEmpty);
-
-        return read;
+        return readStringNotEmpty(message, alphanumeric, InputData::defaultPrint);
     }
 
     /**
@@ -198,7 +169,8 @@ public final class InputData {
      *
      * @param message      The message to print.
      * @param alphanumeric If the input needs to be alphanumeric or not.
-     * @param print Let you execute the print statement that you like the best
+     * @param print        Let you execute the print statement that you like the
+     *                     best
      * @return A <code>String</code> representing the user input.
      */
     public static String readStringNotEmpty(String message, boolean alphanumeric, Consumer<? super String> print) {
@@ -228,23 +200,7 @@ public final class InputData {
      * @return A <code>char</code> representing the character that was read.
      */
     public static char readChar(String message, String allowed) {
-        boolean isAllowed = false;
-        String read;
-        char readChar;
-
-        do {
-            read = readStringNotEmpty(message, false);
-            readChar = read.charAt(0);
-
-            if (allowed.indexOf(readChar) != -1) {
-                isAllowed = true;
-            } else {
-                PrettyStrings.printlnError(ALLOWED_CHARACTERS_ERROR,
-                        Arrays.toString(allowed.toCharArray()));
-            }
-        } while (!isAllowed);
-
-        return readChar;
+        return readChar(message, allowed, m -> defaultPrint(m));
     }
 
     /**
@@ -255,7 +211,7 @@ public final class InputData {
      *
      * @param message The message to print.
      * @param allowed All the allowed characters.
-     * @param print Let you execute the print statement that you like the best
+     * @param print   Let you execute the print statement that you like the best
      * @return A <code>char</code> representing the character that was read.
      */
     public static char readChar(String message, String allowed, Consumer<? super String> print) {
@@ -287,23 +243,7 @@ public final class InputData {
      * @return An <code>int</code> representing the integer that was read.
      */
     public static int readInteger(String message) {
-        boolean isInteger;
-        int read = 0;
-
-        do {
-            try {
-                System.out.printf("%s%s", message, INSERT_REQUEST);
-                read = reader.nextInt();
-                isInteger = true;
-            } catch (InputMismatchException e) {
-                System.out.println(INTEGER_FORMAT_ERROR);
-                isInteger = false;
-            } finally {
-                flushReader();
-            }
-        } while (!isInteger);
-
-        return read;
+        return readInteger(message, m -> defaultPrint(m));
     }
 
     /**
@@ -312,7 +252,7 @@ public final class InputData {
      * integer.
      *
      * @param message The message to print.
-     * @param print Let you execute the print statement that you like the best
+     * @param print   Let you execute the print statement that you like the best
      * @return An <code>int</code> representing the integer that was read.
      */
     public static int readInteger(String message, Consumer<? super String> print) {
@@ -345,20 +285,7 @@ public final class InputData {
      * @return An <code>int</code> representing the integer that was read.
      */
     public static int readIntegerWithMinimum(String message, int min) {
-        boolean isAboveMin = false;
-        int read;
-
-        do {
-            read = readInteger(message);
-
-            if (read >= min) {
-                isAboveMin = true;
-            } else {
-                PrettyStrings.printlnError(MINIMUM_ERROR_INTEGER, min);
-            }
-        } while (!isAboveMin);
-
-        return read;
+        return readIntegerWithMinimum(message, min, m -> defaultPrint(m));
     }
 
     /**
@@ -368,7 +295,7 @@ public final class InputData {
      *
      * @param message The message to print.
      * @param min     The minimum value to read.
-     * @param print Let you execute the print statement that you like the best
+     * @param print   Let you execute the print statement that you like the best
      * @return An <code>int</code> representing the integer that was read.
      */
     public static int readIntegerWithMinimum(String message, int min, Consumer<? super String> print) {
@@ -398,20 +325,7 @@ public final class InputData {
      * @return An <code>int</code> representing the integer that was read.
      */
     public static int readIntegerWithMaximum(String message, int max) {
-        boolean isBelowMax = false;
-        int read;
-
-        do {
-            read = readInteger(message);
-
-            if (read <= max) {
-                isBelowMax = true;
-            } else {
-                PrettyStrings.printlnError(MAXIMUM_ERROR_INTEGER, max);
-            }
-        } while (!isBelowMax);
-
-        return read;
+        return readIntegerWithMaximum(message, max, m -> defaultPrint(m));
     }
 
     /**
@@ -421,7 +335,7 @@ public final class InputData {
      *
      * @param message The message to print.
      * @param max     The maximum value to read.
-     * @param print Let you execute the print statement that you like the best
+     * @param print   Let you execute the print statement that you like the best
      * @return An <code>int</code> representing the integer that was read.
      */
     public static int readIntegerWithMaximum(String message, int max, Consumer<? super String> print) {
@@ -453,22 +367,7 @@ public final class InputData {
      * @return An <code>int</code> representing the integer that was read.
      */
     public static int readIntegerBetween(String message, int min, int max) {
-        boolean isBetweenMinMax = false;
-        int read;
-
-        do {
-            read = readInteger(message);
-
-            if (read < min) {
-                PrettyStrings.printlnError(MINIMUM_ERROR_INTEGER, min);
-            } else if (read > max) {
-                PrettyStrings.printlnError(MAXIMUM_ERROR_INTEGER, max);
-            } else {
-                isBetweenMinMax = true;
-            }
-        } while (!isBetweenMinMax);
-
-        return read;
+        return readIntegerBetween(message, min, max, m -> defaultPrint(m));
     }
 
     /**
@@ -480,7 +379,7 @@ public final class InputData {
      * @param message The message to print.
      * @param min     The minimum value to read.
      * @param max     The maximum value to read.
-     * @param print Let you execute the print statement that you like the best
+     * @param print   Let you execute the print statement that you like the best
      * @return An <code>int</code> representing the integer that was read.
      */
     public static int readIntegerBetween(String message, int min, int max, Consumer<? super String> print) {
@@ -510,47 +409,7 @@ public final class InputData {
      * @return An <code>int</code> representing the choice that was read.
      */
     public static int readChoose(int min, int max) {
-        boolean isBetweenMinMax = false;
-        int read;
-
-        do {
-            read = readChooseInteger();
-
-            if (read < min) {
-                PrettyStrings.printlnError(MINIMUM_ERROR_INTEGER, min);
-            } else if (read > max) {
-                PrettyStrings.printlnError(MAXIMUM_ERROR_INTEGER, max);
-            } else {
-                isBetweenMinMax = true;
-            }
-        } while (!isBetweenMinMax);
-
-        return read;
-    }
-
-    /**
-     * Reads an integer choice without a message prompt.
-     *
-     * @return An <code>int</code> representing the integer that was read.
-     */
-    public static int readChooseInteger() {
-        boolean isInteger;
-        int read = 0;
-
-        do {
-            try {
-                System.out.printf("%s", INSERT_REQUEST);
-                read = reader.nextInt();
-                isInteger = true;
-            } catch (InputMismatchException e) {
-                System.out.println(INTEGER_FORMAT_ERROR);
-                isInteger = false;
-            } finally {
-                flushReader();
-            }
-        } while (!isInteger);
-
-        return read;
+        return readIntegerBetween(INSERT_REQUEST, min, max, m -> choosePrint(m));
     }
 
     /**
@@ -561,24 +420,7 @@ public final class InputData {
      * @return A <code>double</code> representing the double that was read.
      */
     public static double readDouble(String message) {
-        boolean isDouble;
-        double read = Double.NaN;
-
-        do {
-            System.out.printf("%s%s", message, INSERT_REQUEST);
-
-            try {
-                read = reader.nextDouble();
-                isDouble = true;
-            } catch (InputMismatchException e) {
-                PrettyStrings.printlnError(DOUBLE_FORMAT_ERROR);
-                isDouble = false;
-            } finally {
-                flushReader();
-            }
-        } while (!isDouble);
-
-        return read;
+        return readDouble(message, m -> defaultPrint(m));
     }
 
     /**
@@ -586,7 +428,7 @@ public final class InputData {
      * the user. It will print an error message if the text inserted isn't a double.
      *
      * @param message The message to print.
-     * @param print Let you execute the print statement that you like the best
+     * @param print   Let you execute the print statement that you like the best
      * @return A <code>double</code> representing the double that was read.
      */
     public static double readDouble(String message, Consumer<? super String> print) {
@@ -620,20 +462,7 @@ public final class InputData {
      * @return A <code>double</code> representing the double that was read.
      */
     public static double readDoubleWithMinimum(String message, double min) {
-        boolean isAboveMin = false;
-        double read;
-
-        do {
-            read = readDouble(message);
-
-            if (read >= min) {
-                isAboveMin = true;
-            } else {
-                PrettyStrings.printlnError(MINIMUM_ERROR_DOUBLE, min);
-            }
-        } while (!isAboveMin);
-
-        return read;
+        return readDoubleWithMinimum(message, min, InputData::defaultPrint);
     }
 
     /**
@@ -643,7 +472,7 @@ public final class InputData {
      *
      * @param message The message to print.
      * @param min     The minimum value to read.
-     * @param print Let you execute the print statement that you like the best
+     * @param print   Let you execute the print statement that you like the best
      * @return A <code>double</code> representing the double that was read.
      */
     public static double readDoubleWithMinimum(String message, double min, Consumer<? super String> print) {
@@ -673,20 +502,7 @@ public final class InputData {
      * @return A <code>double</code> representing the double that was read.
      */
     public static double readDoubleWithMaximum(String message, double max) {
-        boolean isBelowMax = false;
-        double read;
-
-        do {
-            read = readDouble(message);
-
-            if (read <= max) {
-                isBelowMax = true;
-            } else {
-                PrettyStrings.printlnError(MAXIMUM_ERROR_DOUBLE, max);
-            }
-        } while (!isBelowMax);
-
-        return read;
+        return readDoubleWithMaximum(message, max, InputData::defaultPrint);
     }
 
     /**
@@ -696,7 +512,7 @@ public final class InputData {
      *
      * @param message The message to print.
      * @param max     The maximum value to read.
-     * @param print Let you execute the print statement that you like the best
+     * @param print   Let you execute the print statement that you like the best
      * @return A <code>double</code> representing the double that was read.
      */
     public static double readDoubleWithMaximum(String message, double max, Consumer<? super String> print) {
@@ -728,22 +544,7 @@ public final class InputData {
      * @return A <code>double</code> representing the double that was read.
      */
     public static double readDoubleBetween(String message, double min, double max) {
-        boolean isBetweenMinMax = false;
-        double read;
-
-        do {
-            read = readDouble(message);
-
-            if (read < min) {
-                PrettyStrings.printlnError(MINIMUM_ERROR_DOUBLE, min);
-            } else if (read > max) {
-                PrettyStrings.printlnError(MAXIMUM_ERROR_DOUBLE, max);
-            } else {
-                isBetweenMinMax = true;
-            }
-        } while (!isBetweenMinMax);
-
-        return read;
+        return readDoubleBetween(message, min, max, InputData::defaultPrint);
     }
 
     /**
@@ -755,7 +556,7 @@ public final class InputData {
      * @param message The message to print.
      * @param min     The minimum value to read.
      * @param max     The maximum value to read.
-     * @param print Let you execute the print statement that you like the best
+     * @param print   Let you execute the print statement that you like the best
      * @return A <code>double</code> representing the double that was read.
      */
     public static double readDoubleBetween(String message, double min, double max, Consumer<? super String> print) {
@@ -778,29 +579,108 @@ public final class InputData {
     }
 
     /**
-     * Prints <code>question</code> in the terminal with the string "? [Y/n] "
+     * Prints <code>question</code> in the terminal with the string " [Y/n] "
      * added. If the user answers with 'y' or 'Y' the method will return
      * <code>true</code>, <code>false</code> otherwise.
      *
      * @param question The question to print.
      * @return A <code>boolean</code> representing the affirmative or negative
-     * answer of the user.
+     *         answer of the user.
      */
     public static boolean readYesOrNo(String question) {
-        String answer = readStringNotEmpty(question + " [Y/n]", true, message -> yesOrNoPrint(question));
+        return readYesOrNo(question, InputData::yesOrNoPrint);
+    }
 
-        if (answer.equalsIgnoreCase("Y") || answer.equalsIgnoreCase("YES")) {
-            return true;
-        } else if (answer.equalsIgnoreCase("N") || answer.equalsIgnoreCase("NO")) {
-            return false;
-        } else {
-            PrettyStrings.printlnError(INVALID_ANSWER);
-            return readYesOrNo(question);
+    /**
+     * Prints <code>question</code> in the terminal with the string " [Y/n] "
+     * added. If the user answers with 'y' or 'Y' the method will return
+     * <code>true</code>, <code>false</code> otherwise.
+     *
+     * @param question The question to print.
+     * @param print    Let you execute the print statement that you like the best
+     * @return A <code>boolean</code> representing the affirmative or negative
+     *         answer of the user.
+     */
+    public static boolean readYesOrNo(String question, Consumer<? super String> print) {
+        while (true) {
+            String answer = readStringNotEmpty(question + " [Y/n]", true, print);
+
+            YesNoResponse response = parseYesNoResponse(answer);
+
+            switch (response) {
+                case YES:
+                    return true;
+                case NO:
+                    return false;
+                case INVALID:
+                    PrettyStrings.printlnError(INVALID_ANSWER);
+                    break;
+            }
+        }
+    }
+
+    /**
+     * Enum to represent the possible responses to a yes/no question.
+     */
+    private enum YesNoResponse {
+        YES, NO, INVALID
+    }
+
+    /**
+     * Parses a string response and determines if it represents yes, no, or invalid
+     * input.
+     * 
+     * @param answer The user's input string
+     * @return YesNoResponse enum value representing the parsed response
+     */
+    private static YesNoResponse parseYesNoResponse(String answer) {
+        if (answer == null || answer.trim().isEmpty()) {
+            return YesNoResponse.INVALID;
+        }
+
+        String normalized = answer.trim().toLowerCase();
+
+        // Check for yes responses
+        if (normalized.equals("y") || normalized.equals("yes")) {
+            return YesNoResponse.YES;
+        }
+
+        // Check for no responses
+        if (normalized.equals("n") || normalized.equals("no")) {
+            return YesNoResponse.NO;
+        }
+
+        return YesNoResponse.INVALID;
+    }
+
+    /**
+     * Alternative implementation using a more functional approach with validation.
+     * This method provides additional flexibility for extending accepted responses.
+     */
+    public static boolean readYesOrNoAdvanced(String question, Consumer<? super String> print) {
+        final Set<String> yesResponses = Set.of("y", "yes", "true", "1");
+        final Set<String> noResponses = Set.of("n", "no", "false", "0");
+
+        while (true) {
+            String answer = readStringNotEmpty(question + " [Y/n]", true, print);
+            String normalized = answer.trim().toLowerCase();
+
+            if (yesResponses.contains(normalized)) {
+                return true;
+            } else if (noResponses.contains(normalized)) {
+                return false;
+            } else {
+                PrettyStrings.printlnError(INVALID_ANSWER + " Please enter Y/Yes or N/No.");
+            }
         }
     }
 
     private static void defaultPrint(String message) {
         System.out.printf("%s%s", message, INSERT_REQUEST);
+    }
+
+    private static void choosePrint(String message) {
+        System.out.printf("%s", message);
     }
 
     private static void yesOrNoPrint(String message) {
