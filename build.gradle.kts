@@ -24,7 +24,7 @@ dependencies {
 }
 
 group = "com.kibo.pgar.lib"
-version = "1.4.0"
+version = "1.5.0"
 description = "kibo-pgar-lib"
 java {
     sourceCompatibility = JavaVersion.VERSION_21
