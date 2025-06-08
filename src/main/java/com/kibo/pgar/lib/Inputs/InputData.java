@@ -22,6 +22,7 @@ public final class InputData {
     private static final String INVALID_ANSWER = "\nThe answer is not valid!";
 
 
+    private static final String INSERT_REQUEST = ": ";
     private InputData() {   
     }
 
@@ -87,7 +88,7 @@ public final class InputData {
      * @return A <code>String</code> form the method <code>reader.nextLine()</code>;
      */
     public static String readSting(String message) {
-        System.out.printf("%s ", message);
+        System.out.printf("%s%s", message, INSERT_REQUEST);
         return reader.nextLine();
     }
 
@@ -106,7 +107,7 @@ public final class InputData {
 
         if (alphanumeric) {
             do {
-                System.out.printf("%s ", message);
+                System.out.printf("%s%s", message, INSERT_REQUEST);
 
                 read = reader.next().trim();
 
@@ -116,7 +117,7 @@ public final class InputData {
                     PrettyStrings.printlnError(ALPHANUMERIC_CHARACTERS_ERROR);
             } while (!isAlphanumeric);
         } else {
-            System.out.printf("%s ", message);
+            System.out.printf("%s%s", message, INSERT_REQUEST);
 
             read = reader.next().trim();
         }
@@ -192,7 +193,7 @@ public final class InputData {
 
         do {
             try {
-                System.out.printf("%s ", message);
+                System.out.printf("%s%s", message, INSERT_REQUEST);
 
                 read = reader.nextInt();
 
@@ -288,6 +289,10 @@ public final class InputData {
         return read;
     }
 
+    public static int readChoose(int min, int max) {
+        return readIntegerBetween(INSERT_REQUEST, min, max);
+    }
+
     /**
      * Prints <code>message</code> in the terminal and reads the text inserted by
      * the user. It will print an error message if the text inserted isn't a double.
@@ -300,7 +305,7 @@ public final class InputData {
         double read = Double.NaN;
 
         do {
-            System.out.printf("%s ", message);
+            System.out.printf("%s%s", message, INSERT_REQUEST);
 
             try {
                 read = reader.nextDouble();
