@@ -1,10 +1,10 @@
-package com.kibo.pgar.lib.Formats;
+package com.kibo.pgar.lib.AnsiClasses;
 
 /**
  * <code>Enum</code> that collects the alignment a string can have.
  * 
  * @author Alessandro Muscio (Kibo)
- * @version 1.2
+ * @version 1.4
  */
 public enum Alignment {
     /** Represents the <i>left</i> alignment. */

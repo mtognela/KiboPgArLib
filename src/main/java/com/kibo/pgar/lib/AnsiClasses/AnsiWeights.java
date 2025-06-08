@@ -1,11 +1,11 @@
-package com.kibo.pgar.lib.Formats;
+package com.kibo.pgar.lib.AnsiClasses;
 
 /**
  * <code>Enum</code> that collects some ansi weights in order to prettify
  * strings in the terminal. It can change the font weight of strings.
  * 
  * @author Alessandro Muscio (Kibo)
- * @version 1.2
+ * @version 1.4
  */
 public enum AnsiWeights {
     /** Resets the formatting of the terminal. */

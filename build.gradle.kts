@@ -15,7 +15,9 @@ repositories {
 
 dependencies {
     implementation("com.google.code.gson:gson:2.13.1")
+
     api("org.slf4j:slf4j-api:2.1.0-alpha1") 
+
     testImplementation("ch.qos.logback:logback-classic:1.5.18")
     testImplementation("org.junit.jupiter:junit-jupiter:5.12.1") 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.12.1")
@@ -39,7 +41,7 @@ tasks.withType<Javadoc>() {
 
 tasks.register<JavaExec>("run") {
     classpath = configurations.runtimeClasspath.get()
-    mainClass.set("Main")
+    mainClass.set("TypeSafeEmpty")
     // args = listOf("arg1", "arg2") // if you need arguments
 }
 
@@ -76,6 +78,7 @@ tasks.shadowJar {
         exclude(dependency("org.junit.platform:junit-platform-launcher:1.12.1"))
         exclude(dependency("ch.qos.logback:logback-classic:1.5.18"))
         exclude(dependency("org.slf4j:slf4j-api:2.0.17"))
+        include(dependency("com.google.code.gson:gson:2.13.1"))
 
         configurations = provider { listOf(project.configurations.runtimeClasspath.get()) }
     }

@@ -1,11 +1,11 @@
-package com.kibo.pgar.lib.Formats;
+package com.kibo.pgar.lib.AnsiClasses;
 
 /**
  * <code>Enum</code> that collects some ANSI colors in order to prettify strings in the terminal. It
  * can color both the words and the background of strings.
  * 
  * @author Alessandro Muscio (Kibo) and Mattia Tognela (mtognela)
- * @version 1.2
+ * @version 1.4
  */
 public enum AnsiColors {
     /** Resets all attributes. */

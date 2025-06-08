@@ -6,7 +6,7 @@ import java.io.File;
  * <code>Class</code> for simple universal file  
  * 
  * @author Mattia Tognela (mtognela)
- * @version 1.2
+ * @version 1.4
  */
 public final class OmniFile {
 
@@ -17,7 +17,7 @@ public final class OmniFile {
      * Constructs a {@code File} from a sequence of path components.
      * 
      * @param args Path segments to join with the system's file separator.
-     * @return the File creathed for 
+     * @return the constructed File  
      */
     public static File of(String... args) {
         return new File(String.join(File.separator, args));

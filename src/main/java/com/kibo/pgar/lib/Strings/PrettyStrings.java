@@ -1,17 +1,17 @@
 package com.kibo.pgar.lib.Strings;
 
-import com.kibo.pgar.lib.Formats.Alignment;
-import com.kibo.pgar.lib.Formats.AnsiColors;
-import com.kibo.pgar.lib.Formats.AnsiDecorations;
-import com.kibo.pgar.lib.Formats.AnsiWeights;
+import com.kibo.pgar.lib.AnsiClasses.Alignment;
+import com.kibo.pgar.lib.AnsiClasses.AnsiColors;
+import com.kibo.pgar.lib.AnsiClasses.AnsiDecorations;
+import com.kibo.pgar.lib.AnsiClasses.AnsiWeights;
 import com.kibo.pgar.lib.Menus.FrameSettings;
 
 /**
  * <code>Class</code> that let's you prettify the strings to output in the
  * terminal.
  * 
- * @author Alessandro Muscio (Kibo) and Mattia Tognela 
- * @version 1.2
+ * @author Alessandro Muscio (Kibo) and Mattia Tognela (mtognela)
+ * @version 1.4
  */
 public final class PrettyStrings {
     private static final char SPACE = ' ';
@@ -171,46 +171,24 @@ public final class PrettyStrings {
     }
 
     /**
-     * For backwords compatabily only 
+     * Formats and prettifies a string as an error message with red color and bold
+     * weight.
      * 
-     * Prettifies the given <code>String</code> by adding a <i>color</i>,
-     * <i>weight</i> and <i>decoration</i>, if given.
+     * @param format The format string to be formatted and prettified.
+     * @param args   The arguments referenced by the format specifiers in the format
+     *               string.
      * 
-     * @param color      The color given to the <code>String</code>,
-     *                   <code>null</code> for default color.
-     * @param weight     The weight given to the <code>String</code>,
-     *                   <code>null</code> for default weight.
-     * @param decoration The decoration given to the <code>String</code>,
-     *                   <code>null</code> for no decoration.
-     * @param toPrettify The <code>String</code> to be formatted and prettified.
+     * @return A formatted and prettified string with error styling (red color and
+     *         bold weight).
      * 
-     * @return A <code>String</code> representing the given one prettified.
+     * @see #prettify(AnsiColors, AnsiWeights, AnsiDecorations, String, Object...)
+     * 
+     * @implNote This method uses {@link AnsiColors#RED} for color,
+     *           {@link AnsiWeights#BOLD} for weight,
+     *           and no decoration.
      */
-    public static String prettify(String toPrettify, AnsiColors color, AnsiWeights weight, AnsiDecorations decoration) {
-        StringBuffer builder = new StringBuffer();
-        boolean reset = false;
-
-        if (color != null) {
-            reset = true;
-            builder.append(color);
-        }
-
-        if (weight != null) {
-            reset = true;
-            builder.append(weight);
-        }
-
-        if (decoration != null) {
-            reset = true;
-            builder.append(decoration);
-        }
-
-        builder.append(toPrettify);
-
-        if (reset)
-            builder.append(AnsiColors.RESET);
-
-        return builder.toString();
+    public static String errorDefine(String format, Object... args) {
+        return prettify(AnsiColors.RED, AnsiWeights.BOLD, null, format, args);
     }
 
 }

@@ -5,9 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.StringJoiner;
 
-import com.kibo.pgar.lib.Formats.Alignment;
-import com.kibo.pgar.lib.Formats.AnsiColors;
-import com.kibo.pgar.lib.Formats.AnsiWeights;
+import com.kibo.pgar.lib.AnsiClasses.Alignment;
 import com.kibo.pgar.lib.Strings.PrettyStrings;
 
 /**
@@ -25,11 +23,10 @@ import com.kibo.pgar.lib.Strings.PrettyStrings;
  * <p>
  * 
  * @author Alessandro Muscio (Kibo) and Mattia Tognela (mtognela)
- * @version 1.2
+ * @version 1.4
  */
 public final class CommandLineTable {
-    private static final String SHORT_ROWS_ERROR = PrettyStrings.prettify(AnsiColors.RED, AnsiWeights.BOLD,
-            null, "One or multiple of the given rows are too short for this table!");
+    private static final String SHORT_ROWS_ERROR = PrettyStrings.errorDefine("One or multiple of the given rows are too short for this table!");
 
     private static final char HORIZONTAL_SEPARATOR = '-';
     private static final char VERTICAL_SEPARATOR = '|';

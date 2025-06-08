@@ -3,10 +3,10 @@ package com.kibo.pgar.lib.Menus;
 import java.io.Serializable;
 
 import com.kibo.pgar.lib.Strings.PrettyStrings;
+import com.kibo.pgar.lib.AnsiClasses.Alignment;
+import com.kibo.pgar.lib.AnsiClasses.AnsiColors;
+import com.kibo.pgar.lib.AnsiClasses.AnsiWeights;
 import com.kibo.pgar.lib.Calcs.KnownProblems;
-import com.kibo.pgar.lib.Formats.Alignment;
-import com.kibo.pgar.lib.Formats.AnsiColors;
-import com.kibo.pgar.lib.Formats.AnsiWeights;
 import com.kibo.pgar.lib.Inputs.InputData;
 
 /**
@@ -15,7 +15,7 @@ import com.kibo.pgar.lib.Inputs.InputData;
  * may result useful in visualizing the menu.
  *
  * @author Alessandro Muscio and Mattia Tognela (mtognela)
- * @version 1.2
+ * @version 1.4
  */
 public class Menu implements Serializable {
     private static final String EXIT_ENTRY = PrettyStrings.prettify(
@@ -26,7 +26,7 @@ public class Menu implements Serializable {
         AnsiColors.GREEN, AnsiWeights.BOLD, null,
         ": ");
 
-    private static final String NEGATIVE_MILLIS_ERROR = PrettyStrings.prettify(AnsiColors.RED, null, null,
+    private static final String NEGATIVE_MILLIS_ERROR = PrettyStrings.errorDefine(
             "Attention! You can't have negative time");
 
     /**

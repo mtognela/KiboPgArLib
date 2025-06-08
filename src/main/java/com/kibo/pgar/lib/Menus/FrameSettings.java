@@ -1,13 +1,13 @@
 package com.kibo.pgar.lib.Menus;
 
-import com.kibo.pgar.lib.Formats.Alignment;
+import com.kibo.pgar.lib.AnsiClasses.Alignment;
 
 /**
  * <code>Class</code> that let's you specify the settings for framing a
  * <code>String</code>.
  * 
  * @author Alessandro Muscio (Kibo)
- * @version 1.2
+ * @version 1.4
  */
 public final class FrameSettings {
     private static final char HORIZONTAL_FRAME = '-';
