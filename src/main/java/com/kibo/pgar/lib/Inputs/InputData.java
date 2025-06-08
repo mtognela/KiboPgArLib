@@ -278,9 +278,9 @@ public final class InputData {
             read = readInteger(message);
 
             if (read < min)
-                System.out.printf(MINIMUM_ERROR_INTEGER + "\n", min);
+                PrettyStrings.printlnError("%s\n%d", MINIMUM_ERROR_INTEGER , min);
             else if (read > max)
-                System.out.printf(MAXIMUM_ERROR_INTEGER + "\n", max);
+                PrettyStrings.printlnError("%s\n%s", MAXIMUM_ERROR_INTEGER, max);
             else
                 isBetweenMinMax = true;
         } while (!isBetweenMinMax);
@@ -306,7 +306,7 @@ public final class InputData {
                 read = reader.nextDouble();
                 isDouble = true;
             } catch (InputMismatchException e) {
-                System.out.println(DOUBLE_FORMAT_ERROR);
+                PrettyStrings.printlnError(DOUBLE_FORMAT_ERROR);
 
                 isDouble = false;
             } finally {
@@ -337,7 +337,7 @@ public final class InputData {
             if (read >= min)
                 isAboveMin = true;
             else
-                System.out.printf(MINIMUM_ERROR_DOUBLE + "\n", min);
+                PrettyStrings.printlnError("%s\n%d", MINIMUM_ERROR_DOUBLE, min);
         } while (!isAboveMin);
 
         return read;
@@ -362,7 +362,7 @@ public final class InputData {
             if (read <= max)
                 isBelowMax = true;
             else
-                System.out.printf(MAXIMUM_ERROR_DOUBLE + "\n", max);
+                PrettyStrings.printlnError("%s\n%s",MAXIMUM_ERROR_DOUBLE, max);
         } while (!isBelowMax);
 
         return read;
@@ -387,9 +387,9 @@ public final class InputData {
             read = readDouble(message);
 
             if (read < min)
-                System.out.printf(MINIMUM_ERROR_DOUBLE + "\n", min);
+                PrettyStrings.printlnError("%s\n%f",MINIMUM_ERROR_DOUBLE, min);
             else if (read > max)
-                System.out.printf(MAXIMUM_ERROR_DOUBLE + "\n", max);
+                PrettyStrings.printlnError("%s\n%f",MAXIMUM_ERROR_DOUBLE, max);
             else
                 isBetweenMinMax = true;
         } while (!isBetweenMinMax);
@@ -410,12 +410,12 @@ public final class InputData {
     public static boolean readYesOrNo(String question) {
         String answer = readStringNotEmpty(question + " [Y/n]", true);
 
-        if (answer.equals("Y") || answer.equals("YES"))
+        if (answer.equalsIgnoreCase("Y") || answer.equalsIgnoreCase("YES"))
             return true;
-        else if (answer.equals("N") || answer.equals("NO"))
+        else if (answer.equalsIgnoreCase("N") || answer.equalsIgnoreCase("NO"))
             return false;
         else {
-            System.out.println(INVALID_ANSWER);
+            PrettyStrings.printlnError(INVALID_ANSWER);
             return readYesOrNo(question);
         }
     }
