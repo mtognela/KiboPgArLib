@@ -7,7 +7,7 @@ import java.util.Random;
  * pseudo-random way.
  * 
  * @author Alessandro Muscio (Kibo) and Mattia Tognela (mtognela)
- * @version 1.4
+ * @version 1.5
  */
 public final class RandomDraws {
 	private static final Random RAND = new Random();

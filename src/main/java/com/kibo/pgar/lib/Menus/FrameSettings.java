@@ -7,7 +7,7 @@ import com.kibo.pgar.lib.AnsiClasses.Alignment;
  * <code>String</code>.
  * 
  * @author Alessandro Muscio (Kibo) and Mattia Tognela (mtognela)
- * @version 1.4
+ * @version 1.5
  */
 public final class FrameSettings {
     private static final char HORIZONTAL_FRAME = '-';
