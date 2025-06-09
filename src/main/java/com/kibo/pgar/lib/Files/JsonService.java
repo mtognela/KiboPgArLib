@@ -14,16 +14,16 @@ import com.kibo.pgar.lib.Types.TypeSafe;
 
 public final class JsonService {
 
-    private static final String ERROR_IN_INITIALIZING_THE_READER = PrettyStrings.error("Error in initializing the reader");
-    private static final String ERROR_IN_INITIALIZING_THE_WRITER = PrettyStrings.error("Error in initializing the writer");
+    private static final String ERROR_IN_INITIALIZING_THE_READER = "Error in initializing the reader";
+    private static final String ERROR_IN_INITIALIZING_THE_WRITER = "Error in initializing the writer";
     private static final Gson gson = new Gson();
 
     public static <T> T read(File file, TypeToken<T> type) {
         try (FileReader reader = new FileReader(file)) {
             return gson.fromJson(reader, type);
         } catch (JsonIOException | JsonSyntaxException | IOException e) {
-            System.out.println(ERROR_IN_INITIALIZING_THE_READER);
-            System.out. println(e.getMessage());
+            PrettyStrings.printlnError(ERROR_IN_INITIALIZING_THE_READER);
+            PrettyStrings.printlnError(e.getMessage());
             return TypeSafe.getEmpty(new TypeToken<T>() {});
         }
 
@@ -36,8 +36,8 @@ public final class JsonService {
             gson.toJson(input, writer);
             return true;
         } catch (JsonIOException | IOException e) {
-            System.out.println(ERROR_IN_INITIALIZING_THE_WRITER);
-            System.out.println(e.getMessage());
+            PrettyStrings.printlnError(ERROR_IN_INITIALIZING_THE_WRITER);
+            PrettyStrings.printlnError(e.getMessage());
             return false;
         }
     }
