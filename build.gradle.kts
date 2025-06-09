@@ -74,10 +74,11 @@ tasks.shadowJar {
     manifest.inheritFrom(testJar.get().manifest)
 
     dependencies {
-        exclude(dependency("org.junit.jupiter:junit-jupiter:5.12.1"))
-        exclude(dependency("org.junit.platform:junit-platform-launcher:1.12.1"))
         exclude(dependency("ch.qos.logback:logback-classic:1.5.18"))
         exclude(dependency("org.slf4j:slf4j-api:2.0.17"))
+
+        include(dependency("org.junit.jupiter:junit-jupiter:5.12.1"))
+        include(dependency("org.junit.platform:junit-platform-launcher:1.12.1"))
         include(dependency("com.google.code.gson:gson:2.13.1"))
 
         configurations = provider { listOf(project.configurations.runtimeClasspath.get()) }
