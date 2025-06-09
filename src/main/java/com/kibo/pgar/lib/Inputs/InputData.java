@@ -12,16 +12,16 @@ public final class InputData {
     private static final Scanner reader = createScanner();
 
     private static final String ALPHANUMERIC_CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ";
-    private static final String ALPHANUMERIC_CHARACTERS_ERROR = "\nOnly alphanumeric characters are allowed.";
-    private static final String EMPTY_STRING_ERROR = "\nNo characters were inserted.";
-    private static final String ALLOWED_CHARACTERS_ERROR = "\nThe only allowed characters are: %s";
-    private static final String INTEGER_FORMAT_ERROR = "\nThe inserted data is in an incorrect format. An integer is required.";
-    private static final String DOUBLE_FORMAT_ERROR = "\nThe inserted data is in an incorrect format. A double is required.";
-    private static final String MINIMUM_ERROR_INTEGER = "\nA value greater or equal than %d is required.";
-    private static final String MAXIMUM_ERROR_INTEGER = "\nA value less or equal than %d is required.";
-    private static final String MINIMUM_ERROR_DOUBLE = "\nA value greater or equal than %.2f is required.";
-    private static final String MAXIMUM_ERROR_DOUBLE = "\nA value less or equal than %.2f is required.";
-    private static final String INVALID_ANSWER = "\nThe answer is not valid!";
+    private static final String ALPHANUMERIC_CHARACTERS_ERROR = "Only alphanumeric characters are allowed.";
+    private static final String EMPTY_STRING_ERROR = "No characters were inserted.";
+    private static final String ALLOWED_CHARACTERS_ERROR = "The only allowed characters are: %s";
+    private static final String INTEGER_FORMAT_ERROR = "The inserted data is in an incorrect format. An integer is required.";
+    private static final String DOUBLE_FORMAT_ERROR = "The inserted data is in an incorrect format. A double is required.";
+    private static final String MINIMUM_ERROR_INTEGER = "A value greater or equal than %d is required.";
+    private static final String MAXIMUM_ERROR_INTEGER = "A value less or equal than %d is required.";
+    private static final String MINIMUM_ERROR_DOUBLE = "A value greater or equal than %.2f is required.";
+    private static final String MAXIMUM_ERROR_DOUBLE = "A value less or equal than %.2f is required.";
+    private static final String INVALID_ANSWER = "The answer is not valid!";
 
     private static final String INSERT_REQUEST = ": ";
 
@@ -87,7 +87,7 @@ public final class InputData {
      * @return A <code>String</code> from the method <code>reader.nextLine()</code>
      */
     public static String readString(String message) {
-        return readString(message, InputData::defaultPrint);
+        return readStringConsumer(message, InputData::defaultPrint);
     }
 
     /**
@@ -96,7 +96,7 @@ public final class InputData {
      * @param print   Let you execute the print statement that you like the best
      * @return A <code>String</code> from the method <code>reader.nextLine()</code>
      */
-    public static String readString(String message, Consumer<? super String> print) {
+    public static String readStringConsumer(String message, Consumer<? super String> print) {
         print.accept(message);
         return reader.nextLine();
     }
@@ -111,7 +111,7 @@ public final class InputData {
      * @return A <code>String</code> representing the user input.
      */
     public static String readString(String message, boolean alphanumeric) {
-        return readString(message, alphanumeric, InputData::defaultPrint);
+        return readStringConsumer(message, alphanumeric, InputData::defaultPrint);
     }
 
     /**
@@ -125,7 +125,7 @@ public final class InputData {
      *                     best
      * @return A <code>String</code> representing the user input.
      */
-    public static String readString(String message, boolean alphanumeric, Consumer<? super String> print) {
+    public static String readStringConsumer(String message, boolean alphanumeric, Consumer<? super String> print) {
         boolean isAlphanumeric;
         String read;
 
@@ -158,7 +158,7 @@ public final class InputData {
      * @return A <code>String</code> representing the user input.
      */
     public static String readStringNotEmpty(String message, boolean alphanumeric) {
-        return readStringNotEmpty(message, alphanumeric, InputData::defaultPrint);
+        return readStringNotEmptyConsumer(message, alphanumeric, InputData::defaultPrint);
     }
 
     /**
@@ -173,12 +173,12 @@ public final class InputData {
      *                     best
      * @return A <code>String</code> representing the user input.
      */
-    public static String readStringNotEmpty(String message, boolean alphanumeric, Consumer<? super String> print) {
+    public static String readStringNotEmptyConsumer(String message, boolean alphanumeric, Consumer<? super String> print) {
         boolean isStringEmpty = true;
         String read;
 
         do {
-            read = readString(message, alphanumeric, print);
+            read = readStringConsumer(message, alphanumeric, print);
             isStringEmpty = read.isBlank();
 
             if (isStringEmpty) {
@@ -200,7 +200,7 @@ public final class InputData {
      * @return A <code>char</code> representing the character that was read.
      */
     public static char readChar(String message, String allowed) {
-        return readChar(message, allowed, m -> defaultPrint(m));
+        return readCharConsumer(message, allowed, m -> defaultPrint(m));
     }
 
     /**
@@ -214,13 +214,13 @@ public final class InputData {
      * @param print   Let you execute the print statement that you like the best
      * @return A <code>char</code> representing the character that was read.
      */
-    public static char readChar(String message, String allowed, Consumer<? super String> print) {
+    public static char readCharConsumer(String message, String allowed, Consumer<? super String> print) {
         boolean isAllowed = false;
         String read;
         char readChar;
 
         do {
-            read = readStringNotEmpty(message, false, print);
+            read = readStringNotEmptyConsumer(message, false, print);
             readChar = read.charAt(0);
 
             if (allowed.indexOf(readChar) != -1) {
@@ -243,7 +243,7 @@ public final class InputData {
      * @return An <code>int</code> representing the integer that was read.
      */
     public static int readInteger(String message) {
-        return readInteger(message, m -> defaultPrint(m));
+        return readIntegerConsumer(message, m -> defaultPrint(m));
     }
 
     /**
@@ -255,7 +255,7 @@ public final class InputData {
      * @param print   Let you execute the print statement that you like the best
      * @return An <code>int</code> representing the integer that was read.
      */
-    public static int readInteger(String message, Consumer<? super String> print) {
+    public static int readIntegerConsumer(String message, Consumer<? super String> print) {
         boolean isInteger;
         int read = 0;
 
@@ -285,7 +285,7 @@ public final class InputData {
      * @return An <code>int</code> representing the integer that was read.
      */
     public static int readIntegerWithMinimum(String message, int min) {
-        return readIntegerWithMinimum(message, min, m -> defaultPrint(m));
+        return readIntegerWithMinimumConsumer(message, min, m -> defaultPrint(m));
     }
 
     /**
@@ -298,12 +298,12 @@ public final class InputData {
      * @param print   Let you execute the print statement that you like the best
      * @return An <code>int</code> representing the integer that was read.
      */
-    public static int readIntegerWithMinimum(String message, int min, Consumer<? super String> print) {
+    public static int readIntegerWithMinimumConsumer(String message, int min, Consumer<? super String> print) {
         boolean isAboveMin = false;
         int read;
 
         do {
-            read = readInteger(message, print);
+            read = readIntegerConsumer(message, print);
 
             if (read >= min) {
                 isAboveMin = true;
@@ -325,7 +325,7 @@ public final class InputData {
      * @return An <code>int</code> representing the integer that was read.
      */
     public static int readIntegerWithMaximum(String message, int max) {
-        return readIntegerWithMaximum(message, max, m -> defaultPrint(m));
+        return readIntegerWithMaximumConsumer(message, max, m -> defaultPrint(m));
     }
 
     /**
@@ -338,12 +338,12 @@ public final class InputData {
      * @param print   Let you execute the print statement that you like the best
      * @return An <code>int</code> representing the integer that was read.
      */
-    public static int readIntegerWithMaximum(String message, int max, Consumer<? super String> print) {
+    public static int readIntegerWithMaximumConsumer(String message, int max, Consumer<? super String> print) {
         boolean isBelowMax = false;
         int read;
 
         do {
-            read = readInteger(message, print);
+            read = readIntegerConsumer(message, print);
 
             if (read <= max) {
                 isBelowMax = true;
@@ -367,7 +367,7 @@ public final class InputData {
      * @return An <code>int</code> representing the integer that was read.
      */
     public static int readIntegerBetween(String message, int min, int max) {
-        return readIntegerBetween(message, min, max, m -> defaultPrint(m));
+        return readIntegerBetweenConsumer(message, min, max, m -> defaultPrint(m));
     }
 
     /**
@@ -382,12 +382,12 @@ public final class InputData {
      * @param print   Let you execute the print statement that you like the best
      * @return An <code>int</code> representing the integer that was read.
      */
-    public static int readIntegerBetween(String message, int min, int max, Consumer<? super String> print) {
+    public static int readIntegerBetweenConsumer(String message, int min, int max, Consumer<? super String> print) {
         boolean isBetweenMinMax = false;
         int read;
 
         do {
-            read = readInteger(message, print);
+            read = readIntegerConsumer(message, print);
 
             if (read < min) {
                 PrettyStrings.printlnError(MINIMUM_ERROR_INTEGER, min);
@@ -409,7 +409,7 @@ public final class InputData {
      * @return An <code>int</code> representing the choice that was read.
      */
     public static int readChoose(int min, int max) {
-        return readIntegerBetween(INSERT_REQUEST, min, max, m -> choosePrint(m));
+        return readIntegerBetweenConsumer(INSERT_REQUEST, min, max, m -> choosePrint(m));
     }
 
     /**
@@ -420,7 +420,7 @@ public final class InputData {
      * @return A <code>double</code> representing the double that was read.
      */
     public static double readDouble(String message) {
-        return readDouble(message, m -> defaultPrint(m));
+        return readDoubleConsumer(message, m -> defaultPrint(m));
     }
 
     /**
@@ -431,7 +431,7 @@ public final class InputData {
      * @param print   Let you execute the print statement that you like the best
      * @return A <code>double</code> representing the double that was read.
      */
-    public static double readDouble(String message, Consumer<? super String> print) {
+    public static double readDoubleConsumer(String message, Consumer<? super String> print) {
         boolean isDouble;
         double read = Double.NaN;
 
@@ -462,7 +462,7 @@ public final class InputData {
      * @return A <code>double</code> representing the double that was read.
      */
     public static double readDoubleWithMinimum(String message, double min) {
-        return readDoubleWithMinimum(message, min, InputData::defaultPrint);
+        return readDoubleWithMinimumConsumer(message, min, InputData::defaultPrint);
     }
 
     /**
@@ -475,12 +475,12 @@ public final class InputData {
      * @param print   Let you execute the print statement that you like the best
      * @return A <code>double</code> representing the double that was read.
      */
-    public static double readDoubleWithMinimum(String message, double min, Consumer<? super String> print) {
+    public static double readDoubleWithMinimumConsumer(String message, double min, Consumer<? super String> print) {
         boolean isAboveMin = false;
         double read;
 
         do {
-            read = readDouble(message, print);
+            read = readDoubleConsumer(message, print);
 
             if (read >= min) {
                 isAboveMin = true;
@@ -502,7 +502,7 @@ public final class InputData {
      * @return A <code>double</code> representing the double that was read.
      */
     public static double readDoubleWithMaximum(String message, double max) {
-        return readDoubleWithMaximum(message, max, InputData::defaultPrint);
+        return readDoubleWithMaximumConsumer(message, max, InputData::defaultPrint);
     }
 
     /**
@@ -515,12 +515,12 @@ public final class InputData {
      * @param print   Let you execute the print statement that you like the best
      * @return A <code>double</code> representing the double that was read.
      */
-    public static double readDoubleWithMaximum(String message, double max, Consumer<? super String> print) {
+    public static double readDoubleWithMaximumConsumer(String message, double max, Consumer<? super String> print) {
         boolean isBelowMax = false;
         double read;
 
         do {
-            read = readDouble(message, print);
+            read = readDoubleConsumer(message, print);
 
             if (read <= max) {
                 isBelowMax = true;
@@ -544,7 +544,7 @@ public final class InputData {
      * @return A <code>double</code> representing the double that was read.
      */
     public static double readDoubleBetween(String message, double min, double max) {
-        return readDoubleBetween(message, min, max, InputData::defaultPrint);
+        return readDoubleBetweenConsumer(message, min, max, InputData::defaultPrint);
     }
 
     /**
@@ -559,12 +559,12 @@ public final class InputData {
      * @param print   Let you execute the print statement that you like the best
      * @return A <code>double</code> representing the double that was read.
      */
-    public static double readDoubleBetween(String message, double min, double max, Consumer<? super String> print) {
+    public static double readDoubleBetweenConsumer(String message, double min, double max, Consumer<? super String> print) {
         boolean isBetweenMinMax = false;
         double read;
 
         do {
-            read = readDouble(message, print);
+            read = readDoubleConsumer(message, print);
 
             if (read < min) {
                 PrettyStrings.printlnError(MINIMUM_ERROR_DOUBLE, min);
@@ -588,7 +588,7 @@ public final class InputData {
      *         answer of the user.
      */
     public static boolean readYesOrNo(String question) {
-        return readYesOrNo(question, InputData::yesOrNoPrint);
+        return readYesOrNoConsumer(question, InputData::yesOrNoPrint);
     }
 
     /**
@@ -601,9 +601,9 @@ public final class InputData {
      * @return A <code>boolean</code> representing the affirmative or negative
      *         answer of the user.
      */
-    public static boolean readYesOrNo(String question, Consumer<? super String> print) {
+    public static boolean readYesOrNoConsumer(String question, Consumer<? super String> print) {
         while (true) {
-            String answer = readStringNotEmpty(question, true, print);
+            String answer = readStringNotEmptyConsumer(question, true, print);
 
             YesNoResponse response = parseYesNoResponse(answer);
 
@@ -657,12 +657,12 @@ public final class InputData {
      * Alternative implementation using a more functional approach with validation.
      * This method provides additional flexibility for extending accepted responses.
      */
-    public static boolean readYesOrNoAdvanced(String question, Consumer<? super String> print) {
+    public static boolean readYesOrNoConusumer(String question, Consumer<? super String> print) {
         final Set<String> yesResponses = Set.of("y", "yes", "true", "1");
         final Set<String> noResponses = Set.of("n", "no", "false", "0");
 
         while (true) {
-            String answer = readStringNotEmpty(question, true, print);
+            String answer = readStringNotEmptyConsumer(question, true, print);
             String normalized = answer.trim().toLowerCase();
 
             if (yesResponses.contains(normalized)) {
@@ -684,6 +684,6 @@ public final class InputData {
     }
 
     private static void yesOrNoPrint(String message) {
-        System.out.printf("%s? %s ", message,  "[Y/n]");
+        System.out.printf("%s%s %s ", message,"?", "[Y/n]");
     }
 }
