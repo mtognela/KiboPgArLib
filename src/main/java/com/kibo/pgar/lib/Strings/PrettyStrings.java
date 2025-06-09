@@ -20,20 +20,44 @@ public final class PrettyStrings {
     private PrettyStrings() {
     }
 
+    /**
+     * Creates a framed string representation of the given text using the specified
+     * frame settings.
+     * 
+     * This method wraps the input text within a decorative frame using horizontal
+     * and vertical
+     * frame characters. The text can be aligned within the frame according to the
+     * specified
+     * alignment setting (LEFT, CENTER, or RIGHT). The frame dimensions and
+     * appearance are
+     * controlled by the provided FrameSettings object.
+     *
+     * @param toFrame  the text content to be framed
+     * @param settings the frame configuration specifying width, frame characters,
+     *                 alignment,
+     *                 and whether vertical frames are enabled
+     * @return a formatted string containing the input text surrounded by the
+     *         specified frame
+     * 
+     * @throws NullPointerException if {@code toFrame} or {@code settings} is null
+     * 
+     * @see FrameSettings
+     * @see Alignment
+     * @see PrettyStrings#repeatChar(char, int)
+     * @see PrettyStrings#center(String, int)
+     * @see PrettyStrings#column(String, int, boolean)
+     */
     public static String frame(String toFrame, FrameSettings settings) {
         StringBuffer framed = new StringBuffer();
         String horizontalFrame = PrettyStrings.repeatChar(settings.getHorizontalFrame(), settings.getWidth());
-
         framed.append(horizontalFrame);
         framed.append(PrettyStrings.NEW_LINE);
-
         // Calculate the content width without modifying the settings object
         int contentWidth = settings.getWidth();
         if (settings.isVerticalFrameEnabled()) {
             contentWidth = contentWidth - 2; // Account for left and right vertical frames
             framed.append(settings.getVerticalFrame());
         }
-
         if (settings.getAlignment().equals(Alignment.CENTER))
             framed.append(PrettyStrings.center(toFrame, contentWidth));
         else
@@ -41,11 +65,8 @@ public final class PrettyStrings {
                     toFrame,
                     contentWidth,
                     settings.getAlignment().equals(Alignment.LEFT)));
-
         framed.append(settings.isVerticalFrameEnabled() ? settings.getVerticalFrame() : "");
-
         framed.append(PrettyStrings.isolatedLine(horizontalFrame));
-
         return framed.toString();
     }
 
@@ -120,7 +141,7 @@ public final class PrettyStrings {
      */
     public static String isolatedLine(String toIsolate) {
         StringBuffer builder = new StringBuffer();
-        
+
         builder.append(PrettyStrings.NEW_LINE);
         builder.append(toIsolate);
         builder.append(PrettyStrings.NEW_LINE);
@@ -141,7 +162,8 @@ public final class PrettyStrings {
      * @param format     The <code>String</code> to be formatted and prettified.
      * @param args       The args that format that format the <code>String</code>
      * 
-     * @return A <code>String</code> representing the given one formatted and prettified.
+     * @return A <code>String</code> representing the given one formatted and
+     *         prettified.
      */
     public static String prettify(AnsiColors color, AnsiWeights weight, AnsiDecorations decoration, String format,
             Object... args) {
@@ -171,6 +193,29 @@ public final class PrettyStrings {
         return builder.toString();
     }
 
+    /**
+     * Prints a formatted message to the console with specified ANSI styling.
+     * 
+     * This method applies ANSI color codes, text weights, and decorations to format
+     * and display a message on the console. The message is formatted using the
+     * provided
+     * format string and arguments, then styled with the specified visual attributes
+     * before being printed to standard output.
+     *
+     * @param color      the ANSI color to apply to the text (e.g., RED, GREEN,
+     *                   BLUE)
+     * @param weight     the text weight to apply (e.g., BOLD, NORMAL)
+     * @param decoration the text decoration to apply (e.g., UNDERLINE,
+     *                   STRIKETHROUGH),
+     *                   or {@code null} for no decoration
+     * @param format     the format string (as per
+     *                   {@link String#format(String, Object...)})
+     * @param args       the arguments to be formatted into the format string
+     * 
+     * @see #prettify(AnsiColors, AnsiWeights, AnsiDecorations, String, Object...)
+     * @see String#format(String, Object...)
+     * @see System#out
+     */
     public static void printlnPrettify(AnsiColors color, AnsiWeights weight, AnsiDecorations decoration, String format,
             Object... args) {
         System.out.println(prettify(color, weight, decoration, format, args));
@@ -197,6 +242,19 @@ public final class PrettyStrings {
         return prettify(AnsiColors.RED, AnsiWeights.BOLD, null, format, args);
     }
 
+    /**
+     * Prints an error message to the console with red bold formatting.
+     * 
+     * This method formats and displays error messages using ANSI color codes
+     * to make them visually distinct with red bold text styling.
+     *
+     * @param format the format string (as per
+     *               {@link String#format(String, Object...)})
+     * @param args   the arguments to be formatted into the format string
+     * 
+     * @see #printlnPrettify(AnsiColors, AnsiWeights, Object, String, Object...)
+     * @see String#format(String, Object...)
+     */
     public static void printlnError(String format, Object... args) {
         printlnPrettify(AnsiColors.RED, AnsiWeights.BOLD, null, format, args);
     }
