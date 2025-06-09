@@ -24,7 +24,7 @@ public final class JsonService {
         } catch (JsonIOException | JsonSyntaxException | IOException e) {
             System.out.println(ERROR_IN_INITIALIZING_THE_READER);
             System.out. println(e.getMessage());
-            return (T) TypeSafe.getEmpty(new TypeToken<T>() {});
+            return TypeSafe.getEmpty(new TypeToken<T>() {});
         }
 
     }
