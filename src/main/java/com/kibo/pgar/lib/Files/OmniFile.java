@@ -29,12 +29,15 @@ public final class OmniFile {
         if (args.length == 0) {
             throw new IllegalArgumentException(PrettyStrings.error(AT_LEAST_ONE_PATH_COMPONENT_MUST_BE_PROVIDED));
         }
+
         if (args.length == 1) {
             return Paths.get(args[0]).toFile();
         }
+
         String first = args[0];
         String[] more = new String[args.length - 1];
         System.arraycopy(args, 1, more, 0, args.length - 1);
+        
         return Paths.get(first, more).toFile();
     }
 
