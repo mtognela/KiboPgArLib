@@ -3,7 +3,6 @@ package com.kibo.pgar.lib.Inputs;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.Set;
 import java.util.function.Consumer;
 
 import com.kibo.pgar.lib.Strings.PrettyStrings;
@@ -200,7 +199,7 @@ public final class InputData {
      * @return A <code>char</code> representing the character that was read.
      */
     public static char readChar(String message, String allowed) {
-        return readCharConsumer(message, allowed, m -> defaultPrint(m));
+        return readCharConsumer(message, allowed, InputData::defaultPrint);
     }
 
     /**
@@ -243,7 +242,7 @@ public final class InputData {
      * @return An <code>int</code> representing the integer that was read.
      */
     public static int readInteger(String message) {
-        return readIntegerConsumer(message, m -> defaultPrint(m));
+        return readIntegerConsumer(message,  InputData::defaultPrint);
     }
 
     /**
@@ -285,7 +284,7 @@ public final class InputData {
      * @return An <code>int</code> representing the integer that was read.
      */
     public static int readIntegerWithMinimum(String message, int min) {
-        return readIntegerWithMinimumConsumer(message, min, m -> defaultPrint(m));
+        return readIntegerWithMinimumConsumer(message, min, InputData::defaultPrint);
     }
 
     /**
@@ -325,7 +324,7 @@ public final class InputData {
      * @return An <code>int</code> representing the integer that was read.
      */
     public static int readIntegerWithMaximum(String message, int max) {
-        return readIntegerWithMaximumConsumer(message, max, m -> defaultPrint(m));
+        return readIntegerWithMaximumConsumer(message, max, InputData::defaultPrint);
     }
 
     /**
@@ -367,7 +366,7 @@ public final class InputData {
      * @return An <code>int</code> representing the integer that was read.
      */
     public static int readIntegerBetween(String message, int min, int max) {
-        return readIntegerBetweenConsumer(message, min, max, m -> defaultPrint(m));
+        return readIntegerBetweenConsumer(message, min, max, InputData::defaultPrint);
     }
 
     /**
@@ -409,7 +408,7 @@ public final class InputData {
      * @return An <code>int</code> representing the choice that was read.
      */
     public static int readChoose(int min, int max) {
-        return readIntegerBetweenConsumer(INSERT_REQUEST, min, max, m -> choosePrint(m));
+        return readIntegerBetweenConsumer(INSERT_REQUEST, min, max, InputData::choosePrint);
     }
 
     /**
@@ -420,7 +419,7 @@ public final class InputData {
      * @return A <code>double</code> representing the double that was read.
      */
     public static double readDouble(String message) {
-        return readDoubleConsumer(message, m -> defaultPrint(m));
+        return readDoubleConsumer(message, InputData::defaultPrint);
     }
 
     /**
@@ -651,28 +650,6 @@ public final class InputData {
         }
 
         return YesNoResponse.INVALID;
-    }
-
-    /**
-     * Alternative implementation using a more functional approach with validation.
-     * This method provides additional flexibility for extending accepted responses.
-     */
-    public static boolean readYesOrNoConusumer(String question, Consumer<? super String> print) {
-        final Set<String> yesResponses = Set.of("y", "yes", "true", "1");
-        final Set<String> noResponses = Set.of("n", "no", "false", "0");
-
-        while (true) {
-            String answer = readStringNotEmptyConsumer(question, true, print);
-            String normalized = answer.trim().toLowerCase();
-
-            if (yesResponses.contains(normalized)) {
-                return true;
-            } else if (noResponses.contains(normalized)) {
-                return false;
-            } else {
-                PrettyStrings.printlnError(INVALID_ANSWER + " Please enter Y/Yes or N/No.");
-            }
-        }
     }
 
     private static void defaultPrint(String message) {
