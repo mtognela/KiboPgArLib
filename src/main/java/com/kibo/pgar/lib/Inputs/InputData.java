@@ -4,23 +4,24 @@ import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 import com.kibo.pgar.lib.Strings.PrettyStrings;
 
 public final class InputData {
     private static final Scanner reader = createScanner();
 
-    private static final String ALPHANUMERIC_CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ";
-    private static final String ALPHANUMERIC_CHARACTERS_ERROR = "Only alphanumeric characters are allowed.";
-    private static final String EMPTY_STRING_ERROR = "No characters were inserted.";
-    private static final String ALLOWED_CHARACTERS_ERROR = "The only allowed characters are: %s";
-    private static final String INTEGER_FORMAT_ERROR = "The inserted data is in an incorrect format. An integer is required.";
-    private static final String DOUBLE_FORMAT_ERROR = "The inserted data is in an incorrect format. A double is required.";
-    private static final String MINIMUM_ERROR_INTEGER = "A value greater or equal than %d is required.";
-    private static final String MAXIMUM_ERROR_INTEGER = "A value less or equal than %d is required.";
-    private static final String MINIMUM_ERROR_DOUBLE = "A value greater or equal than %.2f is required.";
-    private static final String MAXIMUM_ERROR_DOUBLE = "A value less or equal than %.2f is required.";
-    private static final String INVALID_ANSWER = "The answer is not valid!";
+    public static final String ALPHANUMERIC_CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ";
+    public static final String ALPHANUMERIC_CHARACTERS_ERROR = "Only alphanumeric characters are allowed.";
+    public static final String EMPTY_STRING_ERROR = "No characters were inserted.";
+    public static final String ALLOWED_CHARACTERS_ERROR = "The only allowed characters are: %s";
+    public static final String INTEGER_FORMAT_ERROR = "The inserted data is in an incorrect format. An integer is required.";
+    public static final String DOUBLE_FORMAT_ERROR = "The inserted data is in an incorrect format. A double is required.";
+    public static final String MINIMUM_ERROR_INTEGER = "A value greater or equal than %d is required.";
+    public static final String MAXIMUM_ERROR_INTEGER = "A value less or equal than %d is required.";
+    public static final String MINIMUM_ERROR_DOUBLE = "A value greater or equal than %.2f is required.";
+    public static final String MAXIMUM_ERROR_DOUBLE = "A value less or equal than %.2f is required.";
+    public static final String INVALID_ANSWER = "The answer is not valid!";
 
     private static final String INSERT_REQUEST = ": ";
 
@@ -89,18 +90,7 @@ public final class InputData {
         return readStringConsumer(message, InputData::defaultPrint);
     }
 
-    /**
-     * @author Mattia Tognela
-     * @param message Let you deliver a message for the user
-     * @param print   Let you execute the print statement that you like the best
-     * @return A <code>String</code> from the method <code>reader.nextLine()</code>
-     */
-    public static String readStringConsumer(String message, Consumer<? super String> print) {
-        print.accept(message);
-        return reader.nextLine();
-    }
-
-    /**
+      /**
      * Prints <code>message</code> in the terminal and reads the text inserted by
      * the user. If it isn't a <code>String</code> an error message is printed. It's
      * also possible to select if the inserted text needs to be alphanumeric or not.
@@ -113,6 +103,23 @@ public final class InputData {
         return readStringConsumer(message, alphanumeric, InputData::defaultPrint);
     }
 
+
+    /**
+     * @author Mattia Tognela
+     * @param message Let you deliver a message for the user
+     * @param print   Let you execute the print statement that you like the best
+     * @return A <code>String</code> from the method <code>reader.nextLine()</code>
+     */
+    public static String readStringConsumer(String message, Consumer<? super String> print) {
+        return readStringConsumerScanf(message, print, InputData::defaultScanfString);
+    }
+
+    public static <T> String readStringConsumerScanf(String message, Consumer<? super String> print, Supplier<String> scanf) {
+        print.accept(message);
+        return scanf.get();
+    }
+
+  
     /**
      * Prints <code>message</code> in the terminal and reads the text inserted by
      * the user. If it isn't a <code>String</code> an error message is printed. It's
@@ -125,13 +132,17 @@ public final class InputData {
      * @return A <code>String</code> representing the user input.
      */
     public static String readStringConsumer(String message, boolean alphanumeric, Consumer<? super String> print) {
+        return readStringConsumerScanf(message, alphanumeric, print, InputData::defaultScanfString);
+    }
+
+    public static String readStringConsumerScanf(String message, boolean alphanumeric, Consumer<? super String> print, Supplier<String> scanf) {
         boolean isAlphanumeric;
         String read;
 
         if (alphanumeric) {
             do {
                 print.accept(message);
-                read = reader.next().trim();
+                read = scanf.get().trim();
                 isAlphanumeric = hasAlphanumericCharacters(read);
 
                 if (!isAlphanumeric) {
@@ -140,7 +151,7 @@ public final class InputData {
             } while (!isAlphanumeric);
         } else {
             print.accept(message + INSERT_REQUEST);
-            read = reader.next().trim();
+            read = scanf.get().trim();
         }
 
         return read;
@@ -173,11 +184,15 @@ public final class InputData {
      * @return A <code>String</code> representing the user input.
      */
     public static String readStringNotEmptyConsumer(String message, boolean alphanumeric, Consumer<? super String> print) {
+        return readStringNotEmptyConsumerScanf(message, alphanumeric, print, InputData::defaultScanfString);
+    }
+
+    public static String readStringNotEmptyConsumerScanf(String message, boolean alphanumeric, Consumer<? super String> print, Supplier<String> scanf) {
         boolean isStringEmpty = true;
         String read;
 
         do {
-            read = readStringConsumer(message, alphanumeric, print);
+            read = readStringConsumerScanf(message, alphanumeric, print, scanf);
             isStringEmpty = read.isBlank();
 
             if (isStringEmpty) {
@@ -214,12 +229,16 @@ public final class InputData {
      * @return A <code>char</code> representing the character that was read.
      */
     public static char readCharConsumer(String message, String allowed, Consumer<? super String> print) {
+        return readCharConsumerScanf(message, allowed, print, InputData::defaultScanfString);
+    }
+
+    public static char readCharConsumerScanf(String message, String allowed, Consumer<? super String> print, Supplier<String> scanf) {
         boolean isAllowed = false;
         String read;
         char readChar;
 
         do {
-            read = readStringNotEmptyConsumer(message, false, print);
+            read = readStringNotEmptyConsumerScanf(message, false, print, scanf);
             readChar = read.charAt(0);
 
             if (allowed.indexOf(readChar) != -1) {
@@ -255,13 +274,17 @@ public final class InputData {
      * @return An <code>int</code> representing the integer that was read.
      */
     public static int readIntegerConsumer(String message, Consumer<? super String> print) {
+        return readIntegerConsumerScanf(message, print, InputData::defaultScanfInteger);
+    }
+
+    public static int readIntegerConsumerScanf(String message, Consumer<? super String> print, Supplier<Integer> scanf) {
         boolean isInteger;
         int read = 0;
 
         do {
             try {
                 print.accept(message);
-                read = reader.nextInt();
+                read = scanf.get();
                 isInteger = true;
             } catch (InputMismatchException e) {
                 System.out.println(INTEGER_FORMAT_ERROR);
@@ -298,11 +321,15 @@ public final class InputData {
      * @return An <code>int</code> representing the integer that was read.
      */
     public static int readIntegerWithMinimumConsumer(String message, int min, Consumer<? super String> print) {
+        return readIntegerWithMinimumConsumerScanf(message, min, print, InputData::defaultScanfInteger);
+    }
+
+    public static int readIntegerWithMinimumConsumerScanf(String message, int min, Consumer<? super String> print, Supplier<Integer> scanf) {
         boolean isAboveMin = false;
         int read;
 
         do {
-            read = readIntegerConsumer(message, print);
+            read = readIntegerConsumerScanf(message, print, scanf);
 
             if (read >= min) {
                 isAboveMin = true;
@@ -338,11 +365,15 @@ public final class InputData {
      * @return An <code>int</code> representing the integer that was read.
      */
     public static int readIntegerWithMaximumConsumer(String message, int max, Consumer<? super String> print) {
+        return readIntegerWithMaximumConsumerScanf(message, max, print, InputData::defaultScanfInteger);
+    }
+
+    public static int readIntegerWithMaximumConsumerScanf(String message, int max, Consumer<? super String> print, Supplier<Integer> scanf) {
         boolean isBelowMax = false;
         int read;
 
         do {
-            read = readIntegerConsumer(message, print);
+            read = readIntegerConsumerScanf(message, print, scanf);
 
             if (read <= max) {
                 isBelowMax = true;
@@ -382,11 +413,15 @@ public final class InputData {
      * @return An <code>int</code> representing the integer that was read.
      */
     public static int readIntegerBetweenConsumer(String message, int min, int max, Consumer<? super String> print) {
+        return readIntegerBetweenConsumerScanf(message, min, max, print, InputData::defaultScanfInteger);
+    }
+
+    public static int readIntegerBetweenConsumerScanf(String message, int min, int max, Consumer<? super String> print, Supplier<Integer> scanf) {
         boolean isBetweenMinMax = false;
         int read;
 
         do {
-            read = readIntegerConsumer(message, print);
+            read = readIntegerConsumerScanf(message, print, scanf);
 
             if (read < min) {
                 PrettyStrings.printlnError(MINIMUM_ERROR_INTEGER, min);
@@ -431,6 +466,10 @@ public final class InputData {
      * @return A <code>double</code> representing the double that was read.
      */
     public static double readDoubleConsumer(String message, Consumer<? super String> print) {
+        return readDoubleConsumerScanf(message, print, InputData::defaultScanfDouble);
+    }
+
+    public static double readDoubleConsumerScanf(String message, Consumer<? super String> print, Supplier<Double> scanf) {
         boolean isDouble;
         double read = Double.NaN;
 
@@ -438,7 +477,7 @@ public final class InputData {
             print.accept(message);
 
             try {
-                read = reader.nextDouble();
+                read = scanf.get();
                 isDouble = true;
             } catch (InputMismatchException e) {
                 PrettyStrings.printlnError(DOUBLE_FORMAT_ERROR);
@@ -475,11 +514,15 @@ public final class InputData {
      * @return A <code>double</code> representing the double that was read.
      */
     public static double readDoubleWithMinimumConsumer(String message, double min, Consumer<? super String> print) {
+        return readDoubleWithMinimumConsumerScanf(message, min, print, InputData::defaultScanfDouble);
+    }
+
+    public static double readDoubleWithMinimumConsumerScanf(String message, double min, Consumer<? super String> print, Supplier<Double> scanf) {
         boolean isAboveMin = false;
         double read;
 
         do {
-            read = readDoubleConsumer(message, print);
+            read = readDoubleConsumerScanf(message, print, scanf);
 
             if (read >= min) {
                 isAboveMin = true;
@@ -515,11 +558,15 @@ public final class InputData {
      * @return A <code>double</code> representing the double that was read.
      */
     public static double readDoubleWithMaximumConsumer(String message, double max, Consumer<? super String> print) {
+        return readDoubleWithMaximumConsumerScanf(message, max, print, InputData::defaultScanfDouble);
+    }
+
+    public static double readDoubleWithMaximumConsumerScanf(String message, double max, Consumer<? super String> print, Supplier<Double> scanf) {
         boolean isBelowMax = false;
         double read;
 
         do {
-            read = readDoubleConsumer(message, print);
+            read = readDoubleConsumerScanf(message, print, scanf);
 
             if (read <= max) {
                 isBelowMax = true;
@@ -559,11 +606,15 @@ public final class InputData {
      * @return A <code>double</code> representing the double that was read.
      */
     public static double readDoubleBetweenConsumer(String message, double min, double max, Consumer<? super String> print) {
+        return readDoubleBetweenConsumerScanf(message, min, max, print, InputData::defaultScanfDouble);
+    }
+
+    public static double readDoubleBetweenConsumerScanf(String message, double min, double max, Consumer<? super String> print, Supplier<Double> scanf) {
         boolean isBetweenMinMax = false;
         double read;
 
         do {
-            read = readDoubleConsumer(message, print);
+            read = readDoubleConsumerScanf(message, print, scanf);
 
             if (read < min) {
                 PrettyStrings.printlnError(MINIMUM_ERROR_DOUBLE, min);
@@ -650,6 +701,18 @@ public final class InputData {
         }
 
         return YesNoResponse.INVALID;
+    }
+
+    private static String defaultScanfString() {
+        return reader.nextLine();
+    }
+
+    private static Integer defaultScanfInteger() {
+        return reader.nextInt();
+    }
+
+    private static Double defaultScanfDouble() {
+        return reader.nextDouble();
     }
 
     private static void defaultPrint(String message) {
